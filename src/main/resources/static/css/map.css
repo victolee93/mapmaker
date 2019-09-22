@@ -1,0 +1,30 @@
+
+
+/**********************
+ *   map-outline
+ **********************/
+#map-container {
+    background-color: #f2f4f7;
+    height: 1700px;
+}
+
+#new-map {
+    height: 500px;
+    padding-left: 30px;
+}
+
+#popular-map {
+    height: 500px;
+    padding-left: 30px;
+}
+
+#recommend-map {
+    height: 500px;
+    padding-left: 30px;
+}
+
+.map-list-box {
+    margin: 30px 0px;
+}
+
+

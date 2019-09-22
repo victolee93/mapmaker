@@ -1,0 +1,42 @@
+
+/**********************
+ *   common
+ **********************/
+#gallery-container {
+    background-color: #f2f4f7;
+    height: 1000px;
+}
+
+#write-btn {
+    width: 15%
+}
+
+.detail-btn {
+    cursor: pointer;
+}
+
+/**********************
+ *   gallery-list
+ **********************/
+#list {
+    margin: 50px 0px;
+    padding: 0px 30px;
+}
+
+/**********************
+ *   gallery-detail
+ **********************/
+#full-img {
+    height: 100%;
+    width: 100%;
+}
+
+#img-preview {
+    width: 50%;
+    height: 50%;
+}
+
+#description {
+    height: 200px;
+    padding: 1.5rem;
+}

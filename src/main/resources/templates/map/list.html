@@ -1,0 +1,284 @@
+<!DOCTYPE html >
+<html lang="ko" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+
+    <link rel="stylesheet" th:href="@{/lib/SemanticUI/semantic.css}">
+    <link rel="stylesheet" th:href="@{/css/map.css}">
+    <link rel="stylesheet" th:href="@{/css/common.css}">
+
+    <title>MapMaker</title>
+</head>
+<body>
+<!-- HEADER -->
+<div th:insert="common/hearder.html" id="header" class="ui grid container"></div>
+
+<div id="map-container">
+    <div class="ui grid container">
+        <!-- SIDE MENU -->
+        <div th:insert="common/sidemenu.html" class="three wide column"></div>
+
+        <div id="new-map" class="thirteen wide column map-list-box">
+            <h1>따끈따근 신상 맵</h1>
+            <div class="ui four cards">
+                <div class="card detail-btn">
+                    <div class="image">
+                        <img th:src="@{/img/sample.jpg}">
+                    </div>
+                    <div class="extra">
+                        <p>우르르르응</p>
+                        <i class="like icon"></i> 11
+                        <span class="right floated">2019-09-14</span>
+                    </div>
+                </div>
+                <div class="card detail-btn">
+                    <div class="image">
+                        <img th:src="@{/img/sample.jpg}">
+                    </div>
+                    <div class="extra">
+                        <p>우르르르응</p>
+                        <i class="like icon"></i> 11
+                        <span class="right floated">2019-09-14</span>
+                    </div>
+                </div>
+                <div class="card detail-btn">
+                    <div class="image">
+                        <img th:src="@{/img/sample.jpg}">
+                    </div>
+                    <div class="extra">
+                        <p>우르르르응</p>
+                        <i class="like icon"></i> 11
+                        <span class="right floated">2019-09-14</span>
+                    </div>
+                </div>
+                <div class="card detail-btn">
+                    <div class="image">
+                        <img th:src="@{/img/sample.jpg}">
+                    </div>
+                    <div class="extra">
+                        <p>우르르르응</p>
+                        <i class="like icon"></i> 11
+                        <span class="right floated">2019-09-14</span>
+                    </div>
+                </div>
+                <div class="card detail-btn">
+                    <div class="image">
+                        <img th:src="@{/img/sample.jpg}">
+                    </div>
+                    <div class="extra">
+                        <p>우르르르응</p>
+                        <i class="like icon"></i> 11
+                        <span class="right floated">2019-09-14</span>
+                    </div>
+                </div>
+                <div class="card detail-btn">
+                    <div class="image">
+                        <img th:src="@{/img/sample.jpg}">
+                    </div>
+                    <div class="extra">
+                        <p>우르르르응</p>
+                        <i class="like icon"></i> 11
+                        <span class="right floated">2019-09-14</span>
+                    </div>
+                </div>
+                <div class="card detail-btn">
+                    <div class="image">
+                        <img th:src="@{/img/sample.jpg}">
+                    </div>
+                    <div class="extra">
+                        <p>우르르르응</p>
+                        <i class="like icon"></i> 11
+                        <span class="right floated">2019-09-14</span>
+                    </div>
+                </div>
+                <div class="card detail-btn">
+                    <div class="image">
+                        <img th:src="@{/img/sample.jpg}">
+                    </div>
+                    <div class="extra">
+                        <p>우르르르응</p>
+                        <i class="like icon"></i> 11
+                        <span class="right floated">2019-09-14</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div id="popular-map" class="thirteen wide column right floated map-list-box">
+            <h1>인기최고 맵</h1>
+            <div class="ui four cards">
+                <div class="card detail-btn">
+                    <div class="image">
+                        <img th:src="@{/img/sample.jpg}">
+                    </div>
+                    <div class="extra">
+                        <p>우르르르응</p>
+                        <i class="like icon"></i> 11
+                        <span class="right floated">2019-09-14</span>
+                    </div>
+                </div>
+                <div class="card detail-btn">
+                    <div class="image">
+                        <img th:src="@{/img/sample.jpg}">
+                    </div>
+                    <div class="extra">
+                        <p>우르르르응</p>
+                        <i class="like icon"></i> 11
+                        <span class="right floated">2019-09-14</span>
+                    </div>
+                </div>
+                <div class="card detail-btn">
+                    <div class="image">
+                        <img th:src="@{/img/sample.jpg}">
+                    </div>
+                    <div class="extra">
+                        <p>우르르르응</p>
+                        <i class="like icon"></i> 11
+                        <span class="right floated">2019-09-14</span>
+                    </div>
+                </div>
+                <div class="card detail-btn">
+                    <div class="image">
+                        <img th:src="@{/img/sample.jpg}">
+                    </div>
+                    <div class="extra">
+                        <p>우르르르응</p>
+                        <i class="like icon"></i> 11
+                        <span class="right floated">2019-09-14</span>
+                    </div>
+                </div>
+                <div class="card detail-btn">
+                    <div class="image">
+                        <img th:src="@{/img/sample.jpg}">
+                    </div>
+                    <div class="extra">
+                        <p>우르르르응</p>
+                        <i class="like icon"></i> 11
+                        <span class="right floated">2019-09-14</span>
+                    </div>
+                </div>
+                <div class="card detail-btn">
+                    <div class="image">
+                        <img th:src="@{/img/sample.jpg}">
+                    </div>
+                    <div class="extra">
+                        <p>우르르르응</p>
+                        <i class="like icon"></i> 11
+                        <span class="right floated">2019-09-14</span>
+                    </div>
+                </div>
+                <div class="card detail-btn">
+                    <div class="image">
+                        <img th:src="@{/img/sample.jpg}">
+                    </div>
+                    <div class="extra">
+                        <p>우르르르응</p>
+                        <i class="like icon"></i> 11
+                        <span class="right floated">2019-09-14</span>
+                    </div>
+                </div>
+                <div class="card detail-btn">
+                    <div class="image">
+                        <img th:src="@{/img/sample.jpg}">
+                    </div>
+                    <div class="extra">
+                        <p>우르르르응</p>
+                        <i class="like icon"></i> 11
+                        <span class="right floated">2019-09-14</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div id="recommend-map" class="thirteen wide column right floated map-list-box">
+            <h1>추천 여행지</h1>
+            <div class="ui four cards">
+                <div class="card detail-btn">
+                    <div class="image">
+                        <img th:src="@{/img/sample.jpg}">
+                    </div>
+                    <div class="extra">
+                        <p>우르르르응</p>
+                        <i class="like icon"></i> 11
+                        <span class="right floated">2019-09-14</span>
+                    </div>
+                </div>
+                <div class="card detail-btn">
+                    <div class="image">
+                        <img th:src="@{/img/sample.jpg}">
+                    </div>
+                    <div class="extra">
+                        <p>우르르르응</p>
+                        <i class="like icon"></i> 11
+                        <span class="right floated">2019-09-14</span>
+                    </div>
+                </div>
+                <div class="card detail-btn">
+                    <div class="image">
+                        <img th:src="@{/img/sample.jpg}">
+                    </div>
+                    <div class="extra">
+                        <p>우르르르응</p>
+                        <i class="like icon"></i> 11
+                        <span class="right floated">2019-09-14</span>
+                    </div>
+                </div>
+                <div class="card detail-btn">
+                    <div class="image">
+                        <img th:src="@{/img/sample.jpg}">
+                    </div>
+                    <div class="extra">
+                        <p>우르르르응</p>
+                        <i class="like icon"></i> 11
+                        <span class="right floated">2019-09-14</span>
+                    </div>
+                </div>
+                <div class="card detail-btn">
+                    <div class="image">
+                        <img th:src="@{/img/sample.jpg}">
+                    </div>
+                    <div class="extra">
+                        <p>우르르르응</p>
+                        <i class="like icon"></i> 11
+                        <span class="right floated">2019-09-14</span>
+                    </div>
+                </div>
+                <div class="card detail-btn">
+                    <div class="image">
+                        <img th:src="@{/img/sample.jpg}">
+                    </div>
+                    <div class="extra">
+                        <p>우르르르응</p>
+                        <i class="like icon"></i> 11
+                        <span class="right floated">2019-09-14</span>
+                    </div>
+                </div>
+                <div class="card detail-btn">
+                    <div class="image">
+                        <img th:src="@{/img/sample.jpg}">
+                    </div>
+                    <div class="extra">
+                        <p>우르르르응</p>
+                        <i class="like icon"></i> 11
+                        <span class="right floated">2019-09-14</span>
+                    </div>
+                </div>
+                <div class="card detail-btn">
+                    <div class="image">
+                        <img th:src="@{/img/sample.jpg}">
+                    </div>
+                    <div class="extra">
+                        <p>우르르르응</p>
+                        <i class="like icon"></i> 11
+                        <span class="right floated">2019-09-14</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<!-- FOOTER -->
+<div th:insert="common/footer.html" id="footer" class="ui grid container"></div>
+
+</body>
+</html>

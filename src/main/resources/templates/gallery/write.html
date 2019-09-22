@@ -1,0 +1,26 @@
+<div class="ui modal write">
+    <i class="close icon"></i>
+    <div class="header">
+        게시글 작성
+    </div>
+    <div class="content">
+        <form action="" method="post" class="ui form">
+            <div class="field">
+                <label>설명</label>
+                <textarea></textarea>
+            </div>
+
+            <button class="ui small basic icon button">
+                <i class="upload icon"></i> 파일 업로드
+            </button>
+            <span>파일명</span>
+            <div>
+                <img th:src="@{/img/sample.jpg}" id="img-preview">
+            </div>
+        </form>
+    </div>
+    <div>
+        <button class="ui medium teal button right floated">취소</button>
+        <button class="ui medium teal button right floated">등록</button>
+    </div>
+</div>

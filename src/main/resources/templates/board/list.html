@@ -1,0 +1,77 @@
+<!DOCTYPE html >
+<html lang="ko" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
+      xmlns:form="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+
+    <link rel="stylesheet" th:href="@{/lib/SemanticUI/semantic.css}">
+    <link rel="stylesheet" th:href="@{/css/common.css}">
+    <link rel="stylesheet" th:href="@{/css/board.css}">
+
+    <script
+        src="https://code.jquery.com/jquery-3.1.1.min.js"
+        integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="
+        crossorigin="anonymous"></script>
+
+    <title>MapMaker</title>
+</head>
+<body>
+<!-- HEADER -->
+<div th:insert="common/hearder.html" id="header" class="ui grid container"></div>
+
+<div id="board-container">
+    <div class="ui grid container">
+        <!-- SIDE MENU -->
+        <div th:insert="common/sidemenu.html" class="three wide column"></div>
+
+        <div class="thirteen wide column">
+            <button id="board-write-btn" class="ui medium teal button right floated">글쓰기</button>
+
+            <div id="board-list-container">
+                <table class="ui table">
+                    <thead>
+                        <tr>
+                            <th class="one wide">번호</th>
+                            <th class="ten wide">글제목</th>
+                            <th class="two wide">작성자</th>
+                            <th class="three wide">등록일</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <!-- CONTENTS !-->
+                        <div th:each="board : ${boardList}">
+                            <td>
+                                <span th:text="${board.id}"></span>
+                            </td>
+                            <td>
+                                <a th:href="@{'/board/' + ${board.id}}">
+                                    <span th:text="${board.title}"></span>
+                                </a>
+                            </td>
+                            <td>
+                                <span th:text="${board.author}"></span>
+                            </td>
+                            <td>
+                                <span th:text="${board.modifiedDate}"></span>
+                            </td>
+                        </div>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- modal -->
+        <div th:insert="board/write.html"></div>
+
+    </div>
+</div>
+
+<!-- FOOTER -->
+<div th:insert="common/footer.html" id="footer" class="ui grid container"></div>
+
+<!-- script -->
+<script th:src="@{/js/board.js}"></script>
+<script th:src="@{/lib/SemanticUI/semantic.js}"></script>
+
+</body>
+</html>

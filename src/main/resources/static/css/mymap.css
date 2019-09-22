@@ -1,0 +1,120 @@
+
+/**********************
+ *   map-list
+ **********************/
+#maplist-container {
+    background-color: #f2f4f7;
+    height: 900px;
+}
+
+#small-map {
+    margin: 0em 1em 0em 22%;
+    height: 700px;
+    border-radius: 4em;
+}
+
+#map-content {
+    border-left: 1px solid darkgray;
+    max-height: 700px;
+    min-height: 700px;
+    overflow-y: auto;
+}
+
+.content-box {
+    margin-bottom: 20px;
+}
+
+.content-box > .content-title{
+    font-weight: 600;
+    font-size: 1.22em;
+}
+
+
+/**********************
+ *   map-making
+ **********************/
+#mapmaking-container {
+    background-color: #f2f4f7;
+    height: 1500px;
+}
+
+#center-pick-btn-group {
+    margin-left: 1em;
+}
+
+#map {
+    margin: 0em 1em 0em 2em;
+    height: 1250px;
+    border-radius: 8em;
+}
+
+.ui.form input[type="date"]#travel-period-start-date {
+    width: 50%;
+    margin-right: 4px;
+}
+
+.ui.form input[type="date"]#travel-period-end-date {
+    width: 50%;
+    margin-left: 4px;
+}
+
+.img-preview {
+    width: 14%;
+    margin: 1em 0.5em 0em 0em;
+}
+
+.ui.form textarea.textarea-scroll {
+    resize: none;
+}
+
+#making-content {
+    height: 1250px;
+    border-left: 1px solid darkgray;
+}
+
+
+/**********************
+ *   scroll
+ **********************/
+.scrollbar::-webkit-scrollbar-track {
+    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+    border-radius: 10px;
+    background-color: #F5F5F5;
+}
+
+.scrollbar::-webkit-scrollbar {
+    width: 12px;
+    background-color: #F5F5F5;
+}
+
+.scrollbar::-webkit-scrollbar-thumb {
+    border-radius: 10px;
+    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,.3);
+    background-color: #555;
+}
+
+
+.textarea-scroll::-webkit-scrollbar-track {
+    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+    border-radius: 10px;
+    background-color: #F5F5F5;
+}
+
+.textarea-scroll::-webkit-scrollbar {
+    width: 7px;
+    background-color: #F5F5F5;
+}
+
+.textarea-scroll::-webkit-scrollbar-thumb {
+    border-radius: 10px;
+    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,.3);
+    background-color: #555;
+}
+
+
+/**********************
+ *   btn
+ **********************/
+#making-btn {
+    width: 15%
+}

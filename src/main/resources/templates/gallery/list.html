@@ -1,0 +1,108 @@
+<!DOCTYPE html >
+<html lang="ko" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+
+    <link rel="stylesheet" th:href="@{/lib/SemanticUI/semantic.css}">
+    <link rel="stylesheet" th:href="@{/css/common.css}">
+    <link rel="stylesheet" th:href="@{/css/gallery.css}">
+
+    <script
+        src="https://code.jquery.com/jquery-3.1.1.min.js"
+        integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="
+        crossorigin="anonymous"></script>
+
+    <title>MapMaker</title>
+</head>
+<body>
+<!-- HEADER -->
+<div th:insert="common/hearder.html" id="header" class="ui grid container"></div>
+
+<div id="gallery-container">
+    <div class="ui grid container">
+        <!-- SIDE MENU -->
+        <div th:insert="common/sidemenu.html" class="three wide column"></div>
+
+        <div class="thirteen wide column">
+            <button id="write-btn" class="ui medium teal button right floated">글쓰기</button>
+
+            <div id="list" class="ui four cards">
+                <div class="card detail-btn">
+                    <div class="image">
+                        <img th:src="@{/img/sample.jpg}">
+                    </div>
+                    <div class="extra">
+                        <p>우르르르응</p>
+                        <i class="like icon"></i> 11
+                        <span class="right floated">2019-09-14</span>
+                    </div>
+                </div>
+                <div class="card detail-btn">
+                    <div class="image">
+                        <img th:src="@{/img/sample.jpg}">
+                    </div>
+                    <div class="extra">
+                        <p>우르르르응</p>
+                        <i class="like icon"></i> 11
+                        <span class="right floated">2019-09-14</span>
+                    </div>
+                </div>
+                <div class="card detail-btn">
+                    <div class="image">
+                        <img th:src="@{/img/sample.jpg}">
+                    </div>
+                    <div class="extra">
+                        <p>우르르르응</p>
+                        <i class="like icon"></i> 11
+                        <span class="right floated">2019-09-14</span>
+                    </div>
+                </div>
+                <div class="card detail-btn">
+                    <div class="image">
+                        <img th:src="@{/img/sample.jpg}">
+                    </div>
+                    <div class="extra">
+                        <p>우르르르응</p>
+                        <i class="like icon"></i> 11
+                        <span class="right floated">2019-09-14</span>
+                    </div>
+                </div>
+                <div class="card detail-btn">
+                    <div class="image">
+                        <img th:src="@{/img/sample.jpg}">
+                    </div>
+                    <div class="extra">
+                        <p>우르르르응</p>
+                        <i class="like icon"></i> 11
+                        <span class="right floated">2019-09-14</span>
+                    </div>
+                </div>
+                <div class="card detail-btn">
+                    <div class="image">
+                        <img th:src="@{/img/sample.jpg}">
+                    </div>
+                    <div class="extra">
+                        <p>우르르르응</p>
+                        <i class="like icon"></i> 11
+                        <span class="right floated">2019-09-14</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- modal -->
+        <div th:insert="gallery/write.html"></div>
+        <div th:insert="gallery/detail.html"></div>
+
+    </div>
+</div>
+
+<!-- FOOTER -->
+<div th:insert="common/footer.html" id="footer" class="ui grid container"></div>
+
+<!-- script -->
+<script th:src="@{/js/gallery.js}"></script>
+<script th:src="@{/lib/SemanticUI/semantic.js}"></script>
+
+</body>
+</html>

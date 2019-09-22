@@ -1,0 +1,219 @@
+<!DOCTYPE html >
+<html lang="ko" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+
+    <link rel="stylesheet" th:href="@{/lib/SemanticUI/semantic.css}">
+    <link rel="stylesheet" th:href="@{/css/common.css}">
+    <link rel="stylesheet" th:href="@{/css/board.css}">
+
+    <script
+        src="https://code.jquery.com/jquery-3.1.1.min.js"
+        integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="
+        crossorigin="anonymous"></script>
+
+    <title>MapMaker</title>
+</head>
+<body>
+<!-- HEADER -->
+<div th:insert="common/hearder.html" id="header" class="ui grid container"></div>
+
+<div id="board-detail-container">
+    <div class="ui grid container">
+        <!-- SIDE MENU -->
+        <div th:insert="common/sidemenu.html" class="three wide column"></div>
+
+        <div class="thirteen wide column">
+            <!-- 게시글 -->
+            <div id="board-detail-wrap">
+                <!-- 헤더 -->
+                <div class="ui list">
+                    <div class="item">
+                        <div class="right floated">
+                            <span th:text="${boardDTO.modifiedDate}"></span>
+                        </div>
+                        <div class="content ui dividing header">
+                            <span th:text="${boardDTO.title}"></span>
+                        </div>
+                    </div>
+                </div>
+
+                <p id="content-header-box" th:inline="text" >[[${boardDTO.author}]]</p>
+
+                <!-- 본문 -->
+                <p id="board-detail-content" class="scrollbar" th:text="${boardDTO.content}"></p>
+
+                <!-- 수정/삭제 -->
+                <div>
+                    <button id="board-update-btn" class="ui medium teal submit button right floated">수정</button>
+
+                    <form th:action="@{'/board/' + ${boardDTO.id}}" method="post">
+                        <input type="hidden" name="_method" value="delete"/>
+                        <button class="ui medium teal submit button right floated">삭제</button>
+                    </form>
+                </div>
+            </div>
+
+            <!-- 댓글 -->
+            <div id="comment-container" class="ui comments">
+                <h3 class="ui dividing header">댓글</h3>
+
+                <div id="comment-form">
+                    <form class="ui form">
+                        <div class="field">
+                            <textarea rows="3"></textarea>
+                        </div>
+                        <button id="comment-write-btn" class="ui medium teal submit button right floated">댓글등록</button>
+                    </form>
+                </div>
+
+                <div id="comment-list" class="scrollbar">
+                    <div class="comment">
+                        <a class="avatar">
+                            <img src="/images/avatar/small/matt.jpg">
+                        </a>
+                        <div class="content">
+                            <a class="author">Matt</a>
+                            <div class="metadata">
+                                <span class="date">Today at 5:42PM</span>
+                            </div>
+                            <div class="text">
+                                How artistic!
+                            </div>
+                            <div class="actions">
+                                <a class="reply">Reply</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="comment">
+                        <a class="avatar">
+                            <img src="/images/avatar/small/elliot.jpg">
+                        </a>
+                        <div class="content">
+                            <a class="author">Elliot Fu</a>
+                            <div class="metadata">
+                                <span class="date">Yesterday at 12:30AM</span>
+                            </div>
+                            <div class="text">
+                                <p>This has been very useful for my research. Thanks as well!</p>
+                            </div>
+                            <div class="actions">
+                                <a class="reply">Reply</a>
+                            </div>
+                        </div>
+                        <div class="comments">
+                            <div class="comment">
+                                <a class="avatar">
+                                    <img src="/images/avatar/small/jenny.jpg">
+                                </a>
+                                <div class="content">
+                                    <a class="author">Jenny Hess</a>
+                                    <div class="metadata">
+                                        <span class="date">Just now</span>
+                                    </div>
+                                    <div class="text">
+                                        Elliot you are always so right :)
+                                    </div>
+                                    <div class="actions">
+                                        <a class="reply">Reply</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="comment">
+                        <a class="avatar">
+                            <img src="/images/avatar/small/joe.jpg">
+                        </a>
+                        <div class="content">
+                            <a class="author">Joe Henderson</a>
+                            <div class="metadata">
+                                <span class="date">5 days ago</span>
+                            </div>
+                            <div class="text">
+                                Dude, this is awesome. Thanks so much
+                            </div>
+                            <div class="actions">
+                                <a class="reply">Reply</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="comment">
+                        <a class="avatar">
+                            <img src="/images/avatar/small/joe.jpg">
+                        </a>
+                        <div class="content">
+                            <a class="author">Joe Henderson</a>
+                            <div class="metadata">
+                                <span class="date">5 days ago</span>
+                            </div>
+                            <div class="text">
+                                Dude, this is awesome. Thanks so much
+                            </div>
+                            <div class="actions">
+                                <a class="reply">Reply</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="comment">
+                        <a class="avatar">
+                            <img src="/images/avatar/small/joe.jpg">
+                        </a>
+                        <div class="content">
+                            <a class="author">Joe Henderson</a>
+                            <div class="metadata">
+                                <span class="date">5 days ago</span>
+                            </div>
+                            <div class="text">
+                                Dude, this is awesome. Thanks so much
+                            </div>
+                            <div class="actions">
+                                <a class="reply">Reply</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="comment">
+                        <a class="avatar">
+                            <img src="/images/avatar/small/joe.jpg">
+                        </a>
+                        <div class="content">
+                            <a class="author">Joe Henderson</a>
+                            <div class="metadata">
+                                <span class="date">5 days ago</span>
+                            </div>
+                            <div class="text">
+                                Dude, this is awesome. Thanks so much
+                            </div>
+                            <div class="actions">
+                                <a class="reply">Reply</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- modal -->
+        <div th:insert="board/update.html"></div>
+
+    </div>
+</div>
+
+<!-- FOOTER -->
+<div th:insert="common/footer.html" id="footer" class="ui grid container"></div>
+
+
+<!-- update modal에서 사용할 변수 셋팅 -->
+<script th:inline="javascript">
+    /*<![CDATA[*/
+    var title = /*[[${boardDTO.title}]]*/ "";
+    var content = /*[[${boardDTO.content}]]*/ "";
+    /*]]>*/
+</script>
+
+<!-- script -->
+<script th:inline="javascript" th:src="@{/js/board.js}"></script>
+<script th:src="@{/lib/SemanticUI/semantic.js}"></script>
+
+</body>
+</html>

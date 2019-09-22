@@ -1,0 +1,85 @@
+
+/**********************
+ *   common
+ **********************/
+#board-container {
+    background-color: #f2f4f7;
+    height: 700px;
+}
+
+#board-write-btn {
+    width: 15%
+}
+
+
+/**********************
+ *   board-list
+ **********************/
+#board-list-container {
+    padding-left: 30px;
+    margin: 50px 0px;
+}
+
+
+/**********************
+ *   board-detail
+ **********************/
+#board-detail-container {
+    background-color: #f2f4f7;
+    height: 1100px;
+}
+
+#board-detail-wrap {
+    margin: 50px 0px;
+    padding-left: 30px;
+}
+
+#board-detail-content {
+    min-height: 300px;
+    max-height: 300px;
+    overflow-y: auto;
+}
+
+#content-header-box {
+    text-align: right;
+}
+
+
+/**********************
+ *   comment
+ **********************/
+#comment-container {
+    max-width: 100%; !important;
+    padding-left: 30px;
+}
+
+#comment-form {
+    margin-bottom: 60px;
+}
+
+#comment-list {
+    min-height: 400px;
+    max-height: 400px;
+    overflow-y: auto;
+}
+
+
+/**********************
+ *   scroll
+ **********************/
+.scrollbar::-webkit-scrollbar-track {
+    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+    border-radius: 10px;
+    background-color: #F5F5F5;
+}
+
+.scrollbar::-webkit-scrollbar {
+    width: 12px;
+    background-color: #F5F5F5;
+}
+
+.scrollbar::-webkit-scrollbar-thumb {
+    border-radius: 10px;
+    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,.3);
+    background-color: #555;
+}

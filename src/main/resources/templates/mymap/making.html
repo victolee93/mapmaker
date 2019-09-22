@@ -1,0 +1,129 @@
+<!DOCTYPE html >
+<html lang="ko" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+
+    <link rel="stylesheet" th:href="@{/lib/SemanticUI/semantic.css}">
+    <link rel="stylesheet" th:href="@{/css/mymap.css}">
+    <link rel="stylesheet" th:href="@{/css/common.css}">
+
+    <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=d8f89e49b5e58828275ce71546d387f4"></script>
+    <title>MapMaker</title>
+</head>
+<body>
+<!-- HEADER -->
+<div th:insert="common/hearder.html" id="header" class="ui grid container"></div>
+
+<div id="mapmaking-container" class="ui grid">
+    <div id="center-pick-btn-group" class="sixteen wide column middle aligned">
+        <button class="ui teal button">서울</button>
+        <button class="ui teal basic button">인천</button>
+        <button class="ui teal basic button">강릉</button>
+        <button class="ui teal basic button">대전</button>
+        <button class="ui teal basic button">광주</button>
+        <button class="ui teal basic button">여수</button>
+        <button class="ui teal basic button">대구</button>
+        <button class="ui teal basic button">부산</button>
+        <button class="ui teal basic button">제주도</button>
+    </div>
+
+    <!-- Kakao Map API -->
+    <div id="map" class="nine wide column"></div>
+
+    <div id="making-content" class="six wide column">
+        <form action="" method="post" class="ui form">
+            <div class="field">
+                <label>제목</label>
+                <input type="text" name="first-name" placeholder="제목">
+            </div>
+            <div class="field">
+                <label>여행일</label>
+                <div class="inline fields">
+                    <input id="travel-period-start-date" type="date">
+                    ~
+                    <input id="travel-period-end-date" type="date">
+                </div>
+            </div>
+            <div class="field">
+                <label>소개</label>
+                <textarea class="textarea-scroll" rows="4" placeholder="여행 목적에 대한 간단소개"></textarea>
+            </div>
+            <div class="field">
+                <label>식사</label>
+                <textarea class="textarea-scroll" rows="3" placeholder="먹었던 음식들"></textarea>
+            </div>
+            <div class="field">
+                <label>여행 장소</label>
+                <textarea class="textarea-scroll" rows="3" placeholder="여행하면서 방문했던 장소들"></textarea>
+            </div>
+            <div class="field">
+                <label>숙소</label>
+                <textarea class="textarea-scroll" rows="3" placeholder="숙소 평가"></textarea>
+            </div>
+            <div class="field">
+                <label>교통</label>
+                <textarea class="textarea-scroll" rows="3" placeholder="뚜벅이 가능여부, 대중교통 등의 정보"></textarea>
+            </div>
+            <div class="field">
+                <label>지출</label>
+                <input type="text" name="first-name" placeholder="지출 금액">
+            </div>
+            <div class="field">
+                <label>총평</label>
+                <textarea class="textarea-scroll" rows="4" placeholder="전체적인 평가"></textarea>
+            </div>
+            <div class="field">
+                <label>메모</label>
+                <textarea class="textarea-scroll" rows="4" placeholder="메모"></textarea>
+            </div>
+            <div class="inline fields">
+                <label>공개 여부</label>
+                <div class="field">
+                    <div class="ui radio checkbox">
+                        <input type="radio" name="open" value="public" tabindex="0" class="hidden">
+                        <label>yes</label>
+                    </div>
+                </div>
+                <div class="field">
+                    <div class="ui radio checkbox">
+                        <input type="radio" name="open" tabindex="0" class="hidden">
+                        <label>no</label>
+                    </div>
+                </div>
+            </div>
+            <div class="field">
+                <button id="map-making-file-upload-btn" class="ui small basic icon button">
+                    <i class="upload icon"></i> 파일 업로드
+                </button>
+                <span>파일명</span>
+                <div class="inline fields">
+                    <img class="img-preview" th:src="@{/img/sample.jpg}">
+                    <img class="img-preview" th:src="@{/img/sample.jpg}">
+                    <img class="img-preview" th:src="@{/img/sample.jpg}">
+                    <img class="img-preview" th:src="@{/img/sample.jpg}">
+                    <img class="img-preview" th:src="@{/img/sample.jpg}">
+                    <img class="img-preview" th:src="@{/img/sample.jpg}">
+                </div>
+            </div>
+
+            <button id="cancel-btn" class="ui medium teal button right floated">취소</button>
+            <button id="write-btn" class="ui medium teal submit button right floated">등록</button>
+        </form>
+    </div>
+</div>
+
+<!-- FOOTER -->
+<div th:insert="common/footer.html" id="footer" class="ui grid container"></div>
+
+<script>
+    var container = document.getElementById('map'); //지도를 담을 영역의 DOM 레퍼런스
+    var options = { //지도를 생성할 때 필요한 기본 옵션
+        center: new kakao.maps.LatLng(33.450701, 126.570667), //지도의 중심좌표.
+        level: 3 //지도의 레벨(확대, 축소 정도)
+    };
+
+    var map = new kakao.maps.Map(container, options); //지도 생성 및 객체 리턴
+</script>
+
+</body>
+</html>

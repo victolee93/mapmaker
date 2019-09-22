@@ -1,0 +1,49 @@
+<!DOCTYPE html >
+<html lang="ko" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+
+    <link rel="stylesheet" th:href="@{/lib/SemanticUI/semantic.css}">
+    <link rel="stylesheet" th:href="@{/css/common.css}">
+    <title>MapMaker</title>
+</head>
+<body>
+<!-- HEADER -->
+<div th:insert="common/hearder.html" id="header" class="ui grid container"></div>
+
+<div id="outer-container" class="ui grid middle aligned center aligned">
+    <div class="five wide column">
+        <h2 class="ui teal header left aligned">
+            <div class="content">
+                로그인
+            </div>
+        </h2>
+        <form class="ui large form">
+            <div class="ui stacked segment">
+                <div class="field">
+                    <div class="ui left icon input">
+                        <i class="user icon"></i>
+                        <input type="text" name="email" placeholder="이메일">
+                    </div>
+                </div>
+                <div class="field">
+                    <div class="ui left icon input">
+                        <i class="lock icon"></i>
+                        <input type="password" name="password" placeholder="비밀번호">
+                    </div>
+                </div>
+                <div class="ui fluid large teal submit button">로그인</div>
+            </div>
+        </form>
+
+        <div class="ui message">
+            아직 계정이 없으신가요? <a href="/user/signup">회원가입</a>
+        </div>
+    </div>
+</div>
+
+<!-- FOOTER -->
+<div th:insert="common/footer.html" id="footer" class="ui grid container"></div>
+
+</body>
+</html>
