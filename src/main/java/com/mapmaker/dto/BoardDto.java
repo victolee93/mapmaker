@@ -9,7 +9,7 @@ import java.time.LocalDateTime;
 @Setter
 @ToString
 @NoArgsConstructor
-public class BoardDTO {
+public class BoardDto {
     private Long id;
     private String author;
     private String title;
@@ -27,7 +27,7 @@ public class BoardDTO {
     }
 
     @Builder
-    public BoardDTO(Long id, String title, String content, String author, LocalDateTime createdDate, LocalDateTime modifiedDate) {
+    public BoardDto(Long id, String title, String content, String author, LocalDateTime createdDate, LocalDateTime modifiedDate) {
         this.id = id;
         this.author = author;
         this.title = title;

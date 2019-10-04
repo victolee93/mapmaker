@@ -2,11 +2,11 @@ package com.mapmaker.service;
 
 import com.mapmaker.domain.entity.BoardEntity;
 import com.mapmaker.domain.repository.BoardRepository;
-import com.mapmaker.dto.BoardDTO;
+import com.mapmaker.dto.BoardDto;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
-import javax.transaction.Transactional;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -17,12 +17,12 @@ public class BoardService {
     private BoardRepository boardRepository;
 
     @Transactional
-    public List<BoardDTO> getBoardlist() {
+    public List<BoardDto> getBoardlist() {
         List<BoardEntity> boardEntities = boardRepository.findAll();
-        List<BoardDTO> boardDTOList = new ArrayList<>();
+        List<BoardDto> boardDTOList = new ArrayList<>();
 
         for ( BoardEntity boardEntity : boardEntities) {
-            BoardDTO boardDTO = BoardDTO.builder()
+            BoardDto boardDTO = BoardDto.builder()
                     .id(boardEntity.getId())
                     .title(boardEntity.getTitle())
                     .content(boardEntity.getContent())
@@ -37,11 +37,11 @@ public class BoardService {
     }
 
     @Transactional
-    public BoardDTO getPost(Long id) {
+    public BoardDto getPost(Long id) {
         Optional<BoardEntity> boardEntityWrapper = boardRepository.findById(id);
         BoardEntity boardEntity = boardEntityWrapper.get();
 
-        BoardDTO boardDTO = BoardDTO.builder()
+        BoardDto boardDTO = BoardDto.builder()
                 .id(boardEntity.getId())
                 .title(boardEntity.getTitle())
                 .content(boardEntity.getContent())
