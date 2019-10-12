@@ -51,8 +51,8 @@ public class TravelDto {
                 .cost(cost)
                 .totalReview(totalReview)
                 .memo(memo)
-                .userEntity(userEntity)
                 .openStatus(openStatus)
+                .userEntity(userEntity)
                 .build();
     }
 
@@ -63,6 +63,8 @@ public class TravelDto {
                         UserEntity userEntity, LocalDateTime createdDate, LocalDateTime modifiedDate) {
         this.id = id;
         this.title = title;
+        this.periodStartDate = periodStartDate;
+        this.periodEndDate = periodEndDate;
         this.description = description;
         this.foodInfo = foodInfo;
         this.placeInfo = placeInfo;

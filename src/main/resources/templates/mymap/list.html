@@ -28,61 +28,63 @@
         <!-- Kakao Map API -->
         <div id="small-map" class="four wide column right floated"></div>
 
-
-        <div id="map-content" class="eight wide column left floated scrollbar">
+        <div th:if="${travelDto}"
+             id="map-content" class="eight wide column left floated scrollbar">
             <div class="content-box">
                 <label class="content-title">제목</label>
-                <p>제목입니다.</p>
+                <p th:text="${travelDto.title}"></p>
             </div>
 
             <div class="content-box">
                 <label class="content-title">여행일</label>
-                <p>2019-09-18 ~ 2019-09-10</p>
+                <p th:inline="text">
+                    [[${travelDto.periodStartDate}]] ~ [[${travelDto.periodEndDate}]]
+                </p>
             </div>
 
             <div class="content-box">
                 <label class="content-title">소개</label>
-                <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</p>
+                <p th:text="${travelDto.description}"></p>
             </div>
 
             <div class="content-box">
                 <label class="content-title">식사</label>
-                <p>피자 존맛 <br> 국밥 존맛! <br> 족발 별로</p>
+                <p th:text="${travelDto.foodInfo}"></p>
             </div>
 
             <div class="content-box">
                 <label class="content-title">여행 장소</label>
-                <p>경주 -> 부산 -> 울산 -> 강릉 -> 서울</p>
+                <p th:text="${travelDto.placeInfo}"></p>
             </div>
 
             <div class="content-box">
                 <label class="content-title">숙소</label>
-                <p>호텔이 진짜 짱좋았다</p>
+                <p th:text="${travelDto.lodgingInfo}"></p>
             </div>
 
             <div class="content-box">
                 <label class="content-title">교통</label>
-                <p>뚜벅이도 다닐만함</p>
+                <p th:text="${travelDto.transportInfo}"></p>
             </div>
 
             <div class="content-box">
                 <label class="content-title">지출</label>
-                <p>50000원</p>
+                <p th:text="${travelDto.cost}"></p>
             </div>
 
             <div class="content-box">
                 <label class="content-title">총평</label>
-                <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</p>
+                <p th:text="${travelDto.totalReview}"></p>
             </div>
 
             <div class="content-box">
                 <label class="content-title">메모</label>
-                <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</p>
+                <p th:text="${travelDto.memo}"></p>
             </div>
 
             <div class="content-box">
                 <label class="content-title">공개 여부</label>
-                <p>yer | no</p>
+                <p th:text="${travelDto.openStatus}"></p>
             </div>
 
             <div class="content-box">

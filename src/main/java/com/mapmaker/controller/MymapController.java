@@ -8,6 +8,7 @@ import lombok.AllArgsConstructor;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 
@@ -22,7 +23,13 @@ public class MymapController {
     UserService userService;
 
     @GetMapping("/mymap")
-    public String list() {
+    public String dispMapList(Model model, Authentication authentication) {
+        UserEntity userEntity = userService.getUserByEmail(authentication.getName());
+        TravelDto travelDto = travelService.getTravelByUser(userEntity);
+
+        // TODO 마커를 클릭하면 정보를 가져올 수 있도록 처리 ( 유저 + 위치정보 )
+        model.addAttribute("travelDto", travelDto);
+
         return "/mymap/list";
     }
 
