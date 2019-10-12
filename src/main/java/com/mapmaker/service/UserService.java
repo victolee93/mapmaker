@@ -39,6 +39,7 @@ public class UserService implements UserDetailsService {
 
         List<GrantedAuthority> authorities = new ArrayList<>();
         authorities.add(new SimpleGrantedAuthority(Role.MEMBER.getValue()));
+
         return new User(userEntity.getEmail(), userEntity.getPassword(), authorities);
     }
 }

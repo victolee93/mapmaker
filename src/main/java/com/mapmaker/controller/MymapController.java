@@ -8,12 +8,12 @@ public class MymapController {
 
     @GetMapping("/mymap")
     public String list() {
-        return "/mymap/list.html";
+        return "/mymap/list";
     }
 
     @GetMapping("/mymap/making")
     public String makingView() {
-        return "/mymap/making.html";
+        return "/mymap/making";
     }
 
 }

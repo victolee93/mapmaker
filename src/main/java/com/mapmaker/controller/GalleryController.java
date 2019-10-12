@@ -8,6 +8,6 @@ public class GalleryController {
 
     @GetMapping("/gallery")
     public String index() {
-        return "/gallery/list.html";
+        return "/gallery/list";
     }
 }

@@ -20,7 +20,7 @@ public class BoardController {
         List<BoardDto> boardList = boardService.getBoardlist();
 
         model.addAttribute("boardList", boardList);
-        return "/board/list.html";
+        return "/board/list";
     }
 
     // 게시글 등록
@@ -38,7 +38,7 @@ public class BoardController {
         BoardDto boardDTO = boardService.getPost(no);
 
         model.addAttribute("boardDTO", boardDTO);
-        return "/board/detail.html";
+        return "/board/detail";
     }
 
     // 게시판 수정

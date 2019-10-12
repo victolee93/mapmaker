@@ -15,32 +15,19 @@ public class UserController {
     // 로그인 페이지
     @GetMapping("/user/login")
     public String dispLogin() {
-        return "/user/login.html";
-    }
-
-    // 로그인
-    @PostMapping("/user/login")
-    public String execLogin(UserDto userDto) {
-        System.out.println("로그인 처리됨");
-        return "redirect:/map";
-    }
-
-    // 로그아웃
-    @PostMapping("/user/logout")
-    public String execLogout(UserDto userDto) {
-        return "redirect:/map";
+        return "/user/login";
     }
 
     // 회원상세 페이지
     @GetMapping("/user/info")
     public String dispInfo() {
-        return "/user/info.html";
+        return "/user/info";
     }
 
     // 회원가입 페이지
     @GetMapping("/user/signup")
     public String dispSignup() {
-        return "/user/signup.html";
+        return "/user/signup";
     }
 
     // 회원가입
@@ -48,12 +35,12 @@ public class UserController {
     public String execSignup(UserDto userDto) {
         userService.joinUser(userDto);
 
-        return "redirect:/map";
+        return "redirect:/user/login";
     }
 
     // 비밀번호 찾기
     @GetMapping("/user/find")
     public String dispFind() {
-        return "/user/find.html";
+        return "/user/find";
     }
 }

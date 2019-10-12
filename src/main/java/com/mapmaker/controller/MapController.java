@@ -8,7 +8,7 @@ public class MapController {
 
     @GetMapping("/map")
     public String list() {
-        return "/map/list.html";
+        return "/map/list";
     }
 
 }
