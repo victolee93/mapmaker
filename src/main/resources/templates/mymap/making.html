@@ -31,62 +31,62 @@
     <div id="map" class="nine wide column"></div>
 
     <div id="making-content" class="six wide column">
-        <form action="" method="post" class="ui form">
+        <form th:action="@{/mymap/making}" method="post" class="ui form">
             <div class="field">
                 <label>제목</label>
-                <input type="text" name="first-name" placeholder="제목">
+                <input type="text" name="title" placeholder="제목">
             </div>
             <div class="field">
                 <label>여행일</label>
                 <div class="inline fields">
-                    <input id="travel-period-start-date" type="date">
+                    <input id="travel-period-start-date" name="periodStartDate" type="date">
                     ~
-                    <input id="travel-period-end-date" type="date">
+                    <input id="travel-period-end-date" name="periodEndDate" type="date">
                 </div>
             </div>
             <div class="field">
                 <label>소개</label>
-                <textarea class="textarea-scroll" rows="4" placeholder="여행 목적에 대한 간단소개"></textarea>
+                <textarea class="textarea-scroll" name="description" rows="4" placeholder="여행 목적에 대한 간단소개"></textarea>
             </div>
             <div class="field">
                 <label>식사</label>
-                <textarea class="textarea-scroll" rows="3" placeholder="먹었던 음식들"></textarea>
+                <textarea class="textarea-scroll" name="foodInfo" rows="3" placeholder="먹었던 음식들"></textarea>
             </div>
             <div class="field">
                 <label>여행 장소</label>
-                <textarea class="textarea-scroll" rows="3" placeholder="여행하면서 방문했던 장소들"></textarea>
+                <textarea class="textarea-scroll" name="placeInfo" rows="3" placeholder="여행하면서 방문했던 장소들"></textarea>
             </div>
             <div class="field">
                 <label>숙소</label>
-                <textarea class="textarea-scroll" rows="3" placeholder="숙소 평가"></textarea>
+                <textarea class="textarea-scroll" name="lodgingInfo" rows="3" placeholder="숙소 평가"></textarea>
             </div>
             <div class="field">
                 <label>교통</label>
-                <textarea class="textarea-scroll" rows="3" placeholder="뚜벅이 가능여부, 대중교통 등의 정보"></textarea>
+                <textarea class="textarea-scroll" name="transportInfo" rows="3" placeholder="뚜벅이 가능여부, 대중교통 등의 정보"></textarea>
             </div>
             <div class="field">
                 <label>지출</label>
-                <input type="text" name="first-name" placeholder="지출 금액">
+                <input type="text" name="cost" placeholder="지출 금액">
             </div>
             <div class="field">
                 <label>총평</label>
-                <textarea class="textarea-scroll" rows="4" placeholder="전체적인 평가"></textarea>
+                <textarea class="textarea-scroll" name="totalReview" rows="4" placeholder="전체적인 평가"></textarea>
             </div>
             <div class="field">
                 <label>메모</label>
-                <textarea class="textarea-scroll" rows="4" placeholder="메모"></textarea>
+                <textarea class="textarea-scroll" name="memo" rows="4" placeholder="메모"></textarea>
             </div>
             <div class="inline fields">
                 <label>공개 여부</label>
                 <div class="field">
                     <div class="ui radio checkbox">
-                        <input type="radio" name="open" value="public" tabindex="0" class="hidden">
+                        <input type="radio" name="openStatus" value="public" tabindex="0">
                         <label>yes</label>
                     </div>
                 </div>
                 <div class="field">
                     <div class="ui radio checkbox">
-                        <input type="radio" name="open" tabindex="0" class="hidden">
+                        <input type="radio" name="openStatus" value="private" tabindex="0">
                         <label>no</label>
                     </div>
                 </div>

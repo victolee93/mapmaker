@@ -6,6 +6,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Getter
@@ -24,6 +26,9 @@ public class UserEntity extends TimeEntity {
 
     @Column(length = 100, nullable = false)
     private String password;
+
+    @OneToMany(mappedBy = "userEntity")
+    private List<TravelEntity> travels = new ArrayList<>();
 
     @Builder
     public UserEntity(Long id, String nickname, String email, String password) {

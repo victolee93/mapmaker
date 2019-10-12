@@ -23,6 +23,11 @@ import java.util.*;
 public class UserService implements UserDetailsService {
     private UserRepository userRepository;
 
+    public UserEntity getUserByEmail(String email) {
+        Optional<UserEntity> userEntityWrapper = userRepository.findByEmail(email);
+        return userEntityWrapper.get();
+    }
+
     @Transactional
     public Long joinUser(UserDto userDto) {
         // 비밀번호 암호화

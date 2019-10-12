@@ -27,7 +27,8 @@ public class UserDto {
     }
 
     @Builder
-    public UserDto(Long id, String nickname, String email, String password, LocalDateTime createdDate, LocalDateTime modifiedDate) {
+    public UserDto(Long id, String nickname, String email, String password,
+                   LocalDateTime createdDate, LocalDateTime modifiedDate) {
         this.id = id;
         this.nickname = nickname;
         this.email = email;
