@@ -26,12 +26,17 @@
         <button class="ui teal basic button">부산</button>
         <button class="ui teal basic button">제주도</button>
     </div>
+    <div id="reset-btn" class="sixteen wide column middle aligned">
+        <button class="ui teal button">초기화</button>
+    </div>
 
     <!-- Kakao Map API -->
     <div id="map" class="nine wide column"></div>
 
     <div id="making-content" class="six wide column">
-        <form th:action="@{/mymap/making}" method="post" class="ui form">
+        <form th:action="@{/mymap/making}" method="post" id="making-form" class="ui form">
+            <input id="maker-positions" name="makerPositions" type="hidden">
+
             <div class="field">
                 <label>제목</label>
                 <input type="text" name="title" placeholder="제목">
@@ -115,15 +120,7 @@
 <!-- FOOTER -->
 <div th:insert="common/footer.html" id="footer" class="ui grid container"></div>
 
-<script>
-    var container = document.getElementById('map'); //지도를 담을 영역의 DOM 레퍼런스
-    var options = { //지도를 생성할 때 필요한 기본 옵션
-        center: new kakao.maps.LatLng(33.450701, 126.570667), //지도의 중심좌표.
-        level: 3 //지도의 레벨(확대, 축소 정도)
-    };
-
-    var map = new kakao.maps.Map(container, options); //지도 생성 및 객체 리턴
-</script>
+<script th:src="@{/js/mapmaking.js}"></script>
 
 </body>
 </html>
