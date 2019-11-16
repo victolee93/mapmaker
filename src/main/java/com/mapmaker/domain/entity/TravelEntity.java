@@ -7,6 +7,8 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Entity
@@ -53,9 +55,15 @@ public class TravelEntity extends TimeEntity {
     @Column(columnDefinition = "enum('public', 'private')", nullable=false)
     private String openStatus;
 
+    /*
+     *  Relation Mapping
+     */
     @ManyToOne
     @JoinColumn(name = "member_id")
     private UserEntity userEntity;
+
+    @OneToMany(mappedBy = "travelEntity")
+    private List<MarkerEntity> markers = new ArrayList<>();
 
 
     @Builder

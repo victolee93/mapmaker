@@ -3,7 +3,7 @@ const libMap = kakao.maps;
 
 let map = null;             // 초기화된 kakao 지도
 let markers = [];           // 마커 객체들
-let markerPositions = [];   // 마커의 위도, 경도
+let markerPositions = [];   // 마커의 위도, 경도 정보를 담는 객체들
 
 /*
  * DOM ready

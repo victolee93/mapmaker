@@ -26,7 +26,7 @@ public class TravelService {
         }
 
         TravelEntity travelEntity = travelEntityWrapper.get();
-        TravelDto travelDto = TravelDto.builder()
+        return TravelDto.builder()
                 .id(travelEntity.getId())
                 .title(travelEntity.getTitle())
                 .periodStartDate(travelEntity.getPeriodStartDate().format(DateTimeFormatter.ofPattern("yyyy-MM-dd")))
@@ -42,8 +42,6 @@ public class TravelService {
                 .userEntity(userEntity)
                 .openStatus(travelEntity.getOpenStatus())
                 .build();
-
-        return travelDto;
     }
 
     @Transactional

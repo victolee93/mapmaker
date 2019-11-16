@@ -1,25 +1,26 @@
 package com.mapmaker.controller;
 
+import com.mapmaker.domain.entity.TravelEntity;
 import com.mapmaker.domain.entity.UserEntity;
+import com.mapmaker.dto.MapmakingDto;
+import com.mapmaker.dto.MarkerDto;
 import com.mapmaker.dto.TravelDto;
+import com.mapmaker.service.MarkerService;
 import com.mapmaker.service.TravelService;
 import com.mapmaker.service.UserService;
 import lombok.AllArgsConstructor;
 import org.springframework.security.core.Authentication;
-import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 
-import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 
 @Controller
 @AllArgsConstructor
 public class MymapController {
     TravelService travelService;
+    MarkerService markerService;
     UserService userService;
 
     @GetMapping("/mymap")
@@ -39,13 +40,21 @@ public class MymapController {
     }
 
     @PostMapping("/mymap/making")
-    public String execMapMaking(TravelDto travelDto, Authentication authentication) {
+    public String execMapMaking(MapmakingDto mapmakingDto, Authentication authentication) {
+        mapmakingDto.setTravelDto(mapmakingDto);
+        mapmakingDto.setMarkerDto(mapmakingDto);
+
+        // travel INSERT
+        TravelDto travelDto = mapmakingDto.getTravelDto();
         UserEntity userEntity = userService.getUserByEmail(authentication.getName());
         travelDto.setUserEntity(userEntity);
-
         travelService.saveMap(travelDto);
 
-        // TODO 여행정보뿐만 아니라 지도 location도 같이 저장하는 로직 구현
+        // marker INSERT
+        TravelEntity travelEntity = travelDto.toEntity();
+        MarkerDto markerDto = mapmakingDto.getMarkerDto();
+        markerDto.setTravelEntity(travelEntity);
+        markerService.saveMaker(markerDto);
 
         return "redirect:/mymap";
     }

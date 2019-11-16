@@ -27,6 +27,9 @@ public class UserEntity extends TimeEntity {
     @Column(length = 100, nullable = false)
     private String password;
 
+    /*
+     *  Relation Mapping
+     */
     @OneToMany(mappedBy = "userEntity")
     private List<TravelEntity> travels = new ArrayList<>();
 
