@@ -10,5 +10,5 @@ import java.util.Optional;
 public interface TravelRepository extends JpaRepository<TravelEntity, Long> {
     Optional<TravelEntity> findByUserEntity(UserEntity userEntity);
 
-    List<TravelEntity> findALLByUserEntity(UserEntity userEntity);
+    List<TravelEntity> findAllByUserEntity(UserEntity userEntity);
 }

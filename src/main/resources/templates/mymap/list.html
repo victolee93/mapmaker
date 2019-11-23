@@ -26,10 +26,11 @@
         </div>
 
         <!-- Kakao Map API -->
-        <div id="small-map" class="four wide column right floated"></div>
+        <div id="small-map" class="thirteen wide column right floated"></div>
 
+        <!-- 여행 정보 -->
         <div th:if="${travelDto}"
-             id="map-content" class="eight wide column left floated scrollbar">
+             id="map-content" class="thirteen wide column left floated scrollbar">
             <div class="content-box">
                 <label class="content-title">제목</label>
                 <p th:text="${travelDto.title}"></p>
@@ -108,15 +109,17 @@
 <!-- FOOTER -->
 <div th:insert="common/footer.html" id="footer" class="ui grid container"></div>
 
-<script>
-    var container = document.getElementById('small-map'); //지도를 담을 영역의 DOM 레퍼런스
-    var options = { //지도를 생성할 때 필요한 기본 옵션
-        center: new kakao.maps.LatLng(33.450701, 126.570667), //지도의 중심좌표.
-        level: 3 //지도의 레벨(확대, 축소 정도)
-    };
+<!-- 변수 셋팅 -->
+<script th:inline="javascript">
+    let markerList = [];
 
-    var map = new kakao.maps.Map(container, options); //지도 생성 및 객체 리턴
+    /*[# th:each="n : ${markerList}"]*/
+    markerList.push("[(${n})]");
+    /*[/]*/
+    console.log(markerList);
 </script>
+
+<script th:src="@{/js/mymap.js}"></script>
 
 </body>
 </html>

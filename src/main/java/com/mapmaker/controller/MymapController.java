@@ -29,19 +29,32 @@ public class MymapController {
     @GetMapping("/mymap")
     public String dispMapList(Model model, Authentication authentication) {
         UserEntity userEntity = userService.getUserByEmail(authentication.getName());
-        List<TravelDto> travelDtoList = travelService.getTravelListByUser(userEntity);
+        List<MarkerDto> markerList = markerService.getMarkerList(userEntity);
 
-        model.addAttribute("travelDtoList", travelDtoList);
+        // TODO Json으로 반환하기
+        String positionsJson = markerService.getPositionsJson(markerList);
+        model.addAttribute("positionsJson", positionsJson);
 
         return "/mymap/list";
     }
+
+    // TODO 여행정보는 검색용으로만 제공
+//    @GetMapping("/mymap/search")
+//    public String dispMapList(Model model, Authentication authentication) {
+//        UserEntity userEntity = userService.getUserByEmail(authentication.getName());
+//        List<TravelDto> travelDtoList = travelService.getTravelListByUser(userEntity);
+//
+//        model.addAttribute("travelDtoList", travelDtoList);
+//
+//        return "/mymap/list";
+//    }
 
 //    @GetMapping("/mymap/{no}")
 //    public String dispMapInfo(@PathVariable("no") Long no, Model model, Authentication authentication) {
 //        UserEntity userEntity = userService.getUserByEmail(authentication.getName());
 //        TravelDto travelDto = travelService.getTravelByUser(userEntity);
 //
-//        // TODO 마커를 클릭하면 정보를 가져올 수 있도록 처리 ( 유저 + 위치정보 )
+//        // TODO 마커를 클릭하면 정보를 가져올 수 있도록 처리 ( ajax, Modal로 구현 )
 //        model.addAttribute("travelDto", travelDto);
 //
 //        return "/mymap/list";

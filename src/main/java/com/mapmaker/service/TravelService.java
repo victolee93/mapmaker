@@ -21,7 +21,7 @@ public class TravelService {
 
     @Transactional
     public List<TravelDto> getTravelListByUser(UserEntity userEntity){
-        List<TravelEntity> travelEntityList = travelRepository.findALLByUserEntity(userEntity);
+        List<TravelEntity> travelEntityList = travelRepository.findAllByUserEntity(userEntity);
         List<TravelDto> travelDtoList = new ArrayList<>();
 
         if (travelEntityList.isEmpty()) {
