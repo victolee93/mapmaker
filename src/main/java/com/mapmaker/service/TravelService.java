@@ -9,6 +9,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
 
@@ -18,14 +20,40 @@ public class TravelService {
     private TravelRepository travelRepository;
 
     @Transactional
-    public TravelDto getTravelByUser(UserEntity userEntity){
-        Optional<TravelEntity> travelEntityWrapper = travelRepository.findByUserEntity(userEntity);
+    public List<TravelDto> getTravelListByUser(UserEntity userEntity){
+        List<TravelEntity> travelEntityList = travelRepository.findALLByUserEntity(userEntity);
+        List<TravelDto> travelDtoList = new ArrayList<>();
 
-        if (travelEntityWrapper.isEmpty() == true) {
-            return null;
+        if (travelEntityList.isEmpty()) {
+            return travelDtoList;
         }
 
-        TravelEntity travelEntity = travelEntityWrapper.get();
+        for(TravelEntity travelEntity : travelEntityList) {
+            TravelDto travelDto = convertDto(travelEntity, userEntity);
+            travelDtoList.add(travelDto);
+        }
+
+        return travelDtoList;
+    }
+
+//    @Transactional
+//    public TravelDto getTravelByUser(UserEntity userEntity){
+//        Optional<TravelEntity> travelEntityWrapper = travelRepository.findByUserEntity(userEntity);
+//
+//        if (travelEntityWrapper.isEmpty() == true) {
+//            return null;
+//        }
+//
+//        TravelEntity travelEntity = travelEntityWrapper.get();
+//        return convertDto(travelEntity, userEntity);
+//    }
+
+    @Transactional
+    public Long saveMap(TravelDto travelDto) {
+        return travelRepository.save(travelDto.toEntity()).getId();
+    }
+
+    private TravelDto convertDto(TravelEntity travelEntity, UserEntity userEntity) {
         return TravelDto.builder()
                 .id(travelEntity.getId())
                 .title(travelEntity.getTitle())
@@ -42,10 +70,5 @@ public class TravelService {
                 .userEntity(userEntity)
                 .openStatus(travelEntity.getOpenStatus())
                 .build();
-    }
-
-    @Transactional
-    public Long saveMap(TravelDto travelDto) {
-        return travelRepository.save(travelDto.toEntity()).getId();
     }
 }

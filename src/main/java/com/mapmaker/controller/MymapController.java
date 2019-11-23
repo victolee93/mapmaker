@@ -13,7 +13,10 @@ import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+
+import java.util.List;
 
 
 @Controller
@@ -26,13 +29,23 @@ public class MymapController {
     @GetMapping("/mymap")
     public String dispMapList(Model model, Authentication authentication) {
         UserEntity userEntity = userService.getUserByEmail(authentication.getName());
-        TravelDto travelDto = travelService.getTravelByUser(userEntity);
+        List<TravelDto> travelDtoList = travelService.getTravelListByUser(userEntity);
 
-        // TODO 마커를 클릭하면 정보를 가져올 수 있도록 처리 ( 유저 + 위치정보 )
-        model.addAttribute("travelDto", travelDto);
+        model.addAttribute("travelDtoList", travelDtoList);
 
         return "/mymap/list";
     }
+
+//    @GetMapping("/mymap/{no}")
+//    public String dispMapInfo(@PathVariable("no") Long no, Model model, Authentication authentication) {
+//        UserEntity userEntity = userService.getUserByEmail(authentication.getName());
+//        TravelDto travelDto = travelService.getTravelByUser(userEntity);
+//
+//        // TODO 마커를 클릭하면 정보를 가져올 수 있도록 처리 ( 유저 + 위치정보 )
+//        model.addAttribute("travelDto", travelDto);
+//
+//        return "/mymap/list";
+//    }
 
 
     @GetMapping("/mymap/making")
@@ -50,7 +63,6 @@ public class MymapController {
         TravelDto travelDto = mapmakingDto.getTravelDto();
         UserEntity userEntity = userService.getUserByEmail(authentication.getName());
         travelDto.setUserEntity(userEntity);
-        travelService.saveMap(travelDto);
 
         // marker INSERT
         TravelEntity travelEntity = travelDto.toEntity();

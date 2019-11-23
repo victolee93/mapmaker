@@ -22,15 +22,7 @@ public class BoardService {
         List<BoardDto> boardDTOList = new ArrayList<>();
 
         for ( BoardEntity boardEntity : boardEntities) {
-            BoardDto boardDTO = BoardDto.builder()
-                    .id(boardEntity.getId())
-                    .title(boardEntity.getTitle())
-                    .content(boardEntity.getContent())
-                    .author(boardEntity.getAuthor())
-                    .modifiedDate(boardEntity.getModifiedDate())
-                    .build();
-
-            boardDTOList.add(boardDTO);
+            boardDTOList.add(convertDto(boardEntity));
         }
 
         return boardDTOList;
@@ -40,16 +32,7 @@ public class BoardService {
     public BoardDto getPost(Long id) {
         Optional<BoardEntity> boardEntityWrapper = boardRepository.findById(id);
         BoardEntity boardEntity = boardEntityWrapper.get();
-
-        BoardDto boardDTO = BoardDto.builder()
-                .id(boardEntity.getId())
-                .title(boardEntity.getTitle())
-                .content(boardEntity.getContent())
-                .author(boardEntity.getAuthor())
-                .modifiedDate(boardEntity.getModifiedDate())
-                .build();
-
-        return boardDTO;
+        return convertDto(boardEntity);
     }
 
     @Transactional
@@ -60,6 +43,16 @@ public class BoardService {
     @Transactional
     public void deletePost(Long id) {
         boardRepository.deleteById(id);
+    }
+
+    private BoardDto convertDto(BoardEntity boardEntity) {
+        return BoardDto.builder()
+                .id(boardEntity.getId())
+                .title(boardEntity.getTitle())
+                .content(boardEntity.getContent())
+                .author(boardEntity.getAuthor())
+                .modifiedDate(boardEntity.getModifiedDate())
+                .build();
     }
 }
 
