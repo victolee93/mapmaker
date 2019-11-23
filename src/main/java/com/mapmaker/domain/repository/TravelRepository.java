@@ -8,4 +8,5 @@ import java.util.Optional;
 
 public interface TravelRepository extends JpaRepository<TravelEntity, Long> {
     Optional<TravelEntity> findByUserEntity(UserEntity userEntity);
+
 }

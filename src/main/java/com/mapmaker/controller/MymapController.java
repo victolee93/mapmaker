@@ -34,10 +34,12 @@ public class MymapController {
         return "/mymap/list";
     }
 
+
     @GetMapping("/mymap/making")
     public String dispMapMaking() {
         return "/mymap/making";
     }
+
 
     @PostMapping("/mymap/making")
     public String execMapMaking(MapmakingDto mapmakingDto, Authentication authentication) {

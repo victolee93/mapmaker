@@ -25,7 +25,7 @@ public class MarkerEntity {
     /*
      *  Relation Mapping
      */
-    @ManyToOne
+    @ManyToOne (cascade = CascadeType.ALL)
     @JoinColumn(name = "travel_id")
     private TravelEntity travelEntity;
 
