@@ -111,12 +111,11 @@
 
 <!-- 변수 셋팅 -->
 <script th:inline="javascript">
-    let markerList = [];
+    let positions = [];
 
-    /*[# th:each="n : ${markerList}"]*/
-    markerList.push("[(${n})]");
+    /*[# th:each="item : ${positionsList}"]*/
+    positions.push([(${item})]);
     /*[/]*/
-    console.log(markerList);
 </script>
 
 <script th:src="@{/js/mymap.js}"></script>

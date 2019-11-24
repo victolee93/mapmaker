@@ -2,7 +2,6 @@ package com.mapmaker.service;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.databind.util.JSONPObject;
 import com.mapmaker.domain.entity.MarkerEntity;
 import com.mapmaker.domain.entity.TravelEntity;
 import com.mapmaker.domain.entity.UserEntity;
@@ -10,16 +9,13 @@ import com.mapmaker.domain.repository.MarkerRepository;
 import com.mapmaker.domain.repository.TravelRepository;
 import com.mapmaker.dto.MarkerDto;
 import com.mapmaker.dto.PositionsDto;
-import com.mapmaker.dto.TravelDto;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.io.IOException;
-import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
 @Service
 @AllArgsConstructor
@@ -86,14 +82,26 @@ public class MarkerService {
                 .build();
     }
 
-    public String getPositionsJson(List<MarkerDto> markerList) {
-        // TODO Json으로 반환하기
-        String positionsJson = "{}";
-
-        for (MarkerDto markerDto : markerList) {
-
+    public List<String> getPositions(List<MarkerDto> markerList) {
+        if (markerList.isEmpty()) {
+            return null;
         }
 
-        return positionsJson;
+        List<String> positionsList = new ArrayList<>();
+        ObjectMapper mapper = new ObjectMapper();
+
+        for (MarkerDto markerDto : markerList) {
+            try {
+                PositionsDto positionsDto = PositionsDto.builder()
+                        .latitude(markerDto.getLatitude())
+                        .longitude(markerDto.getLongitude())
+                        .build();
+                positionsList.add(mapper.writeValueAsString(positionsDto));
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+
+        return positionsList;
     }
 }

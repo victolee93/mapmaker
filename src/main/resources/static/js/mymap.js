@@ -11,8 +11,9 @@ document.addEventListener("DOMContentLoaded", function() {
     map = mapInit();
 
     // 마킹 표시
-    setMarker();
+    displayMarkers(map);
 });
+
 
 /*
  *  지도를 초기화한다. ( 지도의 중심, 레벨 등 )
@@ -28,15 +29,18 @@ const mapInit = function() {
     return new libMap.Map(container, options);
 };
 
-const setMarker = function(map) {
-    // 위도, 경도
-    markerPositions = markerList;
 
-    // 마커 객체를 지도에 표시
-    let marker = new libMap.Marker({
-        position: latLng
-    });
-    marker.setMap(map);
-}
+/*
+ *  유저의 모든 마커를 지도에 표시한다.
+ */
+const displayMarkers = function(map) {
+    for (let item of positions) {
+        let position = new libMap.LatLng(item['longitude'], item['latitude']);
+        let marker = new libMap.Marker({
+            position: position
+        });
+        marker.setMap(map);
+    }
+};
 
 

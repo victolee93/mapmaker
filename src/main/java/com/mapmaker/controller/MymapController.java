@@ -31,9 +31,8 @@ public class MymapController {
         UserEntity userEntity = userService.getUserByEmail(authentication.getName());
         List<MarkerDto> markerList = markerService.getMarkerList(userEntity);
 
-        // TODO Json으로 반환하기
-        String positionsJson = markerService.getPositionsJson(markerList);
-        model.addAttribute("positionsJson", positionsJson);
+        List<String> positionsList = markerService.getPositions(markerList);
+        model.addAttribute("positionsList", positionsList);
 
         return "/mymap/list";
     }
