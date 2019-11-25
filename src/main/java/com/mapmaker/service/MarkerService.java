@@ -87,12 +87,14 @@ public class MarkerService {
             return null;
         }
 
+        // convert : PositionsDto List -> Json
         List<String> positionsList = new ArrayList<>();
         ObjectMapper mapper = new ObjectMapper();
 
         for (MarkerDto markerDto : markerList) {
             try {
                 PositionsDto positionsDto = PositionsDto.builder()
+                        .id(markerDto.getId())
                         .latitude(markerDto.getLatitude())
                         .longitude(markerDto.getLongitude())
                         .build();

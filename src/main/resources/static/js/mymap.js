@@ -40,7 +40,34 @@ const displayMarkers = function(map) {
             position: position
         });
         marker.setMap(map);
+
+        // click event
+        (function(marker) {
+            libMap.event.addListener(marker, 'click', function() {
+                getTravelInfoByAjax(item['id']);
+            });
+        })(marker);
     }
+};
+
+/*
+ *  Ajax 호출로 해당 마커의 여행 정보를 가져온다.
+ */
+const getTravelInfoByAjax = function(id) {
+    let xhr = new XMLHttpRequest();
+
+    xhr.onload = function () {
+        if (xhr.status >= 200 && xhr.status < 300) {
+            // success
+            console.log(this.responseText);
+        } else {
+            // fail
+        }
+        // always
+    };
+
+    xhr.open('GET', 'http://localhost:8080/mymap/' + id, true);
+    xhr.send();
 };
 
 

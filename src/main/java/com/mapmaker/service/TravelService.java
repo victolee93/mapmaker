@@ -1,13 +1,17 @@
 package com.mapmaker.service;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.mapmaker.domain.entity.MarkerEntity;
 import com.mapmaker.domain.entity.TravelEntity;
 import com.mapmaker.domain.entity.UserEntity;
+import com.mapmaker.domain.repository.MarkerRepository;
 import com.mapmaker.domain.repository.TravelRepository;
 import com.mapmaker.dto.TravelDto;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.io.IOException;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
@@ -18,6 +22,7 @@ import java.util.Optional;
 @AllArgsConstructor
 public class TravelService {
     private TravelRepository travelRepository;
+    private MarkerRepository markerRepository;
 
     @Transactional
     public List<TravelDto> getTravelListByUser(UserEntity userEntity){
@@ -36,17 +41,27 @@ public class TravelService {
         return travelDtoList;
     }
 
-//    @Transactional
-//    public TravelDto getTravelByUser(UserEntity userEntity){
-//        Optional<TravelEntity> travelEntityWrapper = travelRepository.findByUserEntity(userEntity);
-//
-//        if (travelEntityWrapper.isEmpty() == true) {
-//            return null;
-//        }
-//
-//        TravelEntity travelEntity = travelEntityWrapper.get();
-//        return convertDto(travelEntity, userEntity);
-//    }
+    @Transactional
+    public String getTravelInfo(Long no){
+        String travelInfoJson = "";
+        Optional<MarkerEntity> markerEntityWrapper = markerRepository.findById(no);
+
+        if (markerEntityWrapper.isEmpty() == true) {
+            return travelInfoJson;
+        }
+
+        TravelEntity travelEntity = markerEntityWrapper.get().getTravelEntity();
+        TravelDto travelDto = convertDto(travelEntity, null);
+
+        ObjectMapper mapper = new ObjectMapper();
+        try {
+            travelInfoJson = mapper.writeValueAsString(travelDto);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        return travelInfoJson;
+    }
 
     @Transactional
     public Long saveMap(TravelDto travelDto) {

@@ -9,12 +9,11 @@ import com.mapmaker.service.MarkerService;
 import com.mapmaker.service.TravelService;
 import com.mapmaker.service.UserService;
 import lombok.AllArgsConstructor;
+import org.springframework.http.MediaType;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -37,6 +36,12 @@ public class MymapController {
         return "/mymap/list";
     }
 
+    @RequestMapping(value="/mymap/{no}", method=RequestMethod.GET, produces=MediaType.APPLICATION_JSON_VALUE)
+    @ResponseBody
+    public String getTravelInfoJson(@PathVariable("no") Long no) {
+        return travelService.getTravelInfo(no);
+    }
+
     // TODO 여행정보는 검색용으로만 제공
 //    @GetMapping("/mymap/search")
 //    public String dispMapList(Model model, Authentication authentication) {
@@ -44,17 +49,6 @@ public class MymapController {
 //        List<TravelDto> travelDtoList = travelService.getTravelListByUser(userEntity);
 //
 //        model.addAttribute("travelDtoList", travelDtoList);
-//
-//        return "/mymap/list";
-//    }
-
-//    @GetMapping("/mymap/{no}")
-//    public String dispMapInfo(@PathVariable("no") Long no, Model model, Authentication authentication) {
-//        UserEntity userEntity = userService.getUserByEmail(authentication.getName());
-//        TravelDto travelDto = travelService.getTravelByUser(userEntity);
-//
-//        // TODO 마커를 클릭하면 정보를 가져올 수 있도록 처리 ( ajax, Modal로 구현 )
-//        model.addAttribute("travelDto", travelDto);
 //
 //        return "/mymap/list";
 //    }

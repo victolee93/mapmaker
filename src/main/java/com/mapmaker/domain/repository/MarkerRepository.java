@@ -8,7 +8,5 @@ import java.util.List;
 import java.util.Optional;
 
 public interface MarkerRepository extends JpaRepository<MarkerEntity, Long> {
-    Optional<MarkerEntity> findByTravelEntity(TravelEntity travelEntity);
-
     List<MarkerEntity> findAllByTravelEntity(TravelEntity travelEntity);
 }
