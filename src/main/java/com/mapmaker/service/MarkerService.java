@@ -1,7 +1,5 @@
 package com.mapmaker.service;
 
-import com.fasterxml.jackson.core.type.TypeReference;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import com.mapmaker.domain.entity.MarkerEntity;
 import com.mapmaker.domain.entity.TravelEntity;
 import com.mapmaker.domain.entity.UserEntity;
@@ -9,11 +7,11 @@ import com.mapmaker.domain.repository.MarkerRepository;
 import com.mapmaker.domain.repository.TravelRepository;
 import com.mapmaker.dto.MarkerDto;
 import com.mapmaker.dto.PositionsDto;
+import com.mapmaker.util.JasonManager;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -49,17 +47,12 @@ public class MarkerService {
 
     @Transactional
     public boolean saveMaker(MarkerDto markerDto) {
-        // convert : 위도 경도 Json -> PositionsDto
-        ObjectMapper mapper = new ObjectMapper();
-        List<PositionsDto> positionsDtoList = null;
-        try {
-            String positionsJson = markerDto.getMarkerPositions();
-            positionsDtoList = mapper.readValue(positionsJson, new TypeReference<List<PositionsDto>>(){});
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        String positionsJson = markerDto.getMarkerPositions();
 
-        if (positionsDtoList == null) {
+        List<PositionsDto> positionsDtoList = null;
+        positionsDtoList = JasonManager.covnertJsonToDto(PositionsDto.class , positionsJson);
+
+        if (positionsDtoList.isEmpty()) {
             return false;
         }
 
@@ -87,21 +80,14 @@ public class MarkerService {
             return null;
         }
 
-        // convert : PositionsDto List -> Json
         List<String> positionsList = new ArrayList<>();
-        ObjectMapper mapper = new ObjectMapper();
-
         for (MarkerDto markerDto : markerList) {
-            try {
-                PositionsDto positionsDto = PositionsDto.builder()
-                        .id(markerDto.getId())
-                        .latitude(markerDto.getLatitude())
-                        .longitude(markerDto.getLongitude())
-                        .build();
-                positionsList.add(mapper.writeValueAsString(positionsDto));
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
+            PositionsDto positionsDto = PositionsDto.builder()
+                    .id(markerDto.getId())
+                    .latitude(markerDto.getLatitude())
+                    .longitude(markerDto.getLongitude())
+                    .build();
+            positionsList.add(JasonManager.convertDtoToJsonString(positionsDto));
         }
 
         return positionsList;

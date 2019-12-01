@@ -65,13 +65,13 @@ public class MymapController {
         mapmakingDto.setTravelDto(mapmakingDto);
         mapmakingDto.setMarkerDto(mapmakingDto);
 
-        // travel INSERT
-        TravelDto travelDto = mapmakingDto.getTravelDto();
         UserEntity userEntity = userService.getUserByEmail(authentication.getName());
-        travelDto.setUserEntity(userEntity);
 
-        // marker INSERT
+        TravelDto travelDto = mapmakingDto.getTravelDto();
+        travelDto.setUserEntity(userEntity);
         TravelEntity travelEntity = travelDto.toEntity();
+
+        // travel, marker INSERT
         MarkerDto markerDto = mapmakingDto.getMarkerDto();
         markerDto.setTravelEntity(travelEntity);
         markerService.saveMaker(markerDto);

@@ -1,17 +1,16 @@
 package com.mapmaker.service;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
 import com.mapmaker.domain.entity.MarkerEntity;
 import com.mapmaker.domain.entity.TravelEntity;
 import com.mapmaker.domain.entity.UserEntity;
 import com.mapmaker.domain.repository.MarkerRepository;
 import com.mapmaker.domain.repository.TravelRepository;
 import com.mapmaker.dto.TravelDto;
+import com.mapmaker.util.JasonManager;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.io.IOException;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
@@ -53,13 +52,7 @@ public class TravelService {
         TravelEntity travelEntity = markerEntityWrapper.get().getTravelEntity();
         TravelDto travelDto = convertDto(travelEntity, null);
 
-        ObjectMapper mapper = new ObjectMapper();
-        try {
-            travelInfoJson = mapper.writeValueAsString(travelDto);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
+        travelInfoJson = JasonManager.convertDtoToJsonString(travelDto);
         return travelInfoJson;
     }
 
