@@ -10,7 +10,7 @@ public class JasonManager {
     private static ObjectMapper objectMapper = new ObjectMapper();
 
     // DTO 클래스를 Json 문자열로 반환
-    public static String convertDtoToJsonString(Object dtoObject) {
+    public static String convertDtoToJson(Object dtoObject) {
         String jsonString = "";
 
         try {

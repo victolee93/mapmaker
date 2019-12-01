@@ -58,16 +58,48 @@ const getTravelInfoByAjax = function(id) {
 
     xhr.onload = function () {
         if (xhr.status >= 200 && xhr.status < 300) {
-            // success
-            console.log(this.responseText);
-        } else {
-            // fail
+            viewTravelInfo(JSON.parse(this.responseText));
         }
-        // always
     };
 
     xhr.open('GET', 'http://localhost:8080/mymap/' + id, true);
     xhr.send();
 };
 
+/*
+ *  여행정보를 DOM에 할당하여 display
+ */
+const viewTravelInfo = function(jsonInfo) {
+    let contentLeftElement = document.getElementById('map-content-left');
+    let contentRightElement = document.getElementById('map-content-right');
+    let contentFooterElement = document.getElementById('map-content-footer');
+    contentLeftElement.style.display = "inline-block";
+    contentRightElement.style.display = "inline-block";
+    contentFooterElement.style.display = "inline-block";
+
+
+    let titleElement = document.getElementById('travel-title');
+    let periodElement = document.getElementById('travel-period');
+    let descriptionElement = document.getElementById('travel-description');
+    let foodInfoElement = document.getElementById('travel-foodInfo');
+    let placeInfoElement = document.getElementById('travel-placeInfo');
+    let lodgingInfoElement = document.getElementById('travel-lodgingInfo');
+    let transportInfoElement = document.getElementById('travel-transportInfo');
+    let costElement = document.getElementById('travel-cost');
+    let totalReviewElement = document.getElementById('travel-totalReview');
+    let memoElement = document.getElementById('travel-memo');
+    let openStatusElement = document.getElementById('travel-openStatus');
+
+    titleElement.innerText = jsonInfo.title;
+    periodElement.innerText = jsonInfo.periodStartDate + " ~ " + jsonInfo.periodEndDate;
+    descriptionElement.innerText = jsonInfo.description;
+    foodInfoElement.innerText = jsonInfo.foodInfo;
+    placeInfoElement.innerText = jsonInfo.placeInfo;
+    lodgingInfoElement.innerText = jsonInfo.lodgingInfo;
+    transportInfoElement.innerText = jsonInfo.transportInfo;
+    costElement.innerText = jsonInfo.cost;
+    totalReviewElement.innerText = jsonInfo.totalReview;
+    memoElement.innerText = jsonInfo.memo;
+    openStatusElement.innerText = jsonInfo.openStatus;
+};
 

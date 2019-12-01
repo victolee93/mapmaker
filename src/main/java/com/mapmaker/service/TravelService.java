@@ -33,7 +33,7 @@ public class TravelService {
         }
 
         for(TravelEntity travelEntity : travelEntityList) {
-            TravelDto travelDto = convertDto(travelEntity, userEntity);
+            TravelDto travelDto = convertEntityToDto(travelEntity, userEntity);
             travelDtoList.add(travelDto);
         }
 
@@ -50,9 +50,9 @@ public class TravelService {
         }
 
         TravelEntity travelEntity = markerEntityWrapper.get().getTravelEntity();
-        TravelDto travelDto = convertDto(travelEntity, null);
+        TravelDto travelDto = convertEntityToDto(travelEntity, null);
 
-        travelInfoJson = JasonManager.convertDtoToJsonString(travelDto);
+        travelInfoJson = JasonManager.convertDtoToJson(travelDto);
         return travelInfoJson;
     }
 
@@ -61,7 +61,7 @@ public class TravelService {
         return travelRepository.save(travelDto.toEntity()).getId();
     }
 
-    private TravelDto convertDto(TravelEntity travelEntity, UserEntity userEntity) {
+    private TravelDto convertEntityToDto(TravelEntity travelEntity, UserEntity userEntity) {
         return TravelDto.builder()
                 .id(travelEntity.getId())
                 .title(travelEntity.getTitle())

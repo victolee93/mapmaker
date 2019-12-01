@@ -42,23 +42,10 @@ public class MymapController {
         return travelService.getTravelInfo(no);
     }
 
-    // TODO 여행정보는 검색용으로만 제공
-//    @GetMapping("/mymap/search")
-//    public String dispMapList(Model model, Authentication authentication) {
-//        UserEntity userEntity = userService.getUserByEmail(authentication.getName());
-//        List<TravelDto> travelDtoList = travelService.getTravelListByUser(userEntity);
-//
-//        model.addAttribute("travelDtoList", travelDtoList);
-//
-//        return "/mymap/list";
-//    }
-
-
     @GetMapping("/mymap/making")
     public String dispMapMaking() {
         return "/mymap/making";
     }
-
 
     @PostMapping("/mymap/making")
     public String execMapMaking(MapmakingDto mapmakingDto, Authentication authentication) {

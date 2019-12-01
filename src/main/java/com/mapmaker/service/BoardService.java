@@ -22,7 +22,7 @@ public class BoardService {
         List<BoardDto> boardDTOList = new ArrayList<>();
 
         for ( BoardEntity boardEntity : boardEntities) {
-            boardDTOList.add(convertDto(boardEntity));
+            boardDTOList.add(convertEntityToDto(boardEntity));
         }
 
         return boardDTOList;
@@ -32,7 +32,7 @@ public class BoardService {
     public BoardDto getPost(Long id) {
         Optional<BoardEntity> boardEntityWrapper = boardRepository.findById(id);
         BoardEntity boardEntity = boardEntityWrapper.get();
-        return convertDto(boardEntity);
+        return convertEntityToDto(boardEntity);
     }
 
     @Transactional
@@ -45,7 +45,7 @@ public class BoardService {
         boardRepository.deleteById(id);
     }
 
-    private BoardDto convertDto(BoardEntity boardEntity) {
+    private BoardDto convertEntityToDto(BoardEntity boardEntity) {
         return BoardDto.builder()
                 .id(boardEntity.getId())
                 .title(boardEntity.getTitle())

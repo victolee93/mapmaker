@@ -16,10 +16,7 @@
 
 <div id="maplist-container">
     <div class="ui grid container">
-        <!-- SIDE MENU -->
-        <div th:insert="common/sidemenu.html" class="three wide column"></div>
-
-        <div class="thirteen wide column">
+        <div class="sixteen wide column">
             <a th:href="@{/mymap/making}">
                 <button id="making-btn" class="ui medium teal button right floated">지도 만들기</button>
             </a>
@@ -28,80 +25,98 @@
         <!-- Kakao Map API -->
         <div id="small-map" class="thirteen wide column right floated"></div>
 
-        <!-- 여행 정보 -->
-        <div th:if="${travelDto}"
-             id="map-content" class="thirteen wide column left floated scrollbar">
-            <div class="content-box">
-                <label class="content-title">제목</label>
-                <p th:text="${travelDto.title}"></p>
+        <!-- 최근 여행정보 리스트 -->
+        <div class="three wide column">
+            <div id="latest-tavel-list" class="ui vertical pointing menu">
+                <a th:href="@{/mymap}" class="active item">여행1</a>
+                <a th:href="@{/gallery}" class="item">여행2</a>
+                <a th:href="@{/board}" class="item">여행3</a>
+                <div id="emtpy" class="item"></div>
             </div>
+        </div>
 
-            <div class="content-box">
-                <label class="content-title">여행일</label>
-                <p th:inline="text">
-                    [[${travelDto.periodStartDate}]] ~ [[${travelDto.periodEndDate}]]
-                </p>
-            </div>
-
-            <div class="content-box">
-                <label class="content-title">소개</label>
-                <p th:text="${travelDto.description}"></p>
-            </div>
-
-            <div class="content-box">
-                <label class="content-title">식사</label>
-                <p th:text="${travelDto.foodInfo}"></p>
-            </div>
-
-            <div class="content-box">
-                <label class="content-title">여행 장소</label>
-                <p th:text="${travelDto.placeInfo}"></p>
-            </div>
-
-            <div class="content-box">
-                <label class="content-title">숙소</label>
-                <p th:text="${travelDto.lodgingInfo}"></p>
-            </div>
-
-            <div class="content-box">
-                <label class="content-title">교통</label>
-                <p th:text="${travelDto.transportInfo}"></p>
-            </div>
-
-            <div class="content-box">
-                <label class="content-title">지출</label>
-                <p th:text="${travelDto.cost}"></p>
-            </div>
-
-            <div class="content-box">
-                <label class="content-title">총평</label>
-                <p th:text="${travelDto.totalReview}"></p>
-            </div>
-
-            <div class="content-box">
-                <label class="content-title">메모</label>
-                <p th:text="${travelDto.memo}"></p>
-            </div>
-
-            <div class="content-box">
-                <label class="content-title">공개 여부</label>
-                <p th:text="${travelDto.openStatus}"></p>
-            </div>
-
-            <div class="content-box">
-                <label class="content-title">이미지</label>
-                <div class="inline">
-                    <img class="img-preview" th:src="@{/img/sample.jpg}">
-                    <img class="img-preview" th:src="@{/img/sample.jpg}">
-                    <img class="img-preview" th:src="@{/img/sample.jpg}">
-                    <img class="img-preview" th:src="@{/img/sample.jpg}">
-                    <img class="img-preview" th:src="@{/img/sample.jpg}">
-                    <img class="img-preview" th:src="@{/img/sample.jpg}">
+        <!-- 단일 여행 정보 영역 -->
+        <div class="ui grid sixteen wide column">
+            <!-- 검색 -->
+            <div id="search-wrap" class="ui search sixteen wide column">
+                <div class="ui icon input">
+                    <input class="prompt" type="text" placeholder="검색어를 입력해주세요">
+                    <i class="search icon"></i>
                 </div>
             </div>
 
+            <div id="map-content-left" class="seven wide column scrollbar" >
+                <div class="content-box">
+                    <label class="content-title">제목</label>
+                    <p id="travel-title"></p>
+                </div>
 
+                <div class="content-box">
+                    <label class="content-title">여행일</label>
+                    <p id="travel-period"></p>
+                </div>
 
+                <div class="content-box">
+                    <label class="content-title">소개</label>
+                    <p id="travel-description"></p>
+                </div>
+
+                <div class="content-box">
+                    <label class="content-title">지출</label>
+                    <p id="travel-cost"></p>
+                </div>
+
+                <div class="content-box">
+                    <label class="content-title">총평</label>
+                    <p id="travel-totalReview"></p>
+                </div>
+
+                <div class="content-box">
+                    <label class="content-title">공개 여부</label>
+                    <p id="travel-openStatus"></p>
+                </div>
+            </div>
+
+            <div id="map-content-right" class="eight wide column scrollbar" >
+                <div class="content-box">
+                    <label class="content-title">식사</label>
+                    <p id="travel-foodInfo"></p>
+                </div>
+
+                <div class="content-box">
+                    <label class="content-title">여행 장소</label>
+                    <p id="travel-placeInfo"></p>
+                </div>
+
+                <div class="content-box">
+                    <label class="content-title">숙소</label>
+                    <p id="travel-lodgingInfo"></p>
+                </div>
+
+                <div class="content-box">
+                    <label class="content-title">교통</label>
+                    <p id="travel-transportInfo"></p>
+                </div>
+
+                <div class="content-box">
+                    <label class="content-title">메모</label>
+                    <p id="travel-memo"></p>
+                </div>
+            </div>
+
+            <div id="map-content-footer" class="thirteen wide column scrollbar" >
+                <div class="content-box">
+                    <label class="content-title">이미지</label>
+                    <div class="inline">
+                        <img class="img-preview" th:src="@{/img/sample.jpg}">
+                        <img class="img-preview" th:src="@{/img/sample.jpg}">
+                        <img class="img-preview" th:src="@{/img/sample.jpg}">
+                        <img class="img-preview" th:src="@{/img/sample.jpg}">
+                        <img class="img-preview" th:src="@{/img/sample.jpg}">
+                        <img class="img-preview" th:src="@{/img/sample.jpg}">
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 </div>

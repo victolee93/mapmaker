@@ -38,7 +38,7 @@ public class MarkerService {
             }
 
             for(MarkerEntity markerEntity : markerEntities) {
-                markerList.add(convertDto(markerEntity, travelEntity));
+                markerList.add(convertEntityToDto(markerEntity, travelEntity));
             }
         }
 
@@ -66,7 +66,7 @@ public class MarkerService {
         return true;
     }
 
-    private MarkerDto convertDto(MarkerEntity markerEntity, TravelEntity travelEntity) {
+    private MarkerDto convertEntityToDto(MarkerEntity markerEntity, TravelEntity travelEntity) {
         return MarkerDto.builder()
                 .id(markerEntity.getId())
                 .latitude(markerEntity.getLatitude())
@@ -87,7 +87,7 @@ public class MarkerService {
                     .latitude(markerDto.getLatitude())
                     .longitude(markerDto.getLongitude())
                     .build();
-            positionsList.add(JasonManager.convertDtoToJsonString(positionsDto));
+            positionsList.add(JasonManager.convertDtoToJson(positionsDto));
         }
 
         return positionsList;
