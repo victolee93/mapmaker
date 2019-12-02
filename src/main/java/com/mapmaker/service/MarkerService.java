@@ -2,11 +2,11 @@ package com.mapmaker.service;
 
 import com.mapmaker.domain.entity.MarkerEntity;
 import com.mapmaker.domain.entity.TravelEntity;
-import com.mapmaker.domain.entity.UserEntity;
 import com.mapmaker.domain.repository.MarkerRepository;
 import com.mapmaker.domain.repository.TravelRepository;
 import com.mapmaker.dto.MarkerDto;
 import com.mapmaker.dto.PositionsDto;
+import com.mapmaker.dto.TravelDto;
 import com.mapmaker.util.JasonManager;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -22,19 +22,15 @@ public class MarkerService {
     private TravelRepository travelRepository;
 
     @Transactional
-    public List<MarkerDto> getMarkerList(UserEntity userEntity){
+    public List<MarkerDto> getMarkerList(List<TravelDto> travelDtoList){
         List<MarkerDto> markerList = new ArrayList<>();
-        List<TravelEntity> travelEntities = travelRepository.findAllByUserEntity(userEntity);
 
-        if (travelEntities.isEmpty()) {
-            return markerList;
-        }
-
-        for(TravelEntity travelEntity : travelEntities) {
+        for(TravelDto travelDto : travelDtoList) {
+            TravelEntity travelEntity = travelDto.toEntity();
             List<MarkerEntity> markerEntities = markerRepository.findAllByTravelEntity(travelEntity);
 
             if (markerEntities.isEmpty()) {
-                return markerList;
+                continue;
             }
 
             for(MarkerEntity markerEntity : markerEntities) {
@@ -76,10 +72,6 @@ public class MarkerService {
     }
 
     public List<String> getPositions(List<MarkerDto> markerList) {
-        if (markerList.isEmpty()) {
-            return null;
-        }
-
         List<String> positionsList = new ArrayList<>();
         for (MarkerDto markerDto : markerList) {
             PositionsDto positionsDto = PositionsDto.builder()

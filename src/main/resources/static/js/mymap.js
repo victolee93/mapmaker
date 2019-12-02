@@ -10,6 +10,9 @@ document.addEventListener("DOMContentLoaded", function() {
     // 지도 초기화
     map = mapInit();
 
+    // 최신 여행정보 click 이벤트 등록
+    RegisterClickEventforTravel();
+
     // 마킹 표시
     displayMarkers(map);
 });
@@ -62,7 +65,7 @@ const getTravelInfoByAjax = function(id) {
         }
     };
 
-    xhr.open('GET', 'http://localhost:8080/mymap/' + id, true);
+    xhr.open('GET', 'http://localhost:8080/mymap/travel/' + id, true);
     xhr.send();
 };
 
@@ -103,3 +106,19 @@ const viewTravelInfo = function(jsonInfo) {
     openStatusElement.innerText = jsonInfo.openStatus;
 };
 
+const RegisterClickEventforTravel = function() {
+    let travelNodes = document.getElementsByClassName('travel-list');
+    let travelCount = travelNodes.length;
+
+    if (travelCount === 0) {
+        return;
+    }
+
+    for (let i = 0; i < travelCount; i++) {
+        let travelNode = travelNodes.item(i);
+        travelNode.addEventListener('click', function() {
+            let travelId = travelNode.getAttribute('data-id');
+            getTravelInfoByAjax(travelId);
+        });
+    }
+};

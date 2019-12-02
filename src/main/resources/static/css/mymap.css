@@ -15,11 +15,11 @@
 /**********************
  *   recent travel list
  **********************/
-#latest-tavel-list {
+#latest-travel-list {
     height: 700px;
 }
 
-#latest-tavel-list > #emtpy {
+#latest-travel-list > #emtpy {
     cursor: default;
 }
 

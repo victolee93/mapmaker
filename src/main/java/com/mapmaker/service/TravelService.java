@@ -56,11 +56,6 @@ public class TravelService {
         return travelInfoJson;
     }
 
-    @Transactional
-    public Long saveMap(TravelDto travelDto) {
-        return travelRepository.save(travelDto.toEntity()).getId();
-    }
-
     private TravelDto convertEntityToDto(TravelEntity travelEntity, UserEntity userEntity) {
         return TravelDto.builder()
                 .id(travelEntity.getId())

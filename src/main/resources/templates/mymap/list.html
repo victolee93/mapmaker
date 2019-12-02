@@ -27,10 +27,13 @@
 
         <!-- 최근 여행정보 리스트 -->
         <div class="three wide column">
-            <div id="latest-tavel-list" class="ui vertical pointing menu">
-                <a th:href="@{/mymap}" class="active item">여행1</a>
-                <a th:href="@{/gallery}" class="item">여행2</a>
-                <a th:href="@{/board}" class="item">여행3</a>
+
+            <div id="latest-travel-list" class="ui vertical pointing menu">
+                <span th:each="travel : ${travelList}"
+                      th:text="${travel.title}"
+                      th:data-id="${travel.id}"
+                      class="active item travel-list">
+                </span>
                 <div id="emtpy" class="item"></div>
             </div>
         </div>

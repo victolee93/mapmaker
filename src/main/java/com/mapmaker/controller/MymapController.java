@@ -28,15 +28,22 @@ public class MymapController {
     @GetMapping("/mymap")
     public String dispMapList(Model model, Authentication authentication) {
         UserEntity userEntity = userService.getUserByEmail(authentication.getName());
-        List<MarkerDto> markerList = markerService.getMarkerList(userEntity);
 
+        // 여행정보 리스트
+        List<TravelDto> travelDtoList = travelService.getTravelListByUser(userEntity);
+
+        // 좌표 리스트 얻기
+        List<MarkerDto> markerList = markerService.getMarkerList(travelDtoList);
         List<String> positionsList = markerService.getPositions(markerList);
+
+        System.out.println(travelDtoList);
+        model.addAttribute("travelList", travelDtoList);
         model.addAttribute("positionsList", positionsList);
 
         return "/mymap/list";
     }
 
-    @RequestMapping(value="/mymap/{no}", method=RequestMethod.GET, produces=MediaType.APPLICATION_JSON_VALUE)
+    @RequestMapping(value="/mymap/travel/{no}", method=RequestMethod.GET, produces=MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody
     public String getTravelInfoJson(@PathVariable("no") Long no) {
         return travelService.getTravelInfo(no);
