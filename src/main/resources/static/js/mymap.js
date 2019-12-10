@@ -46,8 +46,10 @@ const displayMarkers = function(map) {
 
         // click event
         (function(marker) {
+            let url = 'http://localhost:8080/mymap/travel/marker/' + item['id'];
             libMap.event.addListener(marker, 'click', function() {
-                getTravelInfoByAjax(item['id']);
+                let res = ajaxUtil.call(url);
+                viewTravelInfo(JSON.parse(res));
             });
         })(marker);
     }
@@ -56,18 +58,21 @@ const displayMarkers = function(map) {
 /*
  *  Ajax 호출로 해당 마커의 여행 정보를 가져온다.
  */
-const getTravelInfoByAjax = function(id) {
-    let xhr = new XMLHttpRequest();
+// const getTravelInfoByAjax = function(id) {
+//     console.log(id);
+//     let xhr = new XMLHttpRequest();
+//
+//     xhr.onload = function () {
+//         if (xhr.status >= 200 && xhr.status < 300) {
+//             console.log(xhr.responseText);
+//             viewTravelInfo(JSON.parse(xhr.responseText));
+//         }
+//     };
+//
+//     xhr.open('GET', 'http://localhost:8080/mymap/travel/' + id, true);
+//     xhr.send();
+// };
 
-    xhr.onload = function () {
-        if (xhr.status >= 200 && xhr.status < 300) {
-            viewTravelInfo(JSON.parse(this.responseText));
-        }
-    };
-
-    xhr.open('GET', 'http://localhost:8080/mymap/travel/' + id, true);
-    xhr.send();
-};
 
 /*
  *  여행정보를 DOM에 할당하여 display
@@ -108,17 +113,13 @@ const viewTravelInfo = function(jsonInfo) {
 
 const RegisterClickEventforTravel = function() {
     let travelNodes = document.getElementsByClassName('travel-list');
-    let travelCount = travelNodes.length;
 
-    if (travelCount === 0) {
-        return;
-    }
-
-    for (let i = 0; i < travelCount; i++) {
-        let travelNode = travelNodes.item(i);
-        travelNode.addEventListener('click', function() {
-            let travelId = travelNode.getAttribute('data-id');
-            getTravelInfoByAjax(travelId);
+    for (let travelNode of travelNodes) {
+        let travelId = travelNode.getAttribute('data-id');
+        travelNode.addEventListener('click', function () {
+            let url = 'http://localhost:8080/mymap/travel/' + travelId;
+            let res = ajaxUtil.call(url);
+            viewTravelInfo(JSON.parse(res));
         });
     }
 };

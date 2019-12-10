@@ -49,6 +49,12 @@ public class MymapController {
         return travelService.getTravelInfo(no);
     }
 
+    @RequestMapping(value="/mymap/travel/marker/{no}", method=RequestMethod.GET, produces=MediaType.APPLICATION_JSON_VALUE)
+    @ResponseBody
+    public String getTravelInfoJsonByMarker(@PathVariable("no") Long no) {
+        return travelService.getTravelInfoByMarker(no);
+    }
+
     @GetMapping("/mymap/making")
     public String dispMapMaking() {
         return "/mymap/making";

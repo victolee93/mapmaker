@@ -41,7 +41,7 @@ public class TravelService {
     }
 
     @Transactional
-    public String getTravelInfo(Long no){
+    public String getTravelInfoByMarker(Long no){
         String travelInfoJson = "";
         Optional<MarkerEntity> markerEntityWrapper = markerRepository.findById(no);
 
@@ -54,6 +54,14 @@ public class TravelService {
 
         travelInfoJson = JasonManager.convertDtoToJson(travelDto);
         return travelInfoJson;
+    }
+
+    @Transactional
+    public String getTravelInfo(Long no){
+        Optional<TravelEntity> travelEntityWrapper = travelRepository.findById(no);
+
+        TravelDto travelDto = convertEntityToDto(travelEntityWrapper.get(), null);
+        return JasonManager.convertDtoToJson(travelDto);
     }
 
     private TravelDto convertEntityToDto(TravelEntity travelEntity, UserEntity userEntity) {
