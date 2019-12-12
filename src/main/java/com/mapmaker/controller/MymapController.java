@@ -36,7 +36,6 @@ public class MymapController {
         List<MarkerDto> markerList = markerService.getMarkerList(travelDtoList);
         List<String> positionsList = markerService.getPositions(markerList);
 
-        System.out.println(travelDtoList);
         model.addAttribute("travelList", travelDtoList);
         model.addAttribute("positionsList", positionsList);
 

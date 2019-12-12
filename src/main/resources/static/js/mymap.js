@@ -1,20 +1,18 @@
 
 const libMap = kakao.maps;
 
-let map = null;
-
 /*
  * DOM ready
  */
 document.addEventListener("DOMContentLoaded", function() {
     // 지도 초기화
-    map = mapInit();
-
-    // 최신 여행정보 click 이벤트 등록
-    RegisterClickEventforTravel();
+    let map = mapInit();
 
     // 마킹 표시
     displayMarkers(map);
+
+    // 최신 여행정보 click 이벤트 등록
+    RegisterClickEventForTravel();
 });
 
 
@@ -45,34 +43,17 @@ const displayMarkers = function(map) {
         marker.setMap(map);
 
         // click event
-        (function(marker) {
+        ( marker =>  {
             let url = 'http://localhost:8080/mymap/travel/marker/' + item['id'];
-            libMap.event.addListener(marker, 'click', function() {
-                let res = ajaxUtil.call(url);
-                viewTravelInfo(JSON.parse(res));
+
+            // TODO 응답값 null이 나오고 있음 -> 수정
+            libMap.event.addListener(marker, 'click', () => {
+                ajaxUtil.call(url)
+                    .then( res => viewTravelInfo(res));
             });
-        })(marker);
+        })( marker );
     }
 };
-
-/*
- *  Ajax 호출로 해당 마커의 여행 정보를 가져온다.
- */
-// const getTravelInfoByAjax = function(id) {
-//     console.log(id);
-//     let xhr = new XMLHttpRequest();
-//
-//     xhr.onload = function () {
-//         if (xhr.status >= 200 && xhr.status < 300) {
-//             console.log(xhr.responseText);
-//             viewTravelInfo(JSON.parse(xhr.responseText));
-//         }
-//     };
-//
-//     xhr.open('GET', 'http://localhost:8080/mymap/travel/' + id, true);
-//     xhr.send();
-// };
-
 
 /*
  *  여행정보를 DOM에 할당하여 display
@@ -111,15 +92,16 @@ const viewTravelInfo = function(jsonInfo) {
     openStatusElement.innerText = jsonInfo.openStatus;
 };
 
-const RegisterClickEventforTravel = function() {
+const RegisterClickEventForTravel = function() {
     let travelNodes = document.getElementsByClassName('travel-list');
 
     for (let travelNode of travelNodes) {
         let travelId = travelNode.getAttribute('data-id');
-        travelNode.addEventListener('click', function () {
+
+        travelNode.addEventListener('click', () => {
             let url = 'http://localhost:8080/mymap/travel/' + travelId;
-            let res = ajaxUtil.call(url);
-            viewTravelInfo(JSON.parse(res));
+            ajaxUtil.call(url)
+                .then( res => viewTravelInfo(res) );
         });
     }
 };
