@@ -33,10 +33,14 @@
                     </div>
                 </div>
                 <div>
-                    <button class="ui fluid large teal submit button">로그인</button>
+                    <button id="login-btn" class="ui fluid large teal button">로그인</button>
                 </div>
             </div>
         </form>
+
+        <div th:if="${param.error}">
+            아이디가 존재하지 않거나, 비밀번호가 일치하지 않습니다.
+        </div>
 
         <div class="ui message">
             아직 계정이 없으신가요? <a href="/user/signup">회원가입</a>
@@ -47,5 +51,7 @@
 <!-- FOOTER -->
 <div th:insert="common/footer.html" id="footer" class="ui grid container"></div>
 
+<script th:src="@{/js/util/validator.js}"></script>
+<script th:src="@{/js/login.js}"></script>
 </body>
 </html>

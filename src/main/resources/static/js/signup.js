@@ -2,29 +2,21 @@
 const signupObj = {
     init : () => {
         document.querySelector('#submit-btn').addEventListener('click', (event) => {
-            if (validatorObj.passwordConfirm() === false) {
-                event.preventDefault();
+            let passwd = document.querySelector('input[name=password]');
+            let passwdConfirm = document.querySelector('input[name=password-confirm]');
+
+            // 비밀번호 재확인 실패
+            if (validatorObj.passwordConfirm(passwd.value, passwdConfirm.value) === false) {
+                passwd.value = '';
+                passwdConfirm.value = '';
+
                 alert('비밀번호 재확인이 일치하지 않습니다.');
+                event.preventDefault();
                 return false;
             }
 
             this.closest("form").submit();
         })
-    }
-};
-
-const validatorObj = {
-    passwordConfirm : () => {
-        let passwd = document.querySelector('input[name=password]');
-        let passwdConfirm = document.querySelector('input[name=password-confirm]');
-
-        if (passwd.value != passwdConfirm.value) {
-            passwd.value = '';
-            passwdConfirm.value = '';
-            return false;
-        }
-
-        return true;
     }
 };
 
