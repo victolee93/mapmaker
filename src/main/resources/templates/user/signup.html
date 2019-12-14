@@ -44,7 +44,7 @@
                     </div>
                 </div>
                 <div>
-                    <button class="ui fluid large teal submit button">회원가입</button>
+                    <button id="submit-btn" class="ui fluid large teal button">회원가입</button>
                 </div>
             </div>
         </form>
@@ -57,5 +57,6 @@
 <!-- FOOTER -->
 <div th:insert="common/footer.html" id="footer" class="ui grid container"></div>
 
+<script th:src="@{/js/signup.js}"></script>
 </body>
 </html>
