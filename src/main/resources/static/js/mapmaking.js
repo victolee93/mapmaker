@@ -20,7 +20,8 @@ const mapmakingObj = {
 
         // submit
         document.querySelector('#write-btn').addEventListener('click', (event) => {
-            if (mapmakingObj.requireDataCheck() === false) {
+            // 유효성 체크
+            if (mapmakingObj.validationCheck() === false) {
                 event.preventDefault();
                 return false;
             }
@@ -81,9 +82,9 @@ const mapmakingObj = {
     },
 
     /*
-     * 필수 입력 값의 유효성을 체크한다.
+     * 입력값에 대한 유효성을 체크한다.
      */
-    requireDataCheck : () => {
+    validationCheck : () => {
         let title = document.querySelector('input[name=title]').value;
         let isTitleEmpty = validatorObj.isEmpty(title);
 
