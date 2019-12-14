@@ -15,7 +15,7 @@ const signupObj = {
                 return false;
             }
 
-            this.closest("form").submit();
+            this.closest('form').submit();
         })
     }
 };

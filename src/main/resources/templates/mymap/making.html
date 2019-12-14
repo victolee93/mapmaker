@@ -34,7 +34,7 @@
     <div id="map" class="nine wide column"></div>
 
     <div id="making-content" class="six wide column">
-        <form th:action="@{/mymap/making}" method="post" id="making-form" class="ui form">
+        <form th:action="@{/mymap/making}" method="post" class="ui form">
             <input id="maker-positions" name="markerPositions" type="hidden">
 
             <div class="field">
@@ -85,7 +85,7 @@
                 <label>공개 여부</label>
                 <div class="field">
                     <div class="ui radio checkbox">
-                        <input type="radio" name="openStatus" value="public" tabindex="0">
+                        <input type="radio" name="openStatus" value="public" tabindex="0" checked>
                         <label>yes</label>
                     </div>
                 </div>
@@ -120,6 +120,7 @@
 <!-- FOOTER -->
 <div th:insert="common/footer.html" id="footer" class="ui grid container"></div>
 
+<script th:src="@{/js/util/validator.js}"></script>
 <script th:src="@{/js/mapmaking.js}"></script>
 
 </body>
