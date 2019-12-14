@@ -18,22 +18,25 @@
                 회원가입
             </div>
         </h2>
-        <form th:action="@{/user/signup}" method="post" class="ui large form">
+        <form th:action="@{/user/signup}" method="post" class="ui large form" modelAttribute="userDto">
             <div class="ui stacked segment">
                 <div class="field">
                     <div class="ui input">
-                        <input type="text" name="email" placeholder="email@example.com">
+                        <input type="text" name="email" th:value="${userDto.email}" placeholder="email@example.com">
                     </div>
+                    <span th:if="${#strings.isEmpty(userDto.email)}" th:text="${valid_email}"></span>
                 </div>
                 <div class="field">
                     <div class="ui input">
-                        <input type="text" name="nickname" placeholder="닉네임">
+                        <input type="text" name="nickname" th:value="${userDto.nickname}" placeholder="닉네임">
                     </div>
+                    <span th:if="${#strings.isEmpty(userDto.nickname)}" th:text="${valid_nickname}"></span>
                 </div>
                 <div class="field">
                     <div class="ui input">
                         <input type="password" name="password" placeholder="비밀번호">
                     </div>
+                    <span th:if="${#strings.isEmpty(userDto.password)}" th:text="${valid_password}"></span>
                 </div>
                 <div class="field">
                     <div class="ui input">
