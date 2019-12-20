@@ -1,7 +1,9 @@
 
 galleryObj = {
     init : () => {
-        galleryObj.modalEventRegister()
+        galleryObj.modalEventRegister();
+
+        galleryObj.submit();
     },
     
     modalEventRegister : () => {
@@ -19,6 +21,12 @@ galleryObj = {
         document.querySelector(".modal_overlay").addEventListener('click', ()=> {
             writeHiddenElement.classList.add('write_hidden');
         });
+    },
+
+    submit : () => {
+        document.querySelector("#submit-btn").addEventListener("click", () => {
+            this.closest('form').submit();
+        })
     }
 };
 

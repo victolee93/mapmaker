@@ -29,10 +29,10 @@ public class BoardController {
 
     // 게시글 등록
     @PostMapping("/board")
-    public String execWrite(BoardDto boardDTO, Authentication authentication) {
+    public String execWrite(BoardDto boardDto, Authentication authentication) {
         UserEntity userEntity = userService.getUserByEmail(authentication.getName());
-        boardDTO.setAuthor(userEntity.getNickname());
-        boardService.savePost(boardDTO.toEntity());
+        boardDto.setAuthor(userEntity.getNickname());
+        boardService.savePost(boardDto);
 
         return "redirect:/board";
     }
@@ -48,10 +48,10 @@ public class BoardController {
 
     // 게시판 수정
     @PutMapping("/board/{no}")
-    public String execUpdate(BoardDto boardDTO, Authentication authentication) {
+    public String execUpdate(BoardDto boardDto, Authentication authentication) {
         UserEntity userEntity = userService.getUserByEmail(authentication.getName());
-        boardDTO.setAuthor(userEntity.getNickname());
-        boardService.savePost(boardDTO.toEntity());
+        boardDto.setAuthor(userEntity.getNickname());
+        boardService.savePost(boardDto);
 
         return "redirect:/board";
     }
