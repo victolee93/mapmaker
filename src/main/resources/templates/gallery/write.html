@@ -4,7 +4,7 @@
         <h1 class="ui dividing header">게시글 작성</h1>
 
         <div class="content">
-            <form th:action="@{/gallery}" method="post" class="ui form">
+            <form th:action="@{/gallery}" method="post" class="ui form" enctype="multipart/form-data">
                 <div class="field">
                     <label>제목</label>
                     <input name="title" type="text" placeholder="제목을 입력해주세요">
@@ -12,14 +12,18 @@
 
                 <div class="field">
                     <label>설명</label>
-                    <textarea name="content"></textarea>
+                    <textarea name="content" rows="6"></textarea>
                 </div>
 
-                <div class="field">
-                    <button class="ui small basic icon button">
-                        <i class="upload icon"></i> 파일 업로드
-                    </button>
-                    <span>파일명</span>
+                <div class="fields filebox">
+                    <div class="six wide field">
+                        <input id="upload-name" value="파일선택" disabled="disabled">
+                    </div>
+
+                    <div class="field">
+                        <label for="ex_filename">업로드</label>
+                        <input type="file" id="ex_filename" class="field" name="file">
+                    </div>
                 </div>
 
                 <div class="field">

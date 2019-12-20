@@ -66,3 +66,21 @@ body::-webkit-scrollbar-thumb {
     padding: 70px 0px;
 }
 
+
+/**********************
+*   fileupload
+**********************/
+.filebox input[type="file"] {
+    position: absolute;
+    clip: rect(0,0,0,0);
+    border: 0;
+}
+
+.filebox label {
+    padding: .5em .75em;
+    background-color: #fdfdfd;
+    cursor: pointer;
+    border: 1px solid #ebebeb;
+    border-radius: .25em;
+}
+

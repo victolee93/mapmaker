@@ -96,19 +96,25 @@
                     </div>
                 </div>
             </div>
-            <div class="field">
-                <button id="map-making-file-upload-btn" class="ui small basic icon button">
-                    <i class="upload icon"></i> 파일 업로드
-                </button>
-                <span>파일명</span>
-                <div class="inline fields">
-                    <img class="img-preview" th:src="@{/img/sample.jpg}">
-                    <img class="img-preview" th:src="@{/img/sample.jpg}">
-                    <img class="img-preview" th:src="@{/img/sample.jpg}">
-                    <img class="img-preview" th:src="@{/img/sample.jpg}">
-                    <img class="img-preview" th:src="@{/img/sample.jpg}">
-                    <img class="img-preview" th:src="@{/img/sample.jpg}">
+
+            <div class="fields filebox">
+                <div class="six wide field">
+                    <input id="upload-name" value="파일선택" disabled="disabled">
                 </div>
+
+                <div class="field">
+                    <label for="ex_filename">업로드</label>
+                    <input type="file" id="ex_filename" class="field" name="file">
+                </div>
+            </div>
+
+            <div class="inline fields">
+                <img class="img-preview" th:src="@{/img/sample.jpg}">
+                <img class="img-preview" th:src="@{/img/sample.jpg}">
+                <img class="img-preview" th:src="@{/img/sample.jpg}">
+                <img class="img-preview" th:src="@{/img/sample.jpg}">
+                <img class="img-preview" th:src="@{/img/sample.jpg}">
+                <img class="img-preview" th:src="@{/img/sample.jpg}">
             </div>
 
             <button id="cancel-btn" class="ui medium teal button right floated">취소</button>

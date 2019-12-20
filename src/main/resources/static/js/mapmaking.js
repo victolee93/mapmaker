@@ -6,64 +6,57 @@ const mapmakingObj = {
 
     init : () => {
         // 지도 초기화
-        mapmakingObj.map = mapmakingObj.mapInit();
+        mapmakingObj.mapInit();
 
         // 마킹 추가
-        kakao.maps.event.addListener(mapmakingObj.map, 'click', mouseEvent => {
-            mapmakingObj.addMark(mouseEvent);
-        });
+        mapmakingObj.addMark();
 
         // 마킹 초기화
-        document.querySelector('#reset-btn').addEventListener('click', () => {
-            mapmakingObj.hideMarkers();
-        });
+        mapmakingObj.hideMarkers();
 
         // submit
-        document.querySelector('#write-btn').addEventListener('click', (event) => {
-            // 유효성 체크
-            if (mapmakingObj.validationCheck() === false) {
-                event.preventDefault();
-                return false;
-            }
+        mapmakingObj.submit();
 
-            let makerPositionsElement = document.querySelector('#maker-positions')
-            makerPositionsElement.setAttribute('value', JSON.stringify(mapmakingObj.markerPositions));
-            this.closest('form').submit();
-        });
+        // 파일업로드 처리
+        mapmakingObj.fileUpload();
     },
 
     /*
      *  마킹을 추가하고, 지도에 노출한다
      */
-    addMark : mouseEvent => {
+    addMark : () => {
         // 위도, 경도
-        let latLng = mouseEvent.latLng;
+        kakao.maps.event.addListener(mapmakingObj.map, 'click', mouseEvent => {
+            let latLng = mouseEvent.latLng;
 
-        // 마커 객체를 지도에 표시
-        let marker = new kakao.maps.Marker({
-            position: latLng
+            // 마커 객체를 지도에 표시
+            let marker = new kakao.maps.Marker({
+                position: latLng
+            });
+            marker.setMap(mapmakingObj.map);
+            mapmakingObj.markers.push(marker);
+
+            // 위도 경도 정보를 form 데이터로 전송하기 위해, 객체를 만들어 markerPositions 변수에 추가
+            let letLngObj = {
+                "latitude" : latLng['Ga'],
+                "longitude" : latLng['Ha']
+            };
+            mapmakingObj.markerPositions.push(letLngObj);
         });
-        marker.setMap(mapmakingObj.map);
-        mapmakingObj.markers.push(marker);
-
-        // 위도 경도 정보를 form 데이터로 전송하기 위해, 객체를 만들어 markerPositions 변수에 추가
-        let letLngObj = {
-            "latitude" : latLng['Ga'],
-            "longitude" : latLng['Ha']
-        };
-        mapmakingObj.markerPositions.push(letLngObj);
     },
 
     /*
      *  지도에서 모든 마커를 제거한다.
      */
     hideMarkers : () => {
-        for (let i = 0; i < mapmakingObj.markers.length; i++) {
-            mapmakingObj.markers[i].setMap(null);
-        }
+        document.querySelector('#reset-btn').addEventListener('click', () => {
+            for (let i = 0; i < mapmakingObj.markers.length; i++) {
+                mapmakingObj.markers[i].setMap(null);
+            }
 
-        mapmakingObj.markers = [];
-        mapmakingObj.markerPositions = [];
+            mapmakingObj.markers = [];
+            mapmakingObj.markerPositions = [];
+        });
     },
 
 
@@ -78,7 +71,7 @@ const mapmakingObj = {
             center: new kakao.maps.LatLng(37.531425, 127.006561),
             level: 8
         };
-        return new kakao.maps.Map(container, options);
+        mapmakingObj.map = new kakao.maps.Map(container, options);
     },
 
     /*
@@ -114,6 +107,33 @@ const mapmakingObj = {
         }
 
         return true;
+    },
+
+    /*
+     * 파일 업로드 처리
+     */
+    fileUpload : () => {
+        document.querySelector("#ex_filename").addEventListener("change", (event) => {
+            let filename = event.target.files[0].name;;
+            document.querySelector("#upload-name").value = filename;
+        });
+    },
+
+    /*
+     * form 전송
+     */
+    submit : () => {
+        document.querySelector('#write-btn').addEventListener('click', (event) => {
+            // 유효성 체크
+            if (mapmakingObj.validationCheck() === false) {
+                event.preventDefault();
+                return false;
+            }
+
+            let makerPositionsElement = document.querySelector('#maker-positions')
+            makerPositionsElement.setAttribute('value', JSON.stringify(mapmakingObj.markerPositions));
+            this.closest('form').submit();
+        });
     }
 };
 
