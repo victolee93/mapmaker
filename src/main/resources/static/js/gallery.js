@@ -1,13 +1,25 @@
-var writeBtn = document.getElementById('write-btn');
-var detailBtn = document.querySelector('.detail-btn');
 
-var openWriteModal = function(){
-    $('.ui.modal.write').modal('show');
+galleryObj = {
+    init : () => {
+        galleryObj.modalEventRegister()
+    },
+    
+    modalEventRegister : () => {
+        const writeHiddenElement = document.querySelector(".write_hidden");
+
+        // show
+        document.querySelector("#write-btn").addEventListener('click', ()=> {
+            writeHiddenElement.classList.remove('write_hidden');
+        });
+
+        // hidden
+        document.querySelector("#cancel-btn").addEventListener('click', ()=> {
+            writeHiddenElement.classList.add('write_hidden');
+        });
+        document.querySelector(".modal_overlay").addEventListener('click', ()=> {
+            writeHiddenElement.classList.add('write_hidden');
+        });
+    }
 };
 
-var openDetailModal = function(){
-    $('.ui.modal.detail').modal('show');
-};
-
-writeBtn.addEventListener('click', openWriteModal);
-detailBtn.addEventListener('click', openDetailModal);
+galleryObj.init();
