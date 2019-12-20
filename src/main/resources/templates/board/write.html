@@ -1,23 +1,25 @@
-<div class="ui modal write">
-    <i class="close icon"></i>
-    <div class="header">
-        게시글 작성
-    </div>
+<div class="board_modal hidden">
+    <div class="modal_overlay"></div>
+    <div class="modal_content">
+        <h1 class="ui dividing header">게시글 작성</h1>
 
-    <div class="content">
-        <form id="write-form" th:action="@{/board}" method="post" class="ui form">
-            <div class="field">
-                <label>제목</label>
-                <input type="text" name="title" placeholder="제목">
-            </div>
-            <div class="field">
-                <label>내용</label>
-                <textarea name="content"></textarea>
-            </div>
-        </form>
-        <div>
-            <button id="write-cancel-btn" class="ui medium teal button right floated">취소</button>
-            <button id="write-submit-btn" class="ui medium teal button right floated">등록</button>
+        <div class="content">
+            <form id="write-form" th:action="@{/board}" method="post" class="ui form">
+                <div class="field">
+                    <label>제목</label>
+                    <input type="text" name="title" placeholder="제목">
+                </div>
+
+                <div class="field">
+                    <label>내용</label>
+                    <textarea name="content"></textarea>
+                </div>
+
+                <div class="field">
+                    <button id="cancel-btn" class="ui medium teal button right floated">취소</button>
+                    <button id="submit-btn" class="ui medium teal button right floated">등록</button>
+                </div>
+            </form>
         </div>
     </div>
 </div>

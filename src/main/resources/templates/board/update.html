@@ -1,26 +1,28 @@
-<div class="ui modal update">
-    <i class="close icon"></i>
-    <div class="header">
-        게시글 수정
-    </div>
+<div class="board_modal hidden">
+    <div class="modal_overlay"></div>
+    <div class="modal_content">
+        <h1 class="ui dividing header">게시글 수정</h1>
 
-    <div class="content">
-        <form id="update-form" th:action="@{'/board/' + ${boardDTO.id}}" method="post" class="ui form">
-            <input type="hidden" name="_method" value="put"/>
-            <input type="hidden" name="id" th:value="${boardDTO.id}"/>
+        <div class="content">
+            <form id="update-form" th:action="@{'/board/' + ${boardDTO.id}}" method="post" class="ui form">
+                <input type="hidden" name="_method" value="put"/>
+                <input type="hidden" name="id" th:value="${boardDTO.id}"/>
 
-            <div class="field">
-                <label>제목</label>
-                <input type="text" name="title" placeholder="제목">
-            </div>
-            <div class="field">
-                <label>내용</label>
-                <textarea name="content"></textarea>
-            </div>
-        </form>
-        <div>
-            <button id="update-cancel-btn" class="ui medium teal button right floated">취소</button>
-            <button id="update-submit-btn" class="ui medium teal button right floated">등록</button>
+                <div class="field">
+                    <label>제목</label>
+                    <input type="text" name="title" placeholder="제목">
+                </div>
+
+                <div class="field">
+                    <label>내용</label>
+                    <textarea name="content"></textarea>
+                </div>
+
+                <div class="field">
+                    <button id="cancel-btn" class="ui medium teal button right floated">취소</button>
+                    <button id="submit-btn" class="ui medium teal button right floated">등록</button>
+                </div>
+            </form>
         </div>
     </div>
 </div>

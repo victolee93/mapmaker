@@ -8,11 +8,6 @@
     <link rel="stylesheet" th:href="@{/css/common.css}">
     <link rel="stylesheet" th:href="@{/css/board.css}">
 
-    <script
-        src="https://code.jquery.com/jquery-3.1.1.min.js"
-        integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="
-        crossorigin="anonymous"></script>
-
     <title>MapMaker</title>
 </head>
 <body>
@@ -25,7 +20,7 @@
         <div th:insert="common/sidemenu.html" class="three wide column"></div>
 
         <div class="thirteen wide column">
-            <button id="board-write-btn" class="ui medium teal button right floated">글쓰기</button>
+            <button id="write-btn" class="ui medium teal button right floated">글쓰기</button>
 
             <div id="board-list-container">
                 <table class="ui table">
@@ -39,7 +34,7 @@
                     </thead>
                     <tbody>
                         <!-- CONTENTS !-->
-                        <div th:each="board : ${boardList}">
+                        <tr th:each="board : ${boardList}">
                             <td>
                                 <span th:text="${board.id}"></span>
                             </td>
@@ -54,7 +49,7 @@
                             <td>
                                 <span th:text="${board.modifiedDate}"></span>
                             </td>
-                        </div>
+                        </tr>
                     </tbody>
                 </table>
             </div>
@@ -71,7 +66,6 @@
 
 <!-- script -->
 <script th:src="@{/js/board.js}"></script>
-<script th:src="@{/lib/SemanticUI/semantic.js}"></script>
 
 </body>
 </html>

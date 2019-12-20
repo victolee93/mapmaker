@@ -7,11 +7,6 @@
     <link rel="stylesheet" th:href="@{/css/common.css}">
     <link rel="stylesheet" th:href="@{/css/board.css}">
 
-    <script
-        src="https://code.jquery.com/jquery-3.1.1.min.js"
-        integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="
-        crossorigin="anonymous"></script>
-
     <title>MapMaker</title>
 </head>
 <body>
@@ -45,7 +40,7 @@
 
                 <!-- 수정/삭제 -->
                 <div>
-                    <button id="board-update-btn" class="ui medium teal submit button right floated">수정</button>
+                    <button id="write-btn" class="ui medium teal button right floated">수정</button>
 
                     <form th:action="@{'/board/' + ${boardDTO.id}}" method="post">
                         <input type="hidden" name="_method" value="delete"/>
@@ -206,14 +201,14 @@
 <!-- update modal에서 사용할 변수 셋팅 -->
 <script th:inline="javascript">
     /*<![CDATA[*/
-    var title = /*[[${boardDTO.title}]]*/ "";
-    var content = /*[[${boardDTO.content}]]*/ "";
+    let title = /*[[${boardDTO.title}]]*/ "";
+    let content = /*[[${boardDTO.content}]]*/ "";
     /*]]>*/
 </script>
 
 <!-- script -->
+<script th:inline="javascript" th:src="@{/js/util/validator.js}"></script>
 <script th:inline="javascript" th:src="@{/js/board.js}"></script>
-<script th:src="@{/lib/SemanticUI/semantic.js}"></script>
 
 </body>
 </html>
