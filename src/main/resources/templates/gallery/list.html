@@ -23,7 +23,7 @@
 
             <div id="list" class="ui three cards">
                 <!-- CONTENTS !-->
-                <div th:each="gallery : ${galleryList}" class="card detail-btn">
+                <div th:each="gallery : ${galleryList}" class="card detail-btn" th:value="${gallery.id}">
                     <div class="content">
                         <p class="right floated meta" th:text="${gallery.author}"></p>
                         <p th:text="${gallery.title}">14h</p>
@@ -54,6 +54,7 @@
 <div th:insert="common/footer.html" id="footer" class="ui grid container"></div>
 
 <!-- script -->
+<script th:src="@{/js/util/ajax.js}"></script>
 <script th:src="@{/js/gallery.js}"></script>
 
 </body>

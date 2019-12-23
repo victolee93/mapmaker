@@ -6,11 +6,11 @@ import com.mapmaker.service.GalleryService;
 import com.mapmaker.service.UserService;
 import com.mapmaker.service.aws.S3Service;
 import lombok.AllArgsConstructor;
+import org.springframework.http.MediaType;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
@@ -42,5 +42,11 @@ public class GalleryController {
         galleryService.savePost(galleryDto);
 
         return "redirect:/gallery";
+    }
+
+    @RequestMapping(value="/gallery/{no}", method=RequestMethod.GET, produces= MediaType.APPLICATION_JSON_VALUE)
+    @ResponseBody
+    public String dispGalleryDetail(@PathVariable("no") Long no) {
+        return galleryService.getGalleryInfo(no);
     }
 }

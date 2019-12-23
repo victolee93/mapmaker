@@ -1,18 +1,26 @@
-<div class="gallery_modal detail_hidden">
-    <div class="modal_overlay"></div>
-    <div class="modal_content">
-        <i class="close icon"></i>
-        <div class="header">
-            이미지
+<div id="detail-hidden" class="gallery-modal">
+    <div id="detail-modal-overlay"></div>
+    <div id="detail-modal-content" class="ui grid">
+        <div class="sixteen wide wide column">
+            <div id="detail-cancel-box">
+                <i id="detail-cancel-btn" class="close icon one wide column"></i>
+            </div>
+            <div id="gallery-info-title" class="ui dividing header"></div>
         </div>
 
-        <div class="image content">
-            <div class="image">
-                <img id="full-img" th:src="@{/img/sample.jpg}">
+        <div class="nine wide column">
+            <div class="image content">
+                <div class="image">
+                    <img id="detail-img">
+                </div>
+            </div>
+
+            <div class="field">
+                <p id="gallery-info-desc"></p>
             </div>
         </div>
-        <div class="field">
-            <p id="description">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</p>
+        <div class="seven wide column">
+            <p> fppfppfppfppfppfppfppfppfppfppfpp fppfppfppfppfppfppfppfppfppfppfpp fppfppfppfppfppfppfppfppfppfppfpp fppfppfppfppfppfppfppfppfppfppfpp fppfppfppfppfppfppfppfppfppfppfpp fppfppfppfppfppfppfppfppfppfppfpp</p>
         </div>
     </div>
 </div>

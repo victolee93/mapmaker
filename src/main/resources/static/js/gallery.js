@@ -1,7 +1,9 @@
 
 galleryObj = {
     init : () => {
-        galleryObj.modalEventRegister();
+        galleryObj.writeModalEventRegister();
+
+        galleryObj.detailModalEventRegister();
 
         galleryObj.fileUpload();
 
@@ -9,22 +11,55 @@ galleryObj = {
     },
     
     /*
-     * 모달 이벤트 등록
+     * 글쓰기 모달 이벤트 등록
      */
-    modalEventRegister : () => {
-        const writeHiddenElement = document.querySelector(".write_hidden");
+    writeModalEventRegister : () => {
+        const writeHiddenElement = document.querySelector("#write-hidden");
 
         // show
         document.querySelector("#write-btn").addEventListener('click', ()=> {
-            writeHiddenElement.classList.remove('write_hidden');
+            writeHiddenElement.id = '';
         });
 
         // hidden
-        document.querySelector("#cancel-btn").addEventListener('click', ()=> {
-            writeHiddenElement.classList.add('write_hidden');
+        document.querySelector("#write-cancel-btn").addEventListener('click', ()=> {
+            writeHiddenElement.id = 'write-hidden';
         });
-        document.querySelector(".modal_overlay").addEventListener('click', ()=> {
-            writeHiddenElement.classList.add('write_hidden');
+
+        document.querySelector("#write-modal-overlay").addEventListener('click', ()=> {
+            writeHiddenElement.id = 'write-hidden';
+        });
+    },
+
+    /*
+     * 디테일 모달 이벤트 등록
+     */
+    detailModalEventRegister : () => {
+        const detailHiddenElement = document.querySelector("#detail-hidden");
+
+        // show
+        document.querySelectorAll(".detail-btn").forEach((item) => {
+            item.addEventListener('click', ()=> {
+                detailHiddenElement.id = '';
+
+                let galley_id = item.getAttribute('value');
+                let url = 'http://localhost:8080/gallery/' + galley_id;
+                ajaxUtil.call(url)
+                    .then( (res) => {
+                        document.querySelector("#gallery-info-title").innerText = res.title;
+                        document.querySelector("#gallery-info-desc").innerText = res.content;
+                        document.querySelector("#detail-img").src = res.filePath;
+                    });
+            });
+        });
+
+        // hidden
+        document.querySelector("#detail-cancel-btn").addEventListener('click', ()=> {
+            detailHiddenElement.id = 'detail-hidden';
+        });
+
+        document.querySelector("#detail-modal-overlay").addEventListener('click', ()=> {
+            detailHiddenElement.id = 'detail-hidden';
         });
     },
 
