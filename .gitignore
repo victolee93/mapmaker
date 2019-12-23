@@ -34,7 +34,3 @@ out/
 
 ### my ignore ###
 src/main/resources/application.yml
-
-### frontend ###
-frontend/node_modules
-frontend/dist

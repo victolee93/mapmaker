@@ -1,6 +1,5 @@
 package com.mapmaker.dto;
 
-import com.mapmaker.domain.entity.BoardEntity;
 import com.mapmaker.domain.entity.GalleryEntity;
 import lombok.*;
 
@@ -15,6 +14,7 @@ public class GalleryDto {
     private String author;
     private String title;
     private String content;
+    private String filePath;
     private LocalDateTime createdDate;
     private LocalDateTime modifiedDate;
 
@@ -24,16 +24,18 @@ public class GalleryDto {
                 .author(author)
                 .title(title)
                 .content(content)
+                .filePath(filePath)
                 .build();
     }
 
     @Builder
-    public GalleryDto(Long id, String title, String content, String author,
+    public GalleryDto(Long id, String title, String content, String author, String filePath,
                     LocalDateTime createdDate, LocalDateTime modifiedDate) {
         this.id = id;
         this.author = author;
         this.title = title;
         this.content = content;
+        this.filePath = filePath;
         this.createdDate = createdDate;
         this.modifiedDate = modifiedDate;
     }

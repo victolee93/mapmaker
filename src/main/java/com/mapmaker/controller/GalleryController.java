@@ -4,6 +4,7 @@ import com.mapmaker.domain.entity.UserEntity;
 import com.mapmaker.dto.GalleryDto;
 import com.mapmaker.service.GalleryService;
 import com.mapmaker.service.UserService;
+import com.mapmaker.service.aws.S3Service;
 import lombok.AllArgsConstructor;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
@@ -17,10 +18,10 @@ import java.util.List;
 
 @Controller
 @AllArgsConstructor
-// TODO - 파일 업로드 : Object Storage
 public class GalleryController {
     private GalleryService galleryService;
     private UserService userService;
+    private S3Service s3Service;
 
     @GetMapping("/gallery")
     public String dispGalleryList(Model model) {
@@ -35,6 +36,9 @@ public class GalleryController {
     public String execWrite(GalleryDto galleryDto, Authentication authentication, MultipartFile file) throws IOException {
         UserEntity userEntity = userService.getUserByEmail(authentication.getName());
         galleryDto.setAuthor(userEntity.getNickname());
+
+        String imgPath = s3Service.upload(file);
+        galleryDto.setFilePath(imgPath);
         galleryService.savePost(galleryDto);
 
         return "redirect:/gallery";

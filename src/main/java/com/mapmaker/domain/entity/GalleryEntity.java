@@ -26,11 +26,15 @@ public class GalleryEntity extends TimeEntity{
     @Column(columnDefinition = "TEXT", nullable = false)
     private String content;
 
+    @Column(columnDefinition = "TEXT", nullable = false)
+    private String filePath;
+
     @Builder
-    public GalleryEntity(Long id, String title, String content, String author) {
+    public GalleryEntity(Long id, String title, String content, String author, String filePath) {
         this.id = id;
         this.author = author;
         this.title = title;
         this.content = content;
+        this.filePath = filePath;
     }
 }

@@ -38,6 +38,7 @@ public class GalleryService {
                 .title(galleryEntity.getTitle())
                 .content(galleryEntity.getContent())
                 .author(galleryEntity.getAuthor())
+                .filePath(galleryEntity.getFilePath())
                 .modifiedDate(galleryEntity.getModifiedDate())
                 .build();
     }
