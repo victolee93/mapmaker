@@ -79,6 +79,8 @@
 #img-preview {
     width: 50%;
     height: 50%;
+    max-width: 300px;
+    max-height: 300px;
 }
 
 #description {

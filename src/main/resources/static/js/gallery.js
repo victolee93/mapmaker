@@ -32,9 +32,17 @@ galleryObj = {
      * 파일 업로드 처리
      */
     fileUpload : () => {
-        document.querySelector("#ex_filename").addEventListener("change", (event) => {
-            let filename = event.target.files[0].name;;
-            document.querySelector("#upload-name").value = filename;
+        let reader = new FileReader();
+
+        reader.onload = (readerEvent) => {
+            document.querySelector("#img-preview").setAttribute('src', readerEvent.target.result);
+        };
+
+        document.querySelector("#ex_filename").addEventListener("change", (changeEvent) => {
+            let imgFile = changeEvent.target.files[0];
+            document.querySelector("#upload-name").value = imgFile.name;
+
+            reader.readAsDataURL(imgFile);
         });
     },
 
