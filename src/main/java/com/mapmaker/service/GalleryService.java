@@ -35,9 +35,13 @@ public class GalleryService {
     }
 
     @Transactional
-    public String getGalleryInfo(Long no) {
+    public GalleryDto getGalleryInfo(Long no) {
         Optional<GalleryEntity> galleryEntityWrapper = galleryRepository.findById(no);
-        GalleryDto galleryDto = convertEntityToDto(galleryEntityWrapper.get());
+        return convertEntityToDto(galleryEntityWrapper.get());
+    }
+
+    public String getGalleryInfoJson(Long no) {
+        GalleryDto galleryDto = this.getGalleryInfo(no);
         return JasonManager.convertDtoToJson(galleryDto);
     }
 

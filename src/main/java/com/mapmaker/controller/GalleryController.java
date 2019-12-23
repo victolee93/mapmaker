@@ -1,8 +1,11 @@
 package com.mapmaker.controller;
 
+import com.mapmaker.domain.entity.GalleryEntity;
 import com.mapmaker.domain.entity.UserEntity;
 import com.mapmaker.dto.GalleryDto;
+import com.mapmaker.dto.GalleryLikeDto;
 import com.mapmaker.service.GalleryService;
+import com.mapmaker.service.LikeService;
 import com.mapmaker.service.UserService;
 import com.mapmaker.service.aws.S3Service;
 import lombok.AllArgsConstructor;
@@ -22,10 +25,24 @@ public class GalleryController {
     private GalleryService galleryService;
     private UserService userService;
     private S3Service s3Service;
+    private LikeService likeService;
 
     @GetMapping("/gallery")
-    public String dispGalleryList(Model model) {
+    public String dispGalleryList(Model model, Authentication authentication) {
+        UserEntity userEntity = userService.getUserByEmail(authentication.getName());
+
         List<GalleryDto> galleryList = galleryService.getRecentList();
+
+        for(GalleryDto galleryDto: galleryList) {
+            GalleryEntity galleryEntity = galleryDto.toEntity();
+            Long totalLike = likeService.getCountGalleryLike(galleryEntity);
+            Boolean checked = likeService.isUserCheckedGalleryLike(userEntity, galleryEntity);
+
+            galleryDto.setTotalLike(totalLike);
+            galleryDto.setChecked(checked);
+
+            System.out.println(galleryDto);
+        }
 
         model.addAttribute("galleryList", galleryList);
 
@@ -46,7 +63,21 @@ public class GalleryController {
 
     @RequestMapping(value="/gallery/{no}", method=RequestMethod.GET, produces= MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody
-    public String dispGalleryDetail(@PathVariable("no") Long no) {
-        return galleryService.getGalleryInfo(no);
+    public String getGalleryDetail(@PathVariable("no") Long no) {
+        return galleryService.getGalleryInfoJson(no);
+    }
+
+    @RequestMapping(value="/gallery/{no}/like", method=RequestMethod.GET, produces= MediaType.APPLICATION_JSON_VALUE)
+    @ResponseBody
+    public String execLike(@PathVariable("no") Long galleryId, Authentication authentication) {
+        UserEntity userEntity = userService.getUserByEmail(authentication.getName());
+        GalleryEntity galleryEntity = galleryService.getGalleryInfo(galleryId).toEntity();
+
+        GalleryLikeDto galleryLikeDto = new GalleryLikeDto();
+        galleryLikeDto.setUserEntity(userEntity);
+        galleryLikeDto.setGalleryEntity(galleryEntity);
+
+        likeService.saveGalleryLike(galleryLikeDto);
+        return String.valueOf(likeService.getCountGalleryLike(galleryEntity));
     }
 }

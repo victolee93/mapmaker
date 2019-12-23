@@ -5,6 +5,8 @@ galleryObj = {
 
         galleryObj.detailModalEventRegister();
 
+        galleryObj.like();
+
         galleryObj.fileUpload();
 
         galleryObj.submit();
@@ -61,6 +63,35 @@ galleryObj = {
         document.querySelector("#detail-modal-overlay").addEventListener('click', ()=> {
             detailHiddenElement.id = 'detail-hidden';
         });
+    },
+
+    /*
+     * 좋아요 버튼
+     */
+    like : () => {
+        let likeBtnElement = document.querySelectorAll(".like-btn");
+
+        if (likeBtnElement) {
+            likeBtnElement.forEach((item) => {
+                item.addEventListener('click', (event)=> {
+                    event.stopPropagation();
+
+                    if (item.classList.contains('checked')) {
+                        alert('이미 좋아요를 눌렀습니다.')
+                    }
+
+                    let galley_id = event.target.getAttribute('value');
+                    let url = 'http://localhost:8080/gallery/' + galley_id + '/like';
+                    ajaxUtil.call(url)
+                        .then( (res) => {
+                            item.classList.remove('outline');
+                            item.classList.add('checked');
+
+                            item.nextElementSibling.innerText = res;
+                        });
+                });
+            })
+        }
     },
 
     /*

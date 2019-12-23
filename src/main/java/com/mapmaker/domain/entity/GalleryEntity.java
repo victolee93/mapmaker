@@ -6,6 +6,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Getter
@@ -28,6 +30,12 @@ public class GalleryEntity extends TimeEntity{
 
     @Column(columnDefinition = "TEXT", nullable = false)
     private String filePath;
+
+    /*
+     *  Relation Mapping
+     */
+    @OneToMany(mappedBy = "galleryEntity")
+    private List<GalleryLikeEntity> galleryLikes = new ArrayList<>();
 
     @Builder
     public GalleryEntity(Long id, String title, String content, String author, String filePath) {

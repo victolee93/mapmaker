@@ -35,7 +35,11 @@
 
                     <div class="content">
                         <span class="right floated">
-                          <i class="heart outline like icon"></i> 17 likes
+                            <i class="heart like icon like-btn"
+                               th:classappend="${gallery.checked} ? 'checked' : 'outline'"
+                               th:value="${gallery.id}">
+                            </i>
+                            <span class="total-like" th:text="${gallery.totalLike}"></span> likes
                         </span>
                         <i class="comment icon"></i> 3 comments
                     </div>

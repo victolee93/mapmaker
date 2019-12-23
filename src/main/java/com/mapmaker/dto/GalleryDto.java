@@ -15,6 +15,8 @@ public class GalleryDto {
     private String title;
     private String content;
     private String filePath;
+    private Long totalLike;
+    private Boolean checked;
     private LocalDateTime createdDate;
     private LocalDateTime modifiedDate;
 
@@ -30,12 +32,15 @@ public class GalleryDto {
 
     @Builder
     public GalleryDto(Long id, String title, String content, String author, String filePath,
+                    Long totalLike, Boolean checked,
                     LocalDateTime createdDate, LocalDateTime modifiedDate) {
         this.id = id;
         this.author = author;
         this.title = title;
         this.content = content;
         this.filePath = filePath;
+        this.totalLike = totalLike;
+        this.checked = checked;
         this.createdDate = createdDate;
         this.modifiedDate = modifiedDate;
     }
