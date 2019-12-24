@@ -44,7 +44,7 @@ const mymapObj = {
                 let url = 'http://localhost:8080/mymap/travel/marker/' + item['id'];
 
                 kakao.maps.event.addListener(marker, 'click', () => {
-                    ajaxUtil.call(url)
+                    ajaxUtil.GETCall(url)
                         .then( res => mymapObj.viewTravelInfo(res));
                 });
             })( marker );
@@ -64,7 +64,7 @@ const mymapObj = {
     
             travelNode.addEventListener('click', () => {
                 let url = 'http://localhost:8080/mymap/travel/' + travelId;
-                ajaxUtil.call(url)
+                ajaxUtil.GETCall(url)
                     .then( res => mymapObj.viewTravelInfo(res) );
             });
         }

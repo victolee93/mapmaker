@@ -6,7 +6,7 @@ import com.mapmaker.domain.entity.UserEntity;
 import com.mapmaker.domain.repository.MarkerRepository;
 import com.mapmaker.domain.repository.TravelRepository;
 import com.mapmaker.dto.TravelDto;
-import com.mapmaker.util.JasonManager;
+import com.mapmaker.util.JsonManager;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -52,7 +52,7 @@ public class TravelService {
         TravelEntity travelEntity = markerEntityWrapper.get().getTravelEntity();
         TravelDto travelDto = convertEntityToDto(travelEntity, null);
 
-        travelInfoJson = JasonManager.convertDtoToJson(travelDto);
+        travelInfoJson = JsonManager.convertDtoToJson(travelDto);
         return travelInfoJson;
     }
 
@@ -61,7 +61,7 @@ public class TravelService {
         Optional<TravelEntity> travelEntityWrapper = travelRepository.findById(no);
 
         TravelDto travelDto = convertEntityToDto(travelEntityWrapper.get(), null);
-        return JasonManager.convertDtoToJson(travelDto);
+        return JsonManager.convertDtoToJson(travelDto);
     }
 
     private TravelDto convertEntityToDto(TravelEntity travelEntity, UserEntity userEntity) {

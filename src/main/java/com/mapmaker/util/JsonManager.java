@@ -6,7 +6,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import java.io.IOException;
 import java.util.List;
 
-public class JasonManager {
+public class JsonManager {
     private static ObjectMapper objectMapper = new ObjectMapper();
 
     // DTO 클래스를 Json 문자열로 반환

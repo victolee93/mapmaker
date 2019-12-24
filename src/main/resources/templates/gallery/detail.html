@@ -1,6 +1,7 @@
 <div id="detail-hidden" class="gallery-modal">
     <div id="detail-modal-overlay"></div>
     <div id="detail-modal-content" class="ui grid">
+        <!-- 헤더 -->
         <div class="sixteen wide wide column">
             <div id="detail-cancel-box">
                 <i id="detail-cancel-btn" class="close icon one wide column"></i>
@@ -8,6 +9,7 @@
             <div id="gallery-info-title" class="ui dividing header"></div>
         </div>
 
+        <!-- left side : 이미지, 설명 -->
         <div class="nine wide column">
             <div class="image content">
                 <div class="image">
@@ -19,8 +21,33 @@
                 <p id="gallery-info-desc"></p>
             </div>
         </div>
+
+        <!-- right side : 댓글 -->
         <div class="seven wide column">
-            <p> 댓글 공간</p>
+            <div class="ui comments">
+
+                <div id="reply-text" class="ui form">
+                    <input id="reply-url" type="hidden"/>
+                    <input id="csrf_token" type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
+                    <textarea name="content" rows="3"></textarea>
+                </div>
+                <button id="comment-write-btn" class="ui medium teal submit button right floated">등록</button>
+
+                <div id="comment-list" class="scrollbar">
+                    <div id="comment-box" class="comment">
+                        <div class="content">
+                            <span class="author">작성자이름</span>
+                            <div class="metadata">
+                                <span class="date">날짜</span>
+                            </div>
+
+                            <div class="text">
+                                내용
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 </div>

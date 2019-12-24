@@ -7,7 +7,7 @@ import com.mapmaker.domain.repository.TravelRepository;
 import com.mapmaker.dto.MarkerDto;
 import com.mapmaker.dto.PositionsDto;
 import com.mapmaker.dto.TravelDto;
-import com.mapmaker.util.JasonManager;
+import com.mapmaker.util.JsonManager;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -46,7 +46,7 @@ public class MarkerService {
         String positionsJson = markerDto.getMarkerPositions();
 
         List<PositionsDto> positionsDtoList = null;
-        positionsDtoList = JasonManager.covnertJsonToDto(PositionsDto.class , positionsJson);
+        positionsDtoList = JsonManager.covnertJsonToDto(PositionsDto.class , positionsJson);
 
         if (positionsDtoList.isEmpty()) {
             return false;
@@ -79,7 +79,7 @@ public class MarkerService {
                     .latitude(markerDto.getLatitude())
                     .longitude(markerDto.getLongitude())
                     .build();
-            positionsList.add(JasonManager.convertDtoToJson(positionsDto));
+            positionsList.add(JsonManager.convertDtoToJson(positionsDto));
         }
 
         return positionsList;

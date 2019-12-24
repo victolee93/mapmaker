@@ -1,6 +1,8 @@
 package com.mapmaker.dto;
 
 import com.mapmaker.domain.entity.GalleryEntity;
+import com.mapmaker.domain.entity.GalleryLikeEntity;
+import com.mapmaker.domain.entity.UserEntity;
 import lombok.*;
 
 import java.time.LocalDateTime;
@@ -19,6 +21,9 @@ public class GalleryDto {
     private Boolean checked;
     private LocalDateTime createdDate;
     private LocalDateTime modifiedDate;
+
+    private UserEntity userEntity;
+    private GalleryLikeEntity galleryLikeEntity;
 
     public GalleryEntity toEntity(){
         return GalleryEntity.builder()

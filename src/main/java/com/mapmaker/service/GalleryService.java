@@ -3,7 +3,7 @@ package com.mapmaker.service;
 import com.mapmaker.domain.entity.GalleryEntity;
 import com.mapmaker.domain.repository.GalleryRepository;
 import com.mapmaker.dto.GalleryDto;
-import com.mapmaker.util.JasonManager;
+import com.mapmaker.util.JsonManager;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -42,7 +42,7 @@ public class GalleryService {
 
     public String getGalleryInfoJson(Long no) {
         GalleryDto galleryDto = this.getGalleryInfo(no);
-        return JasonManager.convertDtoToJson(galleryDto);
+        return JsonManager.convertDtoToJson(galleryDto);
     }
 
     private GalleryDto convertEntityToDto(GalleryEntity galleryEntity) {

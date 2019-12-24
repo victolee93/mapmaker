@@ -1,9 +1,6 @@
 package com.mapmaker.domain.entity;
 
-import lombok.AccessLevel;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import javax.persistence.*;
 import java.util.ArrayList;
@@ -36,6 +33,10 @@ public class GalleryEntity extends TimeEntity{
      */
     @OneToMany(mappedBy = "galleryEntity")
     private List<GalleryLikeEntity> galleryLikes = new ArrayList<>();
+
+    @OneToMany(mappedBy = "galleryEntity")
+    private List<GalleryCommentEntity> galleryComments = new ArrayList<>();
+
 
     @Builder
     public GalleryEntity(Long id, String title, String content, String author, String filePath) {

@@ -1,9 +1,6 @@
 package com.mapmaker.domain.entity;
 
-import lombok.AccessLevel;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import javax.persistence.*;
 import java.util.ArrayList;
@@ -35,6 +32,9 @@ public class UserEntity extends TimeEntity {
 
     @OneToMany(mappedBy = "userEntity")
     private List<GalleryLikeEntity> galleryLikes = new ArrayList<>();
+
+    @OneToMany(mappedBy = "userEntity")
+    private List<GalleryCommentEntity> galleryComments = new ArrayList<>();
 
     @Builder
     public UserEntity(Long id, String nickname, String email, String password) {

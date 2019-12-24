@@ -9,7 +9,9 @@ galleryObj = {
 
         galleryObj.fileUpload();
 
-        galleryObj.submit();
+        galleryObj.gallerySubmit();
+
+        galleryObj.galleryReplySubmit();
     },
     
     /*
@@ -46,11 +48,12 @@ galleryObj = {
 
                 let galley_id = item.getAttribute('value');
                 let url = 'http://localhost:8080/gallery/' + galley_id;
-                ajaxUtil.call(url)
+                ajaxUtil.GETCall(url)
                     .then( (res) => {
                         document.querySelector("#gallery-info-title").innerText = res.title;
                         document.querySelector("#gallery-info-desc").innerText = res.content;
                         document.querySelector("#detail-img").src = res.filePath;
+                        document.querySelector("#reply-url").value = '/gallery/' + galley_id + '/comment';
                     });
             });
         });
@@ -78,16 +81,18 @@ galleryObj = {
 
                     if (item.classList.contains('checked')) {
                         alert('이미 좋아요를 눌렀습니다.')
+                        return false;
                     }
 
                     let galley_id = event.target.getAttribute('value');
                     let url = 'http://localhost:8080/gallery/' + galley_id + '/like';
-                    ajaxUtil.call(url)
-                        .then( (res) => {
+                    ajaxUtil.GETCall(url)
+                        .then( () => {
                             item.classList.remove('outline');
                             item.classList.add('checked');
 
-                            item.nextElementSibling.innerText = res;
+                            // 현재 좋아요 + 1
+                            item.nextElementSibling.innerText = parseInt(item.nextElementSibling.innerText) + 1;
                         });
                 });
             })
@@ -113,11 +118,50 @@ galleryObj = {
     },
 
     /*
-     * form 전송
+     * 갤러리 글쓰기 form 전송
      */
-    submit : () => {
+    gallerySubmit : () => {
         document.querySelector("#submit-btn").addEventListener("click", () => {
             this.closest('form').submit();
+        })
+    },
+
+    /*
+     * 댓글 form 전송
+     */
+    galleryReplySubmit : () => {
+        document.querySelector("#comment-write-btn").addEventListener("click", (e) => {
+            let url = document.querySelector("#reply-url").value;
+            let contentTextAreaElement = document.querySelector("#reply-text > textarea[name=content]");
+            let csrfTokenElement = document.querySelector("#csrf_token");
+
+            let formData = new FormData();
+            formData.append('content', contentTextAreaElement.value);
+            formData.append(csrfTokenElement.name, csrfTokenElement.value);
+
+            ajaxUtil.POSTCall(url, formData)
+                .then((res) => {
+                    // textarea 초기화
+                    contentTextAreaElement.value = '';
+
+                    // 댓글 내용 엘리먼트 작성하여 추가
+                    let replyContent = `
+                            <span class="author">${res.username}</span>
+                            <div class="metadata">
+                                <span class="date">날짜</span>
+                            </div>
+
+                            <div class="text">
+                                ${res.content}
+                            </div>`
+
+                    let replyContentDiv = document.createElement('div');
+                    replyContentDiv.setAttribute("class", "content");
+                    replyContentDiv.innerHTML = replyContent;
+
+                    document.querySelector("#comment-box").appendChild(replyContentDiv);
+
+                });
         })
     }
 };
