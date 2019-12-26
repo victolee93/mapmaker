@@ -1,7 +1,9 @@
 package com.mapmaker.service;
 
+import com.mapmaker.domain.entity.GalleryCommentEntity;
 import com.mapmaker.domain.entity.GalleryEntity;
 import com.mapmaker.domain.repository.GalleryRepository;
+import com.mapmaker.dto.GalleryCommentDto;
 import com.mapmaker.dto.GalleryDto;
 import com.mapmaker.util.JsonManager;
 import lombok.AllArgsConstructor;
@@ -15,6 +17,7 @@ import java.util.Optional;
 @AllArgsConstructor
 @Service
 public class GalleryService {
+    private CommentService commentService;
     private GalleryRepository galleryRepository;
 
     @Transactional
@@ -23,7 +26,7 @@ public class GalleryService {
         List<GalleryDto> galleryDtos = new ArrayList<>();
 
         for (GalleryEntity galleryEntity : galleryEntities) {
-            galleryDtos.add(convertEntityToDto(galleryEntity));
+            galleryDtos.add(convertEntityToDto(galleryEntity, null));
         }
 
         return galleryDtos;
@@ -35,23 +38,25 @@ public class GalleryService {
     }
 
     @Transactional
-    public GalleryDto getGalleryInfo(Long no) {
+    public GalleryEntity getGalleryInfo(Long no) {
         Optional<GalleryEntity> galleryEntityWrapper = galleryRepository.findById(no);
-        return convertEntityToDto(galleryEntityWrapper.get());
+        return galleryEntityWrapper.get();
     }
 
-    public String getGalleryInfoJson(Long no) {
-        GalleryDto galleryDto = this.getGalleryInfo(no);
-        return JsonManager.convertDtoToJson(galleryDto);
+    public String getGalleryInfoAndCommentsJson(Long no) {
+        GalleryEntity galleryEntity = this.getGalleryInfo(no);
+        List<GalleryCommentDto> galleryCommentList = commentService.getGalleryCommentList(galleryEntity);
+        return JsonManager.convertDtoToJson(convertEntityToDto(galleryEntity, galleryCommentList));
     }
 
-    private GalleryDto convertEntityToDto(GalleryEntity galleryEntity) {
+    private GalleryDto convertEntityToDto(GalleryEntity galleryEntity, List<GalleryCommentDto> galleryCommentList) {
         return GalleryDto.builder()
                 .id(galleryEntity.getId())
                 .title(galleryEntity.getTitle())
                 .content(galleryEntity.getContent())
                 .author(galleryEntity.getAuthor())
                 .filePath(galleryEntity.getFilePath())
+                .galleryCommentEntityList(galleryCommentList)
                 .modifiedDate(galleryEntity.getModifiedDate())
                 .build();
     }

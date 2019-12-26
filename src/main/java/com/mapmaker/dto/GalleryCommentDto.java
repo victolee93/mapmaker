@@ -5,6 +5,8 @@ import com.mapmaker.domain.entity.GalleryEntity;
 import com.mapmaker.domain.entity.UserEntity;
 import lombok.*;
 
+import java.time.LocalDateTime;
+
 @Getter
 @Setter
 @ToString
@@ -12,6 +14,9 @@ import lombok.*;
 public class GalleryCommentDto {
     private Long id;
     private String content;
+    private String username;
+    private String date;
+
     private UserEntity userEntity;
     private GalleryEntity galleryEntity;
 
@@ -25,10 +30,10 @@ public class GalleryCommentDto {
     }
 
     @Builder
-    public GalleryCommentDto(Long id, String content, UserEntity userEntity, GalleryEntity galleryEntity) {
+    public GalleryCommentDto(Long id, String content, String username, String date) {
         this.id = id;
         this.content = content;
-        this.userEntity = userEntity;
-        this.galleryEntity = galleryEntity;
+        this.username = username;
+        this.date = date;
     }
 }

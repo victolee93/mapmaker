@@ -53,7 +53,15 @@ galleryObj = {
                         document.querySelector("#gallery-info-title").innerText = res.title;
                         document.querySelector("#gallery-info-desc").innerText = res.content;
                         document.querySelector("#detail-img").src = res.filePath;
+                        // 댓글 등록시 호출되는 URL
                         document.querySelector("#reply-url").value = '/gallery/' + galley_id + '/comment';
+
+                        // 댓글 리스트
+                        let commentBoxElement = document.querySelector("#comment-box");
+                        res.galleryCommentEntityList.forEach( (reply) => {
+                            let replyContentDiv = galleryObj.createReplyContent(reply);
+                            commentBoxElement.appendChild(replyContentDiv);
+                        });
                     });
             });
         });
@@ -61,10 +69,16 @@ galleryObj = {
         // hidden
         document.querySelector("#detail-cancel-btn").addEventListener('click', ()=> {
             detailHiddenElement.id = 'detail-hidden';
+
+            let commentBoxElement = document.querySelector("#comment-box");
+            commentBoxElement.innerText = '';   // 댓글 목록 초기화
         });
 
         document.querySelector("#detail-modal-overlay").addEventListener('click', ()=> {
             detailHiddenElement.id = 'detail-hidden';
+
+            let commentBoxElement = document.querySelector("#comment-box");
+            commentBoxElement.innerText = '';   // 댓글 목록 초기화
         });
     },
 
@@ -145,24 +159,29 @@ galleryObj = {
                     contentTextAreaElement.value = '';
 
                     // 댓글 내용 엘리먼트 작성하여 추가
-                    let replyContent = `
-                            <span class="author">${res.username}</span>
-                            <div class="metadata">
-                                <span class="date">날짜</span>
-                            </div>
-
-                            <div class="text">
-                                ${res.content}
-                            </div>`
-
-                    let replyContentDiv = document.createElement('div');
-                    replyContentDiv.setAttribute("class", "content");
-                    replyContentDiv.innerHTML = replyContent;
-
+                    let replyContentDiv = galleryObj.createReplyContent(res);
                     document.querySelector("#comment-box").appendChild(replyContentDiv);
-
                 });
         })
+    },
+
+    createReplyContent : (reply) => {
+        let replyContent = `
+            <span class="author">${reply.username}</span>
+            <div class="metadata">
+                <span class="date">${reply.date}</span>
+            </div>
+    
+            <div class="text">
+                ${reply.content}
+            </div>
+            `
+
+        let replyContentDiv = document.createElement('div');
+        replyContentDiv.setAttribute("class", "content");
+        replyContentDiv.innerHTML = replyContent;
+
+        return replyContentDiv;
     }
 };
 

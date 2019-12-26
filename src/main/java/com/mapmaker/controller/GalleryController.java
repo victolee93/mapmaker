@@ -20,6 +20,8 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -69,14 +71,14 @@ public class GalleryController {
     @RequestMapping(value="/gallery/{no}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody
     public String getGalleryDetail(@PathVariable("no") Long no) {
-        return galleryService.getGalleryInfoJson(no);
+        return galleryService.getGalleryInfoAndCommentsJson(no);
     }
 
     @RequestMapping(value="/gallery/{no}/like", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody
     public String execLike(@PathVariable("no") Long galleryId, Authentication authentication) {
         UserEntity userEntity = userService.getUserByEmail(authentication.getName());
-        GalleryEntity galleryEntity = galleryService.getGalleryInfo(galleryId).toEntity();
+        GalleryEntity galleryEntity = galleryService.getGalleryInfo(galleryId);
 
         GalleryLikeDto galleryLikeDto = new GalleryLikeDto();
         galleryLikeDto.setUserEntity(userEntity);
@@ -91,7 +93,7 @@ public class GalleryController {
     @ResponseBody
     public Map<String, String> execComment(@PathVariable("no") Long galleryId, Authentication authentication, GalleryCommentDto galleryCommentDto) {
         UserEntity userEntity = userService.getUserByEmail(authentication.getName());
-        GalleryEntity galleryEntity = galleryService.getGalleryInfo(galleryId).toEntity();
+        GalleryEntity galleryEntity = galleryService.getGalleryInfo(galleryId);
 
         galleryCommentDto.setUserEntity(userEntity);
         galleryCommentDto.setGalleryEntity(galleryEntity);
@@ -101,6 +103,7 @@ public class GalleryController {
         Map<String, String> returnJson = new HashMap<>();
         returnJson.put("username", userEntity.getNickname());
         returnJson.put("content", galleryCommentDto.getContent());
+        returnJson.put("date", LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss")));
         return returnJson;
     }
 }

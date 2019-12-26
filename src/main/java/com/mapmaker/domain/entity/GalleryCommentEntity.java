@@ -11,7 +11,7 @@ import javax.persistence.*;
 @Getter
 @Entity
 @Table(name = "gallery_comment")
-public class GalleryCommentEntity {
+public class GalleryCommentEntity extends TimeEntity {
     @Id
     @GeneratedValue(strategy= GenerationType.IDENTITY)
     private Long id;

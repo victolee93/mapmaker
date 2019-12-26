@@ -117,3 +117,8 @@
     padding-left: 5px;
     padding-right: 5px;
 }
+
+#comment-list {
+    overflow-y: auto;
+    height: 400px;
+}
