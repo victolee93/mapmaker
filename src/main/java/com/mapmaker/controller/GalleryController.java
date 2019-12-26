@@ -42,13 +42,8 @@ public class GalleryController {
         List<GalleryDto> galleryList = galleryService.getRecentList();
 
         for(GalleryDto galleryDto: galleryList) {
-            GalleryEntity galleryEntity = galleryDto.toEntity();
-            Long totalLike = likeService.getCountGalleryLike(galleryEntity);
-            Boolean checked = likeService.isUserCheckedGalleryLike(userEntity, galleryEntity);
-
-            galleryDto.setTotalLike(totalLike);
+            Boolean checked = likeService.isUserCheckedGalleryLike(userEntity, galleryDto.toEntity());
             galleryDto.setChecked(checked);
-
         }
 
         model.addAttribute("galleryList", galleryList);

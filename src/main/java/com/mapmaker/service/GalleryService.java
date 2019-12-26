@@ -1,6 +1,5 @@
 package com.mapmaker.service;
 
-import com.mapmaker.domain.entity.GalleryCommentEntity;
 import com.mapmaker.domain.entity.GalleryEntity;
 import com.mapmaker.domain.repository.GalleryRepository;
 import com.mapmaker.dto.GalleryCommentDto;
@@ -26,7 +25,11 @@ public class GalleryService {
         List<GalleryDto> galleryDtos = new ArrayList<>();
 
         for (GalleryEntity galleryEntity : galleryEntities) {
-            galleryDtos.add(convertEntityToDto(galleryEntity, null));
+            GalleryDto galleryDto = convertEntityToDto(galleryEntity, null);
+            galleryDto.setLikeCount(galleryEntity.getGalleryLikes().size());
+            galleryDto.setCommentCount(galleryEntity.getGalleryComments().size());
+
+            galleryDtos.add(galleryDto);
         }
 
         return galleryDtos;
