@@ -42,7 +42,7 @@
                             <td class="board-title">
                                 <a th:href="@{'/board/' + ${board.id}}">
                                     <span th:text="${board.title}"></span>
-                                    <span>(3)</span>
+                                    (<span th:text="${board.commentCount}"></span>)
                                 </a>
                             </td>
                             <td>
@@ -52,7 +52,7 @@
                                 <span class="board-date" th:text="${#temporals.format(board.modifiedDate, 'yyyy-MM-dd HH:mm')}"></span>
                             </td>
                             <td>
-                                <span><span>3</span></span>
+                                <span th:text="${board.likeCount}"></span>
                             </td>
                         </tr>
                     </tbody>

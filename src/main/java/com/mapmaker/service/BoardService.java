@@ -22,7 +22,12 @@ public class BoardService {
         List<BoardDto> boardDTOList = new ArrayList<>();
 
         for ( BoardEntity boardEntity : boardEntities) {
-            boardDTOList.add(convertEntityToDto(boardEntity));
+            BoardDto boardDto = convertEntityToDto(boardEntity);
+
+            boardDto.setLikeCount(boardEntity.getBoardLikes().size());
+            boardDto.setCommentCount(boardEntity.getBoardComments().size());
+
+            boardDTOList.add(boardDto);
         }
 
         return boardDTOList;

@@ -32,7 +32,10 @@ public class BoardEntity extends TimeEntity {
      *  Relation Mapping
      */
     @OneToMany(mappedBy = "boardEntity")
-    private List<BoardCommentEntity> boardCommentEntityList = new ArrayList<>();
+    private List<BoardLikeEntity> boardLikes = new ArrayList<>();
+
+    @OneToMany(mappedBy = "boardEntity")
+    private List<BoardCommentEntity> boardComments = new ArrayList<>();
 
     @Builder
     public BoardEntity(Long id, String title, String content, String author) {
