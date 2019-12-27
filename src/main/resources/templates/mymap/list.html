@@ -27,7 +27,6 @@
 
         <!-- 최근 여행정보 리스트 -->
         <div class="three wide column">
-
             <div id="latest-travel-list" class="ui vertical pointing menu">
                 <span th:each="travel : ${travelList}"
                       th:text="${travel.title}"
@@ -47,75 +46,10 @@
                     <i class="search icon"></i>
                 </div>
             </div>
-
-            <div id="map-content-left" class="seven wide column scrollbar" >
-                <div class="content-box">
-                    <label class="content-title">제목</label>
-                    <p id="travel-title"></p>
-                </div>
-
-                <div class="content-box">
-                    <label class="content-title">여행일</label>
-                    <p id="travel-period"></p>
-                </div>
-
-                <div class="content-box">
-                    <label class="content-title">소개</label>
-                    <p id="travel-description"></p>
-                </div>
-
-                <div class="content-box">
-                    <label class="content-title">지출</label>
-                    <p id="travel-cost"></p>
-                </div>
-
-                <div class="content-box">
-                    <label class="content-title">총평</label>
-                    <p id="travel-totalReview"></p>
-                </div>
-
-                <div class="content-box">
-                    <label class="content-title">공개 여부</label>
-                    <p id="travel-openStatus"></p>
-                </div>
-            </div>
-
-            <div id="map-content-right" class="eight wide column scrollbar" >
-                <div class="content-box">
-                    <label class="content-title">식사</label>
-                    <p id="travel-foodInfo"></p>
-                </div>
-
-                <div class="content-box">
-                    <label class="content-title">여행 장소</label>
-                    <p id="travel-placeInfo"></p>
-                </div>
-
-                <div class="content-box">
-                    <label class="content-title">숙소</label>
-                    <p id="travel-lodgingInfo"></p>
-                </div>
-
-                <div class="content-box">
-                    <label class="content-title">교통</label>
-                    <p id="travel-transportInfo"></p>
-                </div>
-
-                <div class="content-box">
-                    <label class="content-title">메모</label>
-                    <p id="travel-memo"></p>
-                </div>
-            </div>
-
-            <div id="map-content-footer" class="thirteen wide column scrollbar" >
-                <div class="content-box">
-                    <label class="content-title">이미지</label>
-                    <div class="inline">
-                        <img id="img-preview">
-                    </div>
-                </div>
-            </div>
         </div>
+
+        <!-- 여행정보 modal -->
+        <div id="hidden" class="mymap-modal" th:insert="mymap/detail.html"></div>
     </div>
 </div>
 

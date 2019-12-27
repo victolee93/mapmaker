@@ -45,7 +45,9 @@ const mymapObj = {
 
                 kakao.maps.event.addListener(marker, 'click', () => {
                     ajaxUtil.GETCall(url)
-                        .then( res => mymapObj.viewTravelInfo(res));
+                        .then( (res) => {
+                            mymapObj.displayTravelInfo(res)
+                        });
                 });
             })( marker );
         }
@@ -66,7 +68,7 @@ const mymapObj = {
                 let url = 'http://localhost:8080/mymap/travel/' + travelId;
                 ajaxUtil.GETCall(url)
                     .then( (res) => {
-                        mymapObj.viewTravelInfo(res)
+                        mymapObj.displayTravelInfo(res)
                     });
             });
         }
@@ -76,7 +78,8 @@ const mymapObj = {
     /*
      *  여행정보를 DOM에 display
      */
-    viewTravelInfo : (jsonInfo) => {
+    displayTravelInfo : (jsonInfo) => {
+        // 1. modal에 노출되는 데이터 할당
         let contentLeftElement = document.querySelector('#map-content-left');
         let contentRightElement = document.querySelector('#map-content-right');
         let contentFooterElement = document.querySelector('#map-content-footer');
@@ -96,6 +99,18 @@ const mymapObj = {
         document.querySelector('#travel-memo').innerText = jsonInfo.memo;
         document.querySelector('#travel-openStatus').innerText = jsonInfo.openStatus;
         document.querySelector('#img-preview').src = jsonInfo.filePath;
+
+        // 2. modal show
+        const hiddenElement = document.querySelector("#hidden");
+        hiddenElement.id = '';
+
+        // 3. modal hidden 이벤트 등록
+        document.querySelector("#cancel-btn").addEventListener('click', ()=> {
+            hiddenElement.id = 'hidden';
+        });
+        document.querySelector("#modal-overlay").addEventListener('click', ()=> {
+            hiddenElement.id = 'hidden';
+        });
     },
     
 };
