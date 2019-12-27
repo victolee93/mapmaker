@@ -53,13 +53,28 @@
     margin: 50px 0px;
 }
 
+#board-list-container thead {
+    text-align: center;
+}
+
+#board-list-container tbody {
+    text-align: center;
+}
+
+#board-list-container .board-title {
+    text-align: left;
+}
+
+#board-list-container .board-date {
+    font-size: 0.84em;
+}
 
 /**********************
  *   board-detail
  **********************/
 #board-detail-container {
     background-color: #f2f4f7;
-    height: 1100px;
+    height: 1300px;
 }
 
 #board-detail-wrap {
@@ -77,6 +92,20 @@
     text-align: right;
 }
 
+#like-box {
+    display: flex;
+    flex-flow: row-reverse;
+    margin-bottom: 0.4em;
+}
+
+#like-box .heart {
+    width: 100%;
+}
+
+#update-delete-box {
+    display: flex;
+    flex-flow: row-reverse;
+}
 
 /**********************
  *   comment

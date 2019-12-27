@@ -1,8 +1,11 @@
 package com.mapmaker.controller;
 
+import com.mapmaker.domain.entity.BoardEntity;
 import com.mapmaker.domain.entity.UserEntity;
+import com.mapmaker.dto.BoardCommentDto;
 import com.mapmaker.dto.BoardDto;
 import com.mapmaker.service.BoardService;
+import com.mapmaker.service.CommentService;
 import com.mapmaker.service.UserService;
 import lombok.AllArgsConstructor;
 import org.springframework.security.core.Authentication;
@@ -17,6 +20,7 @@ import java.util.List;
 public class BoardController {
     private BoardService boardService;
     private UserService userService;
+    private CommentService commentService;
 
     // 게시판 리스트 페이지
     @GetMapping("/board")
@@ -42,7 +46,11 @@ public class BoardController {
     public String dispDetail(@PathVariable("no") Long no, Model model) {
         BoardDto boardDTO = boardService.getPost(no);
 
-        model.addAttribute("boardDTO", boardDTO);
+        List<BoardCommentDto> boardComments = commentService.getGalleryCommentList(boardDTO.toEntity());
+
+        model.addAttribute("board", boardDTO);
+        model.addAttribute("replies", boardComments);
+
         return "/board/detail";
     }
 
@@ -64,4 +72,16 @@ public class BoardController {
         return "redirect:/board";
     }
 
+    @PostMapping("/board/{no}/comment")
+    public String execCommentWrite(@PathVariable("no") Long no, Authentication authentication, BoardCommentDto boardCommentDto) {
+        UserEntity userEntity = userService.getUserByEmail(authentication.getName());
+        BoardEntity boardEntity = boardService.getPost(no).toEntity();
+
+        boardCommentDto.setUserEntity(userEntity);
+        boardCommentDto.setBoardEntity(boardEntity);
+
+        commentService.saveBoardComment(boardCommentDto);
+
+        return "redirect:/board/" + no;
+    }
 }

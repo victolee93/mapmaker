@@ -6,24 +6,15 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
-import java.util.ArrayList;
-import java.util.List;
 
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Getter
 @Entity
-@Table(name = "board")
-public class BoardEntity extends TimeEntity {
-
+@Table(name = "board_comment")
+public class BoardCommentEntity extends TimeEntity{
     @Id
     @GeneratedValue(strategy= GenerationType.IDENTITY)
     private Long id;
-
-    @Column(length = 10, nullable = false)
-    private String author;
-
-    @Column(length = 100, nullable = false)
-    private String title;
 
     @Column(columnDefinition = "TEXT", nullable = false)
     private String content;
@@ -31,14 +22,19 @@ public class BoardEntity extends TimeEntity {
     /*
      *  Relation Mapping
      */
-    @OneToMany(mappedBy = "boardEntity")
-    private List<BoardCommentEntity> boardCommentEntityList = new ArrayList<>();
+    @ManyToOne
+    @JoinColumn(name = "board_id")
+    private BoardEntity boardEntity;
+
+    @ManyToOne
+    @JoinColumn(name = "member_id")
+    private UserEntity userEntity;
 
     @Builder
-    public BoardEntity(Long id, String title, String content, String author) {
+    public BoardCommentEntity(Long id, String content, BoardEntity boardEntity, UserEntity userEntity) {
         this.id = id;
-        this.author = author;
-        this.title = title;
         this.content = content;
+        this.boardEntity = boardEntity;
+        this.userEntity = userEntity;
     }
 }

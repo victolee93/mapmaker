@@ -25,26 +25,31 @@
                 <div class="ui list">
                     <div class="item">
                         <div class="right floated">
-                            <span th:text="${boardDTO.modifiedDate}"></span>
+                            <span th:text="${board.author}"></span>
                         </div>
                         <div class="content ui dividing header">
-                            <span th:text="${boardDTO.title}"></span>
+                            <span th:text="${board.title}"></span>
                         </div>
                     </div>
                 </div>
 
-                <p id="content-header-box" th:inline="text" >[[${boardDTO.author}]]</p>
-
                 <!-- 본문 -->
-                <p id="board-detail-content" class="scrollbar" th:text="${boardDTO.content}"></p>
+                <p id="content-header-box" th:inline="text" >[[${#temporals.format(board.modifiedDate, 'yyyy-MM-dd HH:mm')}]]</p>
 
-                <!-- 수정/삭제 -->
-                <div>
-                    <button id="write-btn" class="ui medium teal button right floated">수정</button>
+                <p id="board-detail-content" class="scrollbar" th:text="${board.content}"></p>
 
-                    <form th:action="@{'/board/' + ${boardDTO.id}}" method="post">
+                <!-- 푸터 -->
+                <div id="like-box">
+                    <button class="ui medium teal button">
+                        <i class="heart like icon outline">좋아요</i>
+                    </button>
+                </div>
+                <div id="update-delete-box">
+                    <button id="write-btn" class="ui medium teal button">수정</button>
+
+                    <form th:action="@{'/board/' + ${board.id}}" method="post">
                         <input type="hidden" name="_method" value="delete"/>
-                        <button class="ui medium teal submit button right floated">삭제</button>
+                        <button class="ui medium teal submit button">삭제</button>
                     </form>
                 </div>
             </div>
@@ -54,135 +59,22 @@
                 <h3 class="ui dividing header">댓글</h3>
 
                 <div id="comment-form">
-                    <form class="ui form">
+                    <form th:action="@{'/board/' + ${board.id} + '/comment'}" method="post" class="ui form">
                         <div class="field">
-                            <textarea rows="3"></textarea>
+                            <textarea name="content" rows="3"></textarea>
                         </div>
-                        <button id="comment-write-btn" class="ui medium teal submit button right floated">댓글등록</button>
+                        <button class="ui medium teal submit button right floated">댓글등록</button>
                     </form>
                 </div>
 
                 <div id="comment-list" class="scrollbar">
-                    <div class="comment">
-                        <a class="avatar">
-                            <img src="/images/avatar/small/matt.jpg">
-                        </a>
-                        <div class="content">
-                            <a class="author">Matt</a>
-                            <div class="metadata">
-                                <span class="date">Today at 5:42PM</span>
-                            </div>
-                            <div class="text">
-                                How artistic!
-                            </div>
-                            <div class="actions">
-                                <a class="reply">Reply</a>
-                            </div>
+                    <div th:each="reply : ${replies}" class="comment">
+                        <span th:text="${reply.username}" class="author"></span>
+                        <div class="metadata">
+                            <span th:text="${reply.date}" class="date"></span>
                         </div>
-                    </div>
-                    <div class="comment">
-                        <a class="avatar">
-                            <img src="/images/avatar/small/elliot.jpg">
-                        </a>
-                        <div class="content">
-                            <a class="author">Elliot Fu</a>
-                            <div class="metadata">
-                                <span class="date">Yesterday at 12:30AM</span>
-                            </div>
-                            <div class="text">
-                                <p>This has been very useful for my research. Thanks as well!</p>
-                            </div>
-                            <div class="actions">
-                                <a class="reply">Reply</a>
-                            </div>
-                        </div>
-                        <div class="comments">
-                            <div class="comment">
-                                <a class="avatar">
-                                    <img src="/images/avatar/small/jenny.jpg">
-                                </a>
-                                <div class="content">
-                                    <a class="author">Jenny Hess</a>
-                                    <div class="metadata">
-                                        <span class="date">Just now</span>
-                                    </div>
-                                    <div class="text">
-                                        Elliot you are always so right :)
-                                    </div>
-                                    <div class="actions">
-                                        <a class="reply">Reply</a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="comment">
-                        <a class="avatar">
-                            <img src="/images/avatar/small/joe.jpg">
-                        </a>
-                        <div class="content">
-                            <a class="author">Joe Henderson</a>
-                            <div class="metadata">
-                                <span class="date">5 days ago</span>
-                            </div>
-                            <div class="text">
-                                Dude, this is awesome. Thanks so much
-                            </div>
-                            <div class="actions">
-                                <a class="reply">Reply</a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="comment">
-                        <a class="avatar">
-                            <img src="/images/avatar/small/joe.jpg">
-                        </a>
-                        <div class="content">
-                            <a class="author">Joe Henderson</a>
-                            <div class="metadata">
-                                <span class="date">5 days ago</span>
-                            </div>
-                            <div class="text">
-                                Dude, this is awesome. Thanks so much
-                            </div>
-                            <div class="actions">
-                                <a class="reply">Reply</a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="comment">
-                        <a class="avatar">
-                            <img src="/images/avatar/small/joe.jpg">
-                        </a>
-                        <div class="content">
-                            <a class="author">Joe Henderson</a>
-                            <div class="metadata">
-                                <span class="date">5 days ago</span>
-                            </div>
-                            <div class="text">
-                                Dude, this is awesome. Thanks so much
-                            </div>
-                            <div class="actions">
-                                <a class="reply">Reply</a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="comment">
-                        <a class="avatar">
-                            <img src="/images/avatar/small/joe.jpg">
-                        </a>
-                        <div class="content">
-                            <a class="author">Joe Henderson</a>
-                            <div class="metadata">
-                                <span class="date">5 days ago</span>
-                            </div>
-                            <div class="text">
-                                Dude, this is awesome. Thanks so much
-                            </div>
-                            <div class="actions">
-                                <a class="reply">Reply</a>
-                            </div>
-                        </div>
+
+                        <div class="text" th:text="${reply.content}"></div>
                     </div>
                 </div>
             </div>
@@ -201,8 +93,8 @@
 <!-- update modal에서 사용할 변수 셋팅 -->
 <script th:inline="javascript">
     /*<![CDATA[*/
-    let title = /*[[${boardDTO.title}]]*/ "";
-    let content = /*[[${boardDTO.content}]]*/ "";
+    let title = /*[[${board.title}]]*/ "";
+    let content = /*[[${board.content}]]*/ "";
     /*]]>*/
 </script>
 

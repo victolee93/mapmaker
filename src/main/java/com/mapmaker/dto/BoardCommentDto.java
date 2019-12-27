@@ -1,34 +1,32 @@
 package com.mapmaker.dto;
 
-import com.mapmaker.domain.entity.GalleryCommentEntity;
-import com.mapmaker.domain.entity.GalleryEntity;
-import com.mapmaker.domain.entity.UserEntity;
+import com.mapmaker.domain.entity.*;
 import lombok.*;
 
 @Getter
 @Setter
 @ToString
 @NoArgsConstructor
-public class GalleryCommentDto {
+public class BoardCommentDto {
     private Long id;
     private String content;
     private String username;
     private String date;
 
     private UserEntity userEntity;
-    private GalleryEntity galleryEntity;
+    private BoardEntity boardEntity;
 
-    public GalleryCommentEntity toEntity(){
-        return GalleryCommentEntity.builder()
+    public BoardCommentEntity toEntity(){
+        return BoardCommentEntity.builder()
                 .id(id)
                 .content(content)
                 .userEntity(userEntity)
-                .galleryEntity(galleryEntity)
+                .boardEntity(boardEntity)
                 .build();
     }
 
     @Builder
-    public GalleryCommentDto(Long id, String content, String username, String date) {
+    public BoardCommentDto(Long id, String content, String username, String date) {
         this.id = id;
         this.content = content;
         this.username = username;

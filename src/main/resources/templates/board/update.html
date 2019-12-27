@@ -4,9 +4,9 @@
         <h1 class="ui dividing header">게시글 수정</h1>
 
         <div class="content">
-            <form id="update-form" th:action="@{'/board/' + ${boardDTO.id}}" method="post" class="ui form">
+            <form id="update-form" th:action="@{'/board/' + ${board.id}}" method="post" class="ui form">
                 <input type="hidden" name="_method" value="put"/>
-                <input type="hidden" name="id" th:value="${boardDTO.id}"/>
+                <input type="hidden" name="id" th:value="${board.id}"/>
 
                 <div class="field">
                     <label>제목</label>

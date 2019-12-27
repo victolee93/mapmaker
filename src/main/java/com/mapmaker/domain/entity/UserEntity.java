@@ -36,6 +36,9 @@ public class UserEntity extends TimeEntity {
     @OneToMany(mappedBy = "userEntity")
     private List<GalleryCommentEntity> galleryComments = new ArrayList<>();
 
+    @OneToMany(mappedBy = "userEntity")
+    private List<BoardCommentEntity> boardComments = new ArrayList<>();
+
     @Builder
     public UserEntity(Long id, String nickname, String email, String password) {
         this.id = id;
