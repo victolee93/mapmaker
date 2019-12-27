@@ -10,7 +10,7 @@ import lombok.*;
 @ToString
 @NoArgsConstructor
 public class GalleryLikeDto {
-    Long id;
+    private Long id;
     private UserEntity userEntity;
     private GalleryEntity galleryEntity;
 

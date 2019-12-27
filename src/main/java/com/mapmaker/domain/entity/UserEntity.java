@@ -27,16 +27,19 @@ public class UserEntity extends TimeEntity {
     /*
      *  Relation Mapping
      */
-    @OneToMany(mappedBy = "userEntity")
+    @OneToMany(mappedBy = "userEntity") // 여행정보
     private List<TravelEntity> travels = new ArrayList<>();
 
-    @OneToMany(mappedBy = "userEntity")
+    @OneToMany(mappedBy = "userEntity") // 갤러리 좋아요
     private List<GalleryLikeEntity> galleryLikes = new ArrayList<>();
 
-    @OneToMany(mappedBy = "userEntity")
+    @OneToMany(mappedBy = "userEntity") // 갤러리 댓글
     private List<GalleryCommentEntity> galleryComments = new ArrayList<>();
 
-    @OneToMany(mappedBy = "userEntity")
+    @OneToMany(mappedBy = "userEntity") // 게시판 좋아요
+    private List<BoardLikeEntity> boardLikes = new ArrayList<>();
+
+    @OneToMany(mappedBy = "userEntity") // 게시판 댓글
     private List<BoardCommentEntity> boardComments = new ArrayList<>();
 
     @Builder
