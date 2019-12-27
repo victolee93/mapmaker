@@ -5,21 +5,21 @@
  **********************/
 #map-container {
     background-color: #f2f4f7;
-    height: 1700px;
+    height: 2200px;
 }
 
 #new-map {
-    height: 500px;
+    height: 700px;
     padding-left: 30px;
 }
 
 #popular-map {
-    height: 500px;
+    height: 700px;
     padding-left: 30px;
 }
 
 #recommend-map {
-    height: 500px;
+    height: 700px;
     padding-left: 30px;
 }
 

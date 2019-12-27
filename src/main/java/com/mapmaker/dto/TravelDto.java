@@ -27,6 +27,8 @@ public class TravelDto {
     private String memo;
     private String openStatus;
     private String filePath;
+    private String userName;
+
     private UserEntity userEntity;
     private LocalDateTime createdDate;
     private LocalDateTime modifiedDate;
@@ -60,9 +62,10 @@ public class TravelDto {
 
     @Builder
     public TravelDto(Long id, String title, String periodStartDate, String periodEndDate,
-                        String description, String foodInfo, String placeInfo, String lodgingInfo,
-                        String transportInfo, Long cost, String totalReview, String memo, String openStatus,
-                        String filePath, UserEntity userEntity, LocalDateTime createdDate, LocalDateTime modifiedDate) {
+                     String description, String foodInfo, String placeInfo, String lodgingInfo,
+                     String transportInfo, Long cost, String totalReview, String memo, String openStatus,
+                     String userName, String filePath,
+                     UserEntity userEntity, LocalDateTime createdDate, LocalDateTime modifiedDate) {
         this.id = id;
         this.title = title;
         this.periodStartDate = periodStartDate;
@@ -77,6 +80,7 @@ public class TravelDto {
         this.memo = memo;
         this.openStatus = openStatus;
         this.filePath = filePath;
+        this.userName = userName;
         this.userEntity = userEntity;
         this.createdDate = createdDate;
         this.modifiedDate = modifiedDate;

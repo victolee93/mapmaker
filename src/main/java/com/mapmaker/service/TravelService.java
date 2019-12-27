@@ -8,6 +8,9 @@ import com.mapmaker.domain.repository.TravelRepository;
 import com.mapmaker.dto.TravelDto;
 import com.mapmaker.util.JsonManager;
 import lombok.AllArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -24,6 +27,22 @@ public class TravelService {
     private MarkerRepository markerRepository;
 
     @Transactional
+    public List<TravelDto> getRecentTravelList(){
+        List<TravelDto> travelDtoList = new ArrayList<>();
+
+        Page<TravelEntity> page = travelRepository.findAll(PageRequest.of(0, 9, Sort.by(Sort.Direction.ASC, "createdDate")));
+        List<TravelEntity> travelEntities = page.getContent();
+
+        for(TravelEntity travelEntity : travelEntities) {
+            TravelDto travelDto = convertEntityToDto(travelEntity);
+            travelDto.setUserName(travelEntity.getUserEntity().getNickname());
+            travelDtoList.add(travelDto);
+        }
+
+        return travelDtoList;
+    }
+
+    @Transactional
     public List<TravelDto> getTravelListByUser(UserEntity userEntity){
         List<TravelEntity> travelEntityList = travelRepository.findAllByUserEntity(userEntity);
         List<TravelDto> travelDtoList = new ArrayList<>();
@@ -33,7 +52,8 @@ public class TravelService {
         }
 
         for(TravelEntity travelEntity : travelEntityList) {
-            TravelDto travelDto = convertEntityToDto(travelEntity, userEntity);
+            TravelDto travelDto = convertEntityToDto(travelEntity);
+            travelDto.setUserEntity(userEntity);
             travelDtoList.add(travelDto);
         }
 
@@ -50,7 +70,7 @@ public class TravelService {
         }
 
         TravelEntity travelEntity = markerEntityWrapper.get().getTravelEntity();
-        TravelDto travelDto = convertEntityToDto(travelEntity, null);
+        TravelDto travelDto = convertEntityToDto(travelEntity);
 
         travelInfoJson = JsonManager.convertDtoToJson(travelDto);
         return travelInfoJson;
@@ -60,11 +80,11 @@ public class TravelService {
     public String getTravelInfo(Long no){
         Optional<TravelEntity> travelEntityWrapper = travelRepository.findById(no);
 
-        TravelDto travelDto = convertEntityToDto(travelEntityWrapper.get(), null);
+        TravelDto travelDto = convertEntityToDto(travelEntityWrapper.get());
         return JsonManager.convertDtoToJson(travelDto);
     }
 
-    private TravelDto convertEntityToDto(TravelEntity travelEntity, UserEntity userEntity) {
+    private TravelDto convertEntityToDto(TravelEntity travelEntity) {
         return TravelDto.builder()
                 .id(travelEntity.getId())
                 .title(travelEntity.getTitle())
@@ -79,8 +99,8 @@ public class TravelService {
                 .totalReview(travelEntity.getTotalReview())
                 .memo(travelEntity.getMemo())
                 .filePath(travelEntity.getFilePath())
-                .userEntity(userEntity)
                 .openStatus(travelEntity.getOpenStatus())
+                .createdDate(travelEntity.getCreatedDate())
                 .build();
     }
 }
