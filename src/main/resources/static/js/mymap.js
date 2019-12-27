@@ -65,7 +65,9 @@ const mymapObj = {
             travelNode.addEventListener('click', () => {
                 let url = 'http://localhost:8080/mymap/travel/' + travelId;
                 ajaxUtil.GETCall(url)
-                    .then( res => mymapObj.viewTravelInfo(res) );
+                    .then( (res) => {
+                        mymapObj.viewTravelInfo(res)
+                    });
             });
         }
     },
@@ -93,6 +95,7 @@ const mymapObj = {
         document.querySelector('#travel-totalReview').innerText = jsonInfo.totalReview;
         document.querySelector('#travel-memo').innerText = jsonInfo.memo;
         document.querySelector('#travel-openStatus').innerText = jsonInfo.openStatus;
+        document.querySelector('#img-preview').src = jsonInfo.filePath;
     },
     
 };

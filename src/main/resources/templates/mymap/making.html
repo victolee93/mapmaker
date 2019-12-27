@@ -34,7 +34,7 @@
     <div id="map" class="nine wide column"></div>
 
     <div id="making-content" class="six wide column">
-        <form th:action="@{/mymap/making}" method="post" class="ui form">
+        <form th:action="@{/mymap/making}" method="post" class="ui form" enctype="multipart/form-data">
             <input id="maker-positions" name="markerPositions" type="hidden">
 
             <div class="field">
@@ -109,12 +109,7 @@
             </div>
 
             <div class="inline fields">
-                <img class="img-preview" th:src="@{/img/sample.jpg}">
-                <img class="img-preview" th:src="@{/img/sample.jpg}">
-                <img class="img-preview" th:src="@{/img/sample.jpg}">
-                <img class="img-preview" th:src="@{/img/sample.jpg}">
-                <img class="img-preview" th:src="@{/img/sample.jpg}">
-                <img class="img-preview" th:src="@{/img/sample.jpg}">
+                <img id="img-preview">
             </div>
 
             <button id="cancel-btn" class="ui medium teal button right floated">취소</button>

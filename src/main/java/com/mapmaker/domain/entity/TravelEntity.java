@@ -52,8 +52,12 @@ public class TravelEntity extends TimeEntity {
     @Column(columnDefinition = "TEXT")
     private String memo;
 
-    @Column(columnDefinition = "enum('public', 'private')", nullable=false)
+    @Column(columnDefinition = "enum('public', 'private')", nullable = false)
     private String openStatus;
+
+    @Column(columnDefinition = "TEXT")
+    private String filePath;
+
 
     /*
      *  Relation Mapping
@@ -70,7 +74,7 @@ public class TravelEntity extends TimeEntity {
     public TravelEntity(Long id, String title, LocalDateTime periodStartDate, LocalDateTime periodEndDate,
                         String description, String foodInfo, String placeInfo, String lodgingInfo,
                         String transportInfo, Long cost, String totalReview, String memo, String openStatus,
-                        UserEntity userEntity) {
+                        String filePath, UserEntity userEntity) {
         this.id = id;
         this.title = title;
         this.periodStartDate = periodStartDate;
@@ -84,6 +88,7 @@ public class TravelEntity extends TimeEntity {
         this.totalReview = totalReview;
         this.memo = memo;
         this.openStatus = openStatus;
+        this.filePath = filePath;
         this.userEntity = userEntity;
     }
 }

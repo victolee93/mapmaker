@@ -78,6 +78,7 @@ public class TravelService {
                 .cost(travelEntity.getCost())
                 .totalReview(travelEntity.getTotalReview())
                 .memo(travelEntity.getMemo())
+                .filePath(travelEntity.getFilePath())
                 .userEntity(userEntity)
                 .openStatus(travelEntity.getOpenStatus())
                 .build();

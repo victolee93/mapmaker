@@ -8,13 +8,16 @@ import com.mapmaker.dto.TravelDto;
 import com.mapmaker.service.MarkerService;
 import com.mapmaker.service.TravelService;
 import com.mapmaker.service.UserService;
+import com.mapmaker.service.aws.S3Service;
 import lombok.AllArgsConstructor;
 import org.springframework.http.MediaType;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
 import java.util.List;
 
 
@@ -24,6 +27,7 @@ public class MymapController {
     TravelService travelService;
     MarkerService markerService;
     UserService userService;
+    private S3Service s3Service;
 
     @GetMapping("/mymap")
     public String dispMapList(Model model, Authentication authentication) {
@@ -60,13 +64,15 @@ public class MymapController {
     }
 
     @PostMapping("/mymap/making")
-    public String execMapMaking(MapmakingDto mapmakingDto, Authentication authentication) {
+    public String execMapMaking(MapmakingDto mapmakingDto, Authentication authentication, MultipartFile file) throws IOException {
         mapmakingDto.setTravelDto(mapmakingDto);
         mapmakingDto.setMarkerDto(mapmakingDto);
 
         UserEntity userEntity = userService.getUserByEmail(authentication.getName());
 
+        String imgPath = s3Service.upload(file);
         TravelDto travelDto = mapmakingDto.getTravelDto();
+        travelDto.setFilePath(imgPath);
         travelDto.setUserEntity(userEntity);
         TravelEntity travelEntity = travelDto.toEntity();
 

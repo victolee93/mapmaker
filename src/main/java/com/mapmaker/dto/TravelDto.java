@@ -26,6 +26,7 @@ public class TravelDto {
     private String totalReview;
     private String memo;
     private String openStatus;
+    private String filePath;
     private UserEntity userEntity;
     private LocalDateTime createdDate;
     private LocalDateTime modifiedDate;
@@ -52,6 +53,7 @@ public class TravelDto {
                 .totalReview(totalReview)
                 .memo(memo)
                 .openStatus(openStatus)
+                .filePath(filePath)
                 .userEntity(userEntity)
                 .build();
     }
@@ -60,7 +62,7 @@ public class TravelDto {
     public TravelDto(Long id, String title, String periodStartDate, String periodEndDate,
                         String description, String foodInfo, String placeInfo, String lodgingInfo,
                         String transportInfo, Long cost, String totalReview, String memo, String openStatus,
-                        UserEntity userEntity, LocalDateTime createdDate, LocalDateTime modifiedDate) {
+                        String filePath, UserEntity userEntity, LocalDateTime createdDate, LocalDateTime modifiedDate) {
         this.id = id;
         this.title = title;
         this.periodStartDate = periodStartDate;
@@ -74,6 +76,7 @@ public class TravelDto {
         this.totalReview = totalReview;
         this.memo = memo;
         this.openStatus = openStatus;
+        this.filePath = filePath;
         this.userEntity = userEntity;
         this.createdDate = createdDate;
         this.modifiedDate = modifiedDate;
