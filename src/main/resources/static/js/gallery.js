@@ -50,7 +50,6 @@ galleryObj = {
                 let url = 'http://localhost:8080/gallery/' + galley_id;
                 ajaxUtil.GETCall(url)
                     .then( (res) => {
-                        document.querySelector("#gallery-info-title").innerText = res.title;
                         document.querySelector("#gallery-info-desc").innerText = res.content;
                         document.querySelector("#detail-img").src = res.filePath;
                         // 댓글 등록시 호출되는 URL
@@ -64,14 +63,6 @@ galleryObj = {
                         });
                     });
             });
-        });
-
-        // hidden
-        document.querySelector("#detail-cancel-btn").addEventListener('click', ()=> {
-            detailHiddenElement.id = 'detail-hidden';
-
-            let commentBoxElement = document.querySelector("#comment-box");
-            commentBoxElement.innerText = '';   // 댓글 목록 초기화
         });
 
         document.querySelector("#detail-modal-overlay").addEventListener('click', ()=> {

@@ -55,7 +55,6 @@ public class GalleryService {
     private GalleryDto convertEntityToDto(GalleryEntity galleryEntity, List<GalleryCommentDto> galleryCommentList) {
         return GalleryDto.builder()
                 .id(galleryEntity.getId())
-                .title(galleryEntity.getTitle())
                 .content(galleryEntity.getContent())
                 .author(galleryEntity.getAuthor())
                 .filePath(galleryEntity.getFilePath())

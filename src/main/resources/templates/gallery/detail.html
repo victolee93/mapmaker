@@ -3,29 +3,21 @@
     <div id="detail-modal-content" class="ui grid">
         <!-- 헤더 -->
         <div class="sixteen wide wide column">
-            <div id="detail-cancel-box">
-                <i id="detail-cancel-btn" class="close icon one wide column"></i>
-            </div>
-            <div id="gallery-info-title" class="ui dividing header"></div>
+            <div id="gallery-info-desc" class="ui dividing header"></div>
         </div>
 
         <!-- left side : 이미지, 설명 -->
-        <div class="nine wide column">
-            <div class="image content">
-                <div class="image">
-                    <img id="detail-img">
+        <div class="content">
+            <div class="sixteen wide wide column">
+                <div class="image content">
+                    <div class="image">
+                        <img id="detail-img">
+                    </div>
                 </div>
             </div>
 
-            <div class="field">
-                <p id="gallery-info-desc"></p>
-            </div>
-        </div>
-
-        <!-- right side : 댓글 -->
-        <div class="seven wide column">
-            <div class="ui comments">
-
+            <!-- right side : 댓글 -->
+            <div id="comment-container-box" class="ui comments">
                 <div id="reply-text" class="ui form">
                     <input id="reply-url" type="hidden"/>
                     <input id="csrf_token" type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />

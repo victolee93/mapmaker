@@ -11,10 +11,18 @@
     margin-bottom: 1.0em;
 }
 
-.menu-items {
+#menu-wrap a {
     margin-left: 0.8em;
 }
 
+#search-box {
+    text-align: right;
+}
+
+#search-box .ui.icon.input.search {
+    width: 50%;
+    height: 4em;
+}
 
 /**********************
  *   content
@@ -40,24 +48,6 @@ body::-webkit-scrollbar-thumb {
     -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,.3);
     background-color: #555;
 }
-
-
-
-/**********************
- *   side menu
- **********************/
-#sidemenu {
-    position: fixed;
-    height: 350px;
-    top: 180px;
-    left: auto;
-    z-index: 10;
-}
-
-#sidemenu > #emtpy {
-    cursor: default;
-}
-
 
 /**********************
 *   footer

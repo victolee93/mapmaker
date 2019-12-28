@@ -19,9 +19,6 @@ public class GalleryEntity extends TimeEntity{
     @Column(length = 10, nullable = false)
     private String author;
 
-    @Column(length = 100, nullable = false)
-    private String title;
-
     @Column(columnDefinition = "TEXT", nullable = false)
     private String content;
 
@@ -39,10 +36,9 @@ public class GalleryEntity extends TimeEntity{
 
 
     @Builder
-    public GalleryEntity(Long id, String title, String content, String author, String filePath) {
+    public GalleryEntity(Long id, String content, String author, String filePath) {
         this.id = id;
         this.author = author;
-        this.title = title;
         this.content = content;
         this.filePath = filePath;
     }

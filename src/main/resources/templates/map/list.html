@@ -15,10 +15,7 @@
 
 <div id="map-container">
     <div class="ui grid container">
-        <!-- SIDE MENU -->
-        <div th:insert="common/sidemenu.html" class="three wide column"></div>
-
-        <div id="new-map" class="thirteen wide column map-list-box">
+        <div id="new-map" class="sixteen wide column map-list-box">
             <h1>뜨끄~은한 신상 맵</h1>
             <div class="ui three cards">
                 <div th:each="travel : ${recentTravelList}" class="card detail-btn">
@@ -36,15 +33,19 @@
                     </div>
 
                     <div class="extra">
-                        <i class="like icon"></i> 11
-                        <span th:text="${#temporals.format(travel.createdDate, 'yyyy-MM-dd')}" class="right floated"></span>
+                        <span class="right floated">
+                            <i class="heart like icon like-btn"></i>
+                            <span>0</span> likes
+                        </span>
+                        <i class="comment icon"></i>
+                        <span>0</span> comments
                     </div>
                 </div>
             </div>
         </div>
 
 
-        <div id="popular-map" class="thirteen wide column right floated  map-list-box">
+        <div id="popular-map" class="sixteen wide column right floated  map-list-box">
             <h1>인기최고 맵</h1>
             <div class="ui three cards">
 
@@ -52,7 +53,7 @@
         </div>
 
 
-        <div id="recommend-map" class="thirteen wide column right floated  map-list-box">
+        <div id="recommend-map" class="sixteen wide column right floated  map-list-box">
             <h1>추천 여행지</h1>
             <div class="ui three cards">
 

@@ -9,18 +9,15 @@
 }
 
 #new-map {
-    height: 700px;
-    padding-left: 30px;
+    height: 800px;
 }
 
 #popular-map {
-    height: 700px;
-    padding-left: 30px;
+    height: 800px;
 }
 
 #recommend-map {
-    height: 700px;
-    padding-left: 30px;
+    height: 800px;
 }
 
 .map-list-box {

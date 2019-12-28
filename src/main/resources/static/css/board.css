@@ -7,9 +7,6 @@
     height: 700px;
 }
 
-#board-write-btn {
-    width: 15%
-}
 
 /**********************
  *   modal
@@ -48,25 +45,25 @@
 /**********************
  *   board-list
  **********************/
-#board-list-container {
-    padding-left: 30px;
-    margin: 50px 0px;
+#container-header {
+    margin-top: 3em;
+    margin-bottom: 0.5em;
 }
 
-#board-list-container thead {
+#container-header h1 {
+    display: inline-block;
+}
+
+#board-list thead {
     text-align: center;
 }
 
-#board-list-container tbody {
+#board-list tbody {
     text-align: center;
 }
 
-#board-list-container .board-title {
+#board-list .board-title {
     text-align: left;
-}
-
-#board-list-container .board-date {
-    font-size: 0.84em;
 }
 
 /**********************
@@ -74,12 +71,11 @@
  **********************/
 #board-detail-container {
     background-color: #f2f4f7;
-    height: 1300px;
+    height: 1000px;
 }
 
 #board-detail-wrap {
-    margin: 50px 0px;
-    padding-left: 30px;
+    margin-top: 5%
 }
 
 #board-detail-content {
@@ -111,8 +107,7 @@
  *   comment
  **********************/
 #comment-container {
-    max-width: 100%; !important;
-    padding-left: 30px;
+    max-width: 100%;
 }
 
 #comment-form {

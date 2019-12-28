@@ -15,7 +15,6 @@ import java.util.List;
 public class GalleryDto {
     private Long id;
     private String author;
-    private String title;
     private String content;
     private String filePath;
     private Integer likeCount;
@@ -33,19 +32,17 @@ public class GalleryDto {
         return GalleryEntity.builder()
                 .id(id)
                 .author(author)
-                .title(title)
                 .content(content)
                 .filePath(filePath)
                 .build();
     }
 
     @Builder
-    public GalleryDto(Long id, String title, String content, String author, String filePath,
+    public GalleryDto(Long id, String content, String author, String filePath,
                       Integer likeCount, Integer commentCount, Boolean checked, List<GalleryCommentDto> galleryCommentEntityList,
                     LocalDateTime createdDate, LocalDateTime modifiedDate) {
         this.id = id;
         this.author = author;
-        this.title = title;
         this.content = content;
         this.filePath = filePath;
         this.likeCount = likeCount;

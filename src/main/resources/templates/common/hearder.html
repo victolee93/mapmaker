@@ -5,11 +5,22 @@
     </a>
 </div>
 
-<div class="five wide column right floated bottom aligned">
+<div class="ten wide column right floated bottom aligned">
     <div id="menu-wrap">
-        <a sec:authorize="isAnonymous()" th:href="@{/user/login}" class="menu-items">로그인</a>
-        <a sec:authorize="isAuthenticated()" th:href="@{/user/logout}" class="menu-items">로그아웃</a>
-        <a sec:authorize="isAnonymous()" th:href="@{/user/signup}" class="menu-items">회원가입</a>
-        <a sec:authorize="hasRole('ROLE_MEMBER')" th:href="@{/user/info}" class="menu-items">내정보</a>
+        <a th:href="@{/map}">HOME</a>
+        <a th:href="@{/mymap}">나의 지도</a>
+        <a th:href="@{/gallery}">갤러리</a>
+        <a th:href="@{/board}">게시판</a>
+        <a sec:authorize="isAnonymous()" th:href="@{/user/login}">로그인</a>
+        <a sec:authorize="isAuthenticated()" th:href="@{/user/logout}">로그아웃</a>
+        <a sec:authorize="isAnonymous()" th:href="@{/user/signup}">회원가입</a>
+        <a sec:authorize="hasRole('ROLE_MEMBER')" th:href="@{/user/info}">내정보</a>
+    </div>
+
+    <div id="search-box">
+        <div class="ui search icon input">
+            <input class="prompt" type="text" placeholder="검색어를 입력해주세요">
+            <i class="search icon"></i>
+        </div>
     </div>
 </div>

@@ -15,18 +15,18 @@
 
 <div id="gallery-container">
     <div class="ui grid container">
-        <!-- SIDE MENU -->
-        <div th:insert="common/sidemenu.html" class="three wide column"></div>
+        <div class="sixteen wide column">
+            <div id="container-header">
+                <h1>갤러리</h1>
+                <button id="write-btn" class="ui medium teal button right floated">글쓰기</button>
+            </div>
 
-        <div class="thirteen wide column">
-            <button id="write-btn" class="ui medium teal button right floated">글쓰기</button>
-
-            <div id="list" class="ui three cards">
+            <div class="ui four cards">
                 <!-- CONTENTS !-->
                 <div th:each="gallery : ${galleryList}" class="card detail-btn" th:value="${gallery.id}">
                     <div class="content">
                         <p class="right floated meta" th:text="${gallery.author}"></p>
-                        <p th:text="${gallery.title}">14h</p>
+                        <p th:text="${gallery.content}">14h</p>
                     </div>
 
                     <div class="image">

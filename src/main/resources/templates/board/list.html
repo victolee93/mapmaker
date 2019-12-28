@@ -16,48 +16,46 @@
 
 <div id="board-container">
     <div class="ui grid container">
-        <!-- SIDE MENU -->
-        <div th:insert="common/sidemenu.html" class="three wide column"></div>
-
-        <div class="thirteen wide column">
-            <button id="write-btn" class="ui medium teal button right floated">글쓰기</button>
-
-            <div id="board-list-container">
-                <table class="ui table">
-                    <thead>
-                        <tr>
-                            <th class="one wide">번호</th>
-                            <th class="nine wide">글제목</th>
-                            <th class="two wide">작성자</th>
-                            <th class="three wide">등록일</th>
-                            <th class="one wide">추천</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <!-- CONTENTS !-->
-                        <tr th:each="board : ${boardList}">
-                            <td>
-                                <span th:text="${board.id}"></span>
-                            </td>
-                            <td class="board-title">
-                                <a th:href="@{'/board/' + ${board.id}}">
-                                    <span th:text="${board.title}"></span>
-                                    (<span th:text="${board.commentCount}"></span>)
-                                </a>
-                            </td>
-                            <td>
-                                <span th:text="${board.author}"></span>
-                            </td>
-                            <td>
-                                <span class="board-date" th:text="${#temporals.format(board.modifiedDate, 'yyyy-MM-dd HH:mm')}"></span>
-                            </td>
-                            <td>
-                                <span th:text="${board.likeCount}"></span>
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>
+        <div class="sixteen wide column">
+            <div id="container-header">
+                <h1>게시판</h1>
+                <button id="write-btn" class="ui medium teal button right floated">글쓰기</button>
             </div>
+
+            <table id="board-list" class="ui table">
+                <thead>
+                    <tr>
+                        <th class="one wide">번호</th>
+                        <th class="ten wide">글제목</th>
+                        <th class="two wide">작성자</th>
+                        <th class="two wide">등록일</th>
+                        <th class="one wide">추천</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- CONTENTS !-->
+                    <tr th:each="board : ${boardList}">
+                        <td>
+                            <span th:text="${board.id}"></span>
+                        </td>
+                        <td class="board-title">
+                            <a th:href="@{'/board/' + ${board.id}}">
+                                <span th:text="${board.title}"></span>
+                                (<span th:text="${board.commentCount}"></span>)
+                            </a>
+                        </td>
+                        <td>
+                            <span th:text="${board.author}"></span>
+                        </td>
+                        <td>
+                            <span th:text="${#temporals.format(board.modifiedDate, 'yyyy-MM-dd HH:mm')}"></span>
+                        </td>
+                        <td>
+                            <span th:text="${board.likeCount}"></span>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
         </div>
 
         <!-- modal -->

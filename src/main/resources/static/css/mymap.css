@@ -12,6 +12,19 @@
     border-radius: 4em;
 }
 
+#container-header-box {
+    margin-left: 3em;
+}
+
+#container-header {
+    margin-top: 3em;
+    margin-bottom: 0.5em;
+}
+
+#container-header h1 {
+    display: inline-block;
+}
+
 /**********************
  *   recent travel list
  **********************/
@@ -22,23 +35,6 @@
 #latest-travel-list > #emtpy {
     cursor: default;
 }
-
-
-/**********************
- *   search
- **********************/
-.ui.search#search-wrap {
-    text-align: center;
-    margin-top: 30px;
-    margin-bottom: 30px;
-}
-
-.ui.icon.input > input {
-    height: 50px;
-    width: 600px;
-    font-size: 1.5em;
-}
-
 
 /**********************
  *   map-content
@@ -107,11 +103,12 @@
  **********************/
 #mapmaking-container {
     background-color: #f2f4f7;
-    height: 1500px;
+    height: 1600px;
 }
 
-#center-pick-btn-group {
-    margin-left: 1em;
+#container-header-box #center-pick-btn-group {
+    margin-top: 3em;
+    margin-bottom: 0.5em;
 }
 
 #map {

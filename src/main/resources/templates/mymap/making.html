@@ -15,19 +15,26 @@
 <div th:insert="common/hearder.html" id="header" class="ui grid container"></div>
 
 <div id="mapmaking-container" class="ui grid">
-    <div id="center-pick-btn-group" class="sixteen wide column middle aligned">
-        <button class="ui teal button">서울</button>
-        <button class="ui teal basic button">인천</button>
-        <button class="ui teal basic button">강릉</button>
-        <button class="ui teal basic button">대전</button>
-        <button class="ui teal basic button">광주</button>
-        <button class="ui teal basic button">여수</button>
-        <button class="ui teal basic button">대구</button>
-        <button class="ui teal basic button">부산</button>
-        <button class="ui teal basic button">제주도</button>
-    </div>
-    <div id="reset-btn" class="sixteen wide column middle aligned">
-        <button class="ui teal button">초기화</button>
+    <div id="container-header-box" class="sixteen wide column">
+        <div id="container-header">
+            <h1>나의 지도 만들기</h1>
+        </div>
+
+        <div id="center-pick-btn-group">
+            <button class="ui teal button">서울</button>
+            <button class="ui teal basic button">인천</button>
+            <button class="ui teal basic button">강릉</button>
+            <button class="ui teal basic button">대전</button>
+            <button class="ui teal basic button">광주</button>
+            <button class="ui teal basic button">여수</button>
+            <button class="ui teal basic button">대구</button>
+            <button class="ui teal basic button">부산</button>
+            <button class="ui teal basic button">제주도</button>
+        </div>
+
+        <div id="reset-btn">
+            <button class="ui teal button">초기화</button>
+        </div>
     </div>
 
     <!-- Kakao Map API -->
