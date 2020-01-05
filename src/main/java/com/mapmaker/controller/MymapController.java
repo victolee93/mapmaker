@@ -49,7 +49,7 @@ public class MymapController {
     @RequestMapping(value="/mymap/travel/{no}", method=RequestMethod.GET, produces=MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody
     public String getTravelInfoJson(@PathVariable("no") Long no) {
-        return travelService.getTravelInfo(no);
+        return travelService.getTravelInfoJson(no);
     }
 
     @RequestMapping(value="/mymap/travel/marker/{no}", method=RequestMethod.GET, produces=MediaType.APPLICATION_JSON_VALUE)

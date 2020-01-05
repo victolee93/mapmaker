@@ -3,7 +3,7 @@
 /**********************
  *   map-outline
  **********************/
-#map-container {
+#maplist-container {
     background-color: #f2f4f7;
     height: 2200px;
 }
@@ -24,4 +24,10 @@
     margin: 30px 0px;
 }
 
+/**********************
+ *   card
+ **********************/
+.card-img {
+    width: 100%;
+}
 

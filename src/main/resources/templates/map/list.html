@@ -13,19 +13,21 @@
 <!-- HEADER -->
 <div th:insert="common/hearder.html" id="header" class="ui grid container"></div>
 
-<div id="map-container">
+<div id="maplist-container">
     <div class="ui grid container">
         <div id="new-map" class="sixteen wide column map-list-box">
             <h1>뜨끄~은한 신상 맵</h1>
             <div class="ui three cards">
-                <div th:each="travel : ${recentTravelList}" class="card detail-btn">
+                <div th:each="travel : ${recentTravelList}" class="card">
                     <div class="content">
                         <p class="right floated meta" th:text="${travel.userName}"></p>
                         <p th:text="${travel.title}"></p>
                     </div>
 
                     <div class="image">
-                        <img th:src="${travel.filePath}">
+                        <a th:href="@{'/search/map/' + ${travel.id}}">
+                            <img class="card-img" th:src="${travel.filePath}">
+                        </a>
                     </div>
 
                     <div class="content">
@@ -59,7 +61,6 @@
 
             </div>
         </div>
-
     </div>
 </div>
 

@@ -3,7 +3,6 @@ package com.mapmaker.service;
 import com.mapmaker.domain.entity.MarkerEntity;
 import com.mapmaker.domain.entity.TravelEntity;
 import com.mapmaker.domain.repository.MarkerRepository;
-import com.mapmaker.domain.repository.TravelRepository;
 import com.mapmaker.dto.MarkerDto;
 import com.mapmaker.dto.PositionsDto;
 import com.mapmaker.dto.TravelDto;
@@ -19,7 +18,6 @@ import java.util.List;
 @AllArgsConstructor
 public class MarkerService {
     private MarkerRepository markerRepository;
-    private TravelRepository travelRepository;
 
     @Transactional
     public List<MarkerDto> getMarkerList(List<TravelDto> travelDtoList){
@@ -36,6 +34,24 @@ public class MarkerService {
             for(MarkerEntity markerEntity : markerEntities) {
                 markerList.add(convertEntityToDto(markerEntity, travelEntity));
             }
+        }
+
+        return markerList;
+    }
+
+    @Transactional
+    public List<MarkerDto> getMarkerList(TravelDto travelDto){
+        List<MarkerDto> markerList = new ArrayList<>();
+
+        TravelEntity travelEntity = travelDto.toEntity();
+        List<MarkerEntity> markerEntities = markerRepository.findAllByTravelEntity(travelEntity);
+
+        if (markerEntities.isEmpty()) {
+            return null;
+        }
+
+        for(MarkerEntity markerEntity : markerEntities) {
+            markerList.add(convertEntityToDto(markerEntity, travelEntity));
         }
 
         return markerList;

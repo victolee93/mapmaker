@@ -77,10 +77,15 @@ public class TravelService {
     }
 
     @Transactional
-    public String getTravelInfo(Long no){
+    public TravelDto getTravelInfo(Long no){
         Optional<TravelEntity> travelEntityWrapper = travelRepository.findById(no);
 
-        TravelDto travelDto = convertEntityToDto(travelEntityWrapper.get());
+        return convertEntityToDto(travelEntityWrapper.get());
+    }
+
+    @Transactional
+    public String getTravelInfoJson(Long no){
+        TravelDto travelDto = getTravelInfo(no);
         return JsonManager.convertDtoToJson(travelDto);
     }
 
