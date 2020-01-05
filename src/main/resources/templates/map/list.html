@@ -25,7 +25,7 @@
         </div>
 
         <div id="new-map" class="sixteen wide column map-list-box">
-            <h1>뜨끄~은한 신상 맵</h1>
+            <h1>뜨끄~은한 여행지도</h1>
             <div class="ui three cards">
                 <div th:each="travel : ${recentTravelList}" class="card">
                     <div class="content">
@@ -43,10 +43,13 @@
                         <p th:text="${travel.description}"></p>
                     </div>
 
-                    <div class="extra">
+                    <div class="content">
                         <span class="right floated">
-                            <i class="heart like icon like-btn"></i>
-                            <span>0</span> likes
+                            <i class="heart like icon like-btn"
+                               th:classappend="${travel.checked} ? 'checked' : 'outline'"
+                               th:value="${travel.id}">
+                            </i>
+                            <span th:text="${travel.likeCount}"></span> likes
                         </span>
                         <i class="comment icon"></i>
                         <span>0</span> comments
@@ -57,7 +60,7 @@
 
 
         <div id="popular-map" class="sixteen wide column right floated  map-list-box">
-            <h1>인기최고 맵</h1>
+            <h1>인기최고 여행지도</h1>
             <div class="ui three cards">
 
             </div>
@@ -75,6 +78,9 @@
 
 <!-- FOOTER -->
 <div th:insert="common/footer.html" id="footer" class="ui grid container"></div>
+
+<script th:src="@{/js/util/ajax.js}"></script>
+<script th:src="@{/js/map.js}"></script>
 
 </body>
 </html>

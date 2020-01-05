@@ -33,9 +33,11 @@ public class TravelService {
         Page<TravelEntity> page = travelRepository.findAll(PageRequest.of(0, 9, Sort.by(Sort.Direction.ASC, "createdDate")));
         List<TravelEntity> travelEntities = page.getContent();
 
-        for(TravelEntity travelEntity : travelEntities) {
+        for (TravelEntity travelEntity : travelEntities) {
             TravelDto travelDto = convertEntityToDto(travelEntity);
             travelDto.setUserName(travelEntity.getUserEntity().getNickname());
+            travelDto.setLikeCount(travelEntity.getTravelLikes().size());
+
             travelDtoList.add(travelDto);
         }
 

@@ -52,11 +52,11 @@ public class BoardController {
 
         List<BoardCommentDto> boardComments = commentService.getGalleryCommentList(boardDTO.toEntity());
 
-        Boolean replyChecked = likeService.isUserCheckedBoardLike(userEntity, boardDTO.toEntity());
+        Boolean likeChecked = likeService.isUserCheckedBoardLike(userEntity, boardDTO.toEntity());
 
         model.addAttribute("board", boardDTO);
         model.addAttribute("replies", boardComments);
-        model.addAttribute("replyChecked", replyChecked);
+        model.addAttribute("likeChecked", likeChecked);
 
         return "/board/detail";
     }

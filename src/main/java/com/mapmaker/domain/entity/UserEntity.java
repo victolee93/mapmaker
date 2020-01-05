@@ -30,6 +30,9 @@ public class UserEntity extends TimeEntity {
     @OneToMany(mappedBy = "userEntity") // 여행정보
     private List<TravelEntity> travels = new ArrayList<>();
 
+    @OneToMany(mappedBy = "userEntity") // 여행정보 좋아요
+    private List<TravelLikeEntity> travelLikes = new ArrayList<>();
+
     @OneToMany(mappedBy = "userEntity") // 갤러리 좋아요
     private List<GalleryLikeEntity> galleryLikes = new ArrayList<>();
 

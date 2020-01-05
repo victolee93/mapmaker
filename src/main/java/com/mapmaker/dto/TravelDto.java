@@ -29,6 +29,10 @@ public class TravelDto {
     private String filePath;
     private String userName;
 
+    private Integer likeCount;
+    private Integer commentCount;
+    private Boolean checked;
+
     private UserEntity userEntity;
     private LocalDateTime createdDate;
     private LocalDateTime modifiedDate;
@@ -64,7 +68,7 @@ public class TravelDto {
     public TravelDto(Long id, String title, String periodStartDate, String periodEndDate,
                      String description, String foodInfo, String placeInfo, String lodgingInfo,
                      String transportInfo, Long cost, String totalReview, String memo, String openStatus,
-                     String userName, String filePath,
+                     String userName, String filePath, Integer likeCount, Integer commentCount, Boolean checked,
                      UserEntity userEntity, LocalDateTime createdDate, LocalDateTime modifiedDate) {
         this.id = id;
         this.title = title;
@@ -80,6 +84,9 @@ public class TravelDto {
         this.memo = memo;
         this.openStatus = openStatus;
         this.filePath = filePath;
+        this.likeCount = likeCount;
+        this.commentCount = commentCount;
+        this.checked = checked;
         this.userName = userName;
         this.userEntity = userEntity;
         this.createdDate = createdDate;
