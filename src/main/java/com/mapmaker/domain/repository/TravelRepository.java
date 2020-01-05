@@ -8,4 +8,6 @@ import java.util.List;
 
 public interface TravelRepository extends JpaRepository<TravelEntity, Long> {
     List<TravelEntity> findAllByUserEntity(UserEntity userEntity);
+
+    List<TravelEntity> findByTitleContaining(String keyword);
 }

@@ -138,3 +138,17 @@
 #making-btn {
     width: 15%
 }
+
+/**********************
+ *   search
+ **********************/
+#search-box {
+    width: 100%;
+    text-align: center;
+    margin-bottom: 3em;
+}
+
+#search-box .ui.icon.input.search {
+    width: 50%;
+    height: 4em;
+}

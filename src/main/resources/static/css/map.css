@@ -24,6 +24,22 @@
     margin: 30px 0px;
 }
 
+
+/**********************
+ *   search
+ **********************/
+#search-box {
+    width: 100%;
+    text-align: center;
+    margin-top: 3em;
+}
+
+#search-box .ui.icon.input.search {
+    width: 50%;
+    height: 4em;
+}
+
+
 /**********************
  *   card
  **********************/

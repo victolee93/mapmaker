@@ -61,6 +61,25 @@ public class TravelService {
     }
 
     @Transactional
+    public List<TravelDto> searchTravelList(String keyword){
+        List<TravelEntity> travelEntityList = travelRepository.findByTitleContaining(keyword);
+        List<TravelDto> travelDtoList = new ArrayList<>();
+
+        if (travelEntityList.isEmpty()) {
+            return travelDtoList;
+        }
+
+        for (TravelEntity travelEntity : travelEntityList) {
+            TravelDto travelDto = convertEntityToDto(travelEntity);
+            travelDto.setUserName(travelEntity.getUserEntity().getNickname());
+
+            travelDtoList.add(convertEntityToDto(travelEntity));
+        }
+
+        return travelDtoList;
+    }
+
+    @Transactional
     public String getTravelInfoByMarker(Long no){
         String travelInfoJson = "";
         Optional<MarkerEntity> markerEntityWrapper = markerRepository.findById(no);

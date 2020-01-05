@@ -9,6 +9,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.List;
 
@@ -31,4 +32,13 @@ public class SearchController {
         return "/map/detail";
     }
 
+    @GetMapping("/search/map")
+    public String dispList(@RequestParam(value="keyword") String keyword,
+                           Model model) {
+        List<TravelDto> travelList = travelService.searchTravelList(keyword);
+
+        model.addAttribute("travelList", travelList);
+
+        return "/map/search";
+    }
 }
