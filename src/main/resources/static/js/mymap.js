@@ -79,14 +79,6 @@ const mymapObj = {
      *  여행정보를 DOM에 display
      */
     displayTravelInfo : (jsonInfo) => {
-        // 1. modal에 노출되는 데이터 할당
-        let contentLeftElement = document.querySelector('#map-content-left');
-        let contentRightElement = document.querySelector('#map-content-right');
-        let contentFooterElement = document.querySelector('#map-content-footer');
-        contentLeftElement.style.display = "inline-block";
-        contentRightElement.style.display = "inline-block";
-        contentFooterElement.style.display = "inline-block";
-
         document.querySelector('#travel-title').innerText = jsonInfo.title;
         document.querySelector('#travel-period').innerText = jsonInfo.periodStartDate + " ~ " + jsonInfo.periodEndDate;
         document.querySelector('#travel-description').innerText = jsonInfo.description;
@@ -100,17 +92,8 @@ const mymapObj = {
         document.querySelector('#travel-openStatus').innerText = jsonInfo.openStatus;
         document.querySelector('#img-preview').src = jsonInfo.filePath;
 
-        // 2. modal show
-        const hiddenElement = document.querySelector("#hidden");
-        hiddenElement.id = '';
-
-        // 3. modal hidden 이벤트 등록
-        document.querySelector("#cancel-btn").addEventListener('click', ()=> {
-            hiddenElement.id = 'hidden';
-        });
-        document.querySelector("#modal-overlay").addEventListener('click', ()=> {
-            hiddenElement.id = 'hidden';
-        });
+        // show
+        document.querySelector("#hidden").id = '';
     },
     
 };

@@ -4,7 +4,7 @@
  **********************/
 #maplist-container {
     background-color: #f2f4f7;
-    height: 1250px;
+    height: 1450px;
 }
 
 #small-map {
@@ -39,60 +39,11 @@
 /**********************
  *   map-content
  **********************/
-.mymap-modal {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    z-index: 10;
-}
-
-#modal-overlay {
-    background-color: rgba(0, 0, 0, 0.75);
-    width: 100%;
-    height: 100%;
-    position: absolute;
-}
-
-#modal-content {
-    background-color: white;
-    position: relative;
-    padding: 40px 60px;
-    width: 70%;
-}
-
 #hidden {
     display: none;
 }
 
-#map-content-left {
-    max-height: 450px;
-    min-height: 450px;
-    overflow-y: auto;
-    display: none;
-}
-
-#map-content-right {
-    border-left: 1px solid darkgray;
-    max-height: 450px;
-    min-height: 450px;
-    overflow-y: auto;
-    display: none;
-}
-
-#map-content-footer {
-    display: none;
-}
-
-.content-box {
-    margin-bottom: 20px;
-}
-
-.content-box > .content-title{
+.content-title{
     font-weight: 600;
     font-size: 1.22em;
 }
