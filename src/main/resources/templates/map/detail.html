@@ -17,6 +17,7 @@
 
 <div id="map-container">
     <div class="ui grid container">
+        <!-- 헤더 -->
         <div id="container-header" class="sixteen wide column">
             <h1>지도 상세 정보</h1>
             <a th:href="@{/mymap/making}">
@@ -117,7 +118,31 @@
                     <img id="img-preview" th:src="${travelInfo.filePath}">
                 </div>
             </div>
+        </div>
 
+        <!-- 댓글 -->
+        <div id="comment-container" class="ui comments sixteen wide column">
+            <h3 class="ui dividing header">댓글</h3>
+
+            <div id="comment-form">
+                <form th:action="@{'/map/' + ${travelInfo.id} + '/comment'}" method="post" class="ui form">
+                    <div class="field">
+                        <textarea name="content" rows="3"></textarea>
+                    </div>
+                    <button class="ui medium teal submit button right floated">댓글등록</button>
+                </form>
+            </div>
+
+            <div id="comment-list" class="scrollbar">
+                <div th:each="reply : ${replies}" class="comment">
+                    <span th:text="${reply.username}" class="author"></span>
+                    <div class="metadata">
+                        <span th:text="${reply.date}" class="date"></span>
+                    </div>
+
+                    <div class="text" th:text="${reply.content}"></div>
+                </div>
+            </div>
         </div>
     </div>
 </div>

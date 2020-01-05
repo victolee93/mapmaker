@@ -37,6 +37,7 @@ public class TravelService {
             TravelDto travelDto = convertEntityToDto(travelEntity);
             travelDto.setUserName(travelEntity.getUserEntity().getNickname());
             travelDto.setLikeCount(travelEntity.getTravelLikes().size());
+            travelDto.setCommentCount(travelEntity.getTravelComments().size());
 
             travelDtoList.add(travelDto);
         }

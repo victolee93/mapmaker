@@ -72,6 +72,9 @@ public class TravelEntity extends TimeEntity {
     @OneToMany(mappedBy = "travelEntity")
     private List<TravelLikeEntity> travelLikes = new ArrayList<>();
 
+    @OneToMany(mappedBy = "travelEntity")
+    private List<TravelCommentEntity> travelComments = new ArrayList<>();
+
     @Builder
     public TravelEntity(Long id, String title, LocalDateTime periodStartDate, LocalDateTime periodEndDate,
                         String description, String foodInfo, String placeInfo, String lodgingInfo,

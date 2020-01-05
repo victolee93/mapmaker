@@ -156,6 +156,9 @@ galleryObj = {
         })
     },
 
+    /*
+     * 댓글 element 내용 채우기
+     */
     createReplyContent : (reply) => {
         let replyContent = `
             <span class="author">${reply.username}</span>

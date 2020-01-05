@@ -3,8 +3,10 @@ package com.mapmaker.service;
 import com.mapmaker.domain.entity.*;
 import com.mapmaker.domain.repository.BoardCommentRepository;
 import com.mapmaker.domain.repository.GalleryCommentRepository;
+import com.mapmaker.domain.repository.TravelCommentRepository;
 import com.mapmaker.dto.BoardCommentDto;
 import com.mapmaker.dto.GalleryCommentDto;
+import com.mapmaker.dto.TravelCommentDto;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -18,6 +20,7 @@ import java.util.List;
 public class CommentService {
     private GalleryCommentRepository galleryCommentRepository;
     private BoardCommentRepository boardCommentRepository;
+    private TravelCommentRepository travelCommentRepository;
 
     /****************
      * 갤러리 댓글 영역
@@ -60,7 +63,30 @@ public class CommentService {
         return boardCommentRepository.save(boardCommentDto.toEntity()).getId();
     }
 
+    /****************
+     * 여행 댓글 영역
+     */
+    @Transactional
+    public List<TravelCommentDto> getTravelCommentList(TravelEntity travelEntity) {
+        List<TravelCommentDto> travelCommentDtoList = new ArrayList<>();
+        List<TravelCommentEntity> travelCommentEntityList = travelCommentRepository.findByTravelEntity(travelEntity);
 
+        for (TravelCommentEntity travelCommentEntity: travelCommentEntityList) {
+            travelCommentDtoList.add(convertEntityToTravelCommentDto(travelCommentEntity, travelCommentEntity.getUserEntity()));
+        }
+
+        return travelCommentDtoList;
+    }
+
+    @Transactional
+    public Long saveTravelComment(TravelCommentDto travelCommentDto) {
+        return travelCommentRepository.save(travelCommentDto.toEntity()).getId();
+    }
+
+
+    /****************
+     * DTO 변환 영역
+     */
     private GalleryCommentDto convertEntityToGalleryCommentDto (GalleryCommentEntity galleryCommentEntity, UserEntity userEntity) {
         return GalleryCommentDto.builder()
                 .content(galleryCommentEntity.getContent())
@@ -74,6 +100,14 @@ public class CommentService {
                 .content(boardCommentEntity.getContent())
                 .username(userEntity.getNickname())
                 .date(boardCommentEntity.getModifiedDate().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss")))
+                .build();
+    }
+
+    private TravelCommentDto convertEntityToTravelCommentDto (TravelCommentEntity travelCommentEntity, UserEntity userEntity) {
+        return TravelCommentDto.builder()
+                .content(travelCommentEntity.getContent())
+                .username(userEntity.getNickname())
+                .date(travelCommentEntity.getModifiedDate().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss")))
                 .build();
     }
 }

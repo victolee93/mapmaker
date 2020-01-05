@@ -34,7 +34,7 @@
                     </div>
 
                     <div class="image">
-                        <a th:href="@{'/search/map/' + ${travel.id}}">
+                        <a th:href="@{'/map/' + ${travel.id}}">
                             <img class="card-img" th:src="${travel.filePath}">
                         </a>
                     </div>
@@ -52,7 +52,7 @@
                             <span th:text="${travel.likeCount}"></span> likes
                         </span>
                         <i class="comment icon"></i>
-                        <span>0</span> comments
+                        <span th:text="${travel.commentCount}"></span> comments
                     </div>
                 </div>
             </div>
