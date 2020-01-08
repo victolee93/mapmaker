@@ -11,6 +11,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Controller
@@ -26,14 +27,11 @@ public class MapController {
     public String list(Model model, Authentication authentication) {
         UserEntity userEntity = userService.getUserByEmail(authentication.getName());
 
-        List<TravelDto> recentTravelList = travelService.getRecentTravelList();
-
-        for(TravelDto travelDto: recentTravelList) {
-            Boolean checked = likeService.isUserCheckedTravelLike(userEntity, travelDto.toEntity());
-            travelDto.setChecked(checked);
-        }
+        List<TravelDto> recentTravelList = travelService.getRecentTravelList(userEntity);
+        List<TravelDto> popularTravelList = travelService.getPopularTravelList(userEntity);
 
         model.addAttribute("recentTravelList", recentTravelList);
+        model.addAttribute("popularTravelList", popularTravelList);
 
         return "/map/list";
     }

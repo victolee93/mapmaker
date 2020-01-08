@@ -25,24 +25,18 @@ import java.util.Optional;
 public class TravelService {
     private TravelRepository travelRepository;
     private MarkerRepository markerRepository;
+    private LikeService likeService;
 
     @Transactional
-    public List<TravelDto> getRecentTravelList(){
-        List<TravelDto> travelDtoList = new ArrayList<>();
-
+    public List<TravelDto> getRecentTravelList(UserEntity userEntity){
         Page<TravelEntity> page = travelRepository.findAll(PageRequest.of(0, 9, Sort.by(Sort.Direction.ASC, "createdDate")));
-        List<TravelEntity> travelEntities = page.getContent();
+        return getDtoListByAddingField(page.getContent(), userEntity);
+    }
 
-        for (TravelEntity travelEntity : travelEntities) {
-            TravelDto travelDto = convertEntityToDto(travelEntity);
-            travelDto.setUserName(travelEntity.getUserEntity().getNickname());
-            travelDto.setLikeCount(travelEntity.getTravelLikes().size());
-            travelDto.setCommentCount(travelEntity.getTravelComments().size());
-
-            travelDtoList.add(travelDto);
-        }
-
-        return travelDtoList;
+    @Transactional
+    public List<TravelDto> getPopularTravelList(UserEntity userEntity){
+        List<TravelEntity> travelEntities = travelRepository.findByTravelLikesOrderByDesc();
+        return getDtoListByAddingField(travelEntities, userEntity);
     }
 
     @Transactional
@@ -109,6 +103,22 @@ public class TravelService {
     public String getTravelInfoJson(Long no){
         TravelDto travelDto = getTravelInfo(no);
         return JsonManager.convertDtoToJson(travelDto);
+    }
+
+    private List<TravelDto> getDtoListByAddingField(List<TravelEntity> travelEntities, UserEntity userEntity) {
+        List<TravelDto> travelDtoList = new ArrayList<>();
+
+        for (TravelEntity travelEntity : travelEntities) {
+            TravelDto travelDto = convertEntityToDto(travelEntity);
+
+            travelDto.setUserName(travelEntity.getUserEntity().getNickname());
+            travelDto.setLikeCount(travelEntity.getTravelLikes().size());
+            travelDto.setCommentCount(travelEntity.getTravelComments().size());
+            travelDto.setChecked(likeService.isUserCheckedTravelLike(userEntity, travelEntity));
+
+            travelDtoList.add(travelDto);
+        }
+        return travelDtoList;
     }
 
     private TravelDto convertEntityToDto(TravelEntity travelEntity) {
