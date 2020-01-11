@@ -97,7 +97,65 @@
         <div id="recommend-map" class="sixteen wide column right floated  map-list-box">
             <h1>추천 여행지</h1>
             <div class="ui three cards">
+                <!-- 추천 여행지 1번 -->
+                <div class="card">
+                    <div class="content">
+                        <p class="recommend-card-title">제주도</p>
+                    </div>
 
+                    <div class="image">
+                        <a href="https://www.google.com/maps/place/%EC%84%B1%EC%82%B0+%EC%9D%BC%EC%B6%9C%EB%B4%89/@33.4645856,126.9266334,13.35z/data=!4m5!3m4!1s0x350d14b9f6e3789f:0x555132053a23b64b!8m2!3d33.458056!4d126.9425?hl=ko">
+                            <img class="card-img" th:src="@{/img/recommend_travel/jeju_20200111.jpg}">
+                        </a>
+                    </div>
+
+                    <div class="content">
+                        <p>
+                            지치고 힘들땐 바다를 보면서... 🌊🌊
+                            올 겨울 제주로 떠나보시는건 어떠신가요~? 🛫
+                        </p>
+                    </div>
+                </div>
+
+                <!-- 추천 여행지 2번 -->
+                <div class="card">
+                    <div class="content">
+                        <p class="recommend-card-title">순천</p>
+                    </div>
+
+                    <div class="image">
+                        <a href="https://www.google.com/maps/search/%EC%88%9C%EC%B2%9C%EB%A7%8C+%EC%9E%90%EC%97%B0%EC%83%9D%ED%83%9C%EA%B3%B5%EC%9B%90/@34.881723,127.4869475,12.38z?hl=ko">
+                            <img class="card-img" th:src="@{/img/recommend_travel/sunchjeon_20200111.jpg}">
+                        </a>
+                    </div>
+
+                    <div class="content">
+                        <p>
+                            나 어딨게~~? 🙈  <br>
+                            갈대밭에서 사진📸 찍자!!
+                        </p>
+                    </div>
+                </div>
+
+                <!-- 추천 여행지 3번 -->
+                <div class="card">
+                    <div class="content">
+                        <p class="recommend-card-title">서울</p>
+                    </div>
+
+                    <div class="image">
+                        <a href="https://www.google.com/maps/place/%EB%B6%81%EC%B4%8C%ED%95%9C%EC%98%A5%EB%A7%88%EC%9D%84/@37.5818137,126.9797378,15.35z/data=!4m5!3m4!1s0x357ca2daaff8c14f:0xcdbcbaa9ffc9e59a!8m2!3d37.5824075!4d126.9836531?hl=ko">
+                            <img class="card-img" th:src="@{/img/recommend_travel/seoul_20200111.jpg}">
+                        </a>
+                    </div>
+
+                    <div class="content">
+                        <p>
+                            서울에 이런곳이...!? 😱 <br>
+                            노을진 한옥마을로 떠나보자
+                        </p>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
@@ -107,7 +165,7 @@
 <div th:insert="common/footer.html" id="footer" class="ui grid container"></div>
 
 <script th:src="@{/js/util/ajax.js}"></script>
-<script th:src="@{/js/map.js}"></script>
+<script th:src="@{/js/mapList.js}"></script>
 
 </body>
 </html>

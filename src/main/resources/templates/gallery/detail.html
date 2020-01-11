@@ -23,13 +23,11 @@
                     <input id="reply-url" type="hidden"/>
                     <input id="csrf_token" type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
                     <textarea name="content" rows="3"></textarea>
+                    <button id="comment-write-btn" class="ui medium teal submit button right floated">등록</button>
                 </div>
-                <button id="comment-write-btn" class="ui medium teal submit button right floated">등록</button>
 
                 <!-- 댓글 리스트 (ajax) -->
-                <div id="comment-list" class="scrollbar">
-                    <div id="comment-box" class="comment"></div>
-                </div>
+                <div id="comment-box" class="comment scrollbar"></div>
             </div>
         </div>
     </div>

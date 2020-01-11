@@ -16,7 +16,9 @@
 <div id="board-detail-container">
     <div class="ui grid container">
         <div class="sixteen wide column">
-            <h1>게시판</h1>
+            <div id="container-header">
+                <h1>게시글</h1>
+            </div>
 
             <div id="board-detail-wrap">
                 <!-- 헤더 -->
@@ -69,15 +71,13 @@
                     </form>
                 </div>
 
-                <div id="comment-list" class="scrollbar">
-                    <div th:each="reply : ${replies}" class="comment">
-                        <span th:text="${reply.username}" class="author"></span>
-                        <div class="metadata">
-                            <span th:text="${reply.date}" class="date"></span>
-                        </div>
-
-                        <div class="text" th:text="${reply.content}"></div>
+                <div th:each="reply : ${replies}" class="comment">
+                    <span th:text="${reply.username}" class="author"></span>
+                    <div class="metadata">
+                        <span th:text="${reply.date}" class="date"></span>
                     </div>
+
+                    <div class="text" th:text="${reply.content}"></div>
                 </div>
             </div>
         </div>

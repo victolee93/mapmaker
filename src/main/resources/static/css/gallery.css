@@ -54,12 +54,18 @@
 #detail-modal-content {
     background-color: white;
     position: relative;
-    padding: 40px 60px;
+    padding: 00px 60px;
     width: 70%;
+    height: 96%;
 }
 
 #detail-hidden {
     display: none;
+}
+
+#reply-text textarea {
+    height: 40px;
+    width: 90%;
 }
 
 
@@ -103,6 +109,11 @@
     max-width: 100%;
 }
 
-#comment-list {
+#comment-box {
+    max-height: 160px;
     overflow-y: auto;
+}
+
+.ui.comments .comment > .content {
+    margin-bottom: 20px;
 }

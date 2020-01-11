@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
 
     <link rel="stylesheet" th:href="@{/lib/SemanticUI/semantic.css}">
-    <link rel="stylesheet" th:href="@{/css/mymap.css}">
+    <link rel="stylesheet" th:href="@{/css/map.css}">
     <link rel="stylesheet" th:href="@{/css/common.css}">
 
     <title>MapMaker</title>
@@ -14,7 +14,7 @@
 <!-- HEADER -->
 <div th:insert="common/hearder.html" id="header" class="ui grid container"></div>
 
-<div id="map-container">
+<div id="map-search-container">
     <div class="ui grid container">
         <!-- 헤더 -->
         <div id="container-header" class="sixteen wide column">
@@ -53,13 +53,16 @@
                         <p th:text="${travel.description}"></p>
                     </div>
 
-                    <div class="extra">
+                    <div class="content">
                         <span class="right floated">
-                            <i class="heart like icon like-btn"></i>
-                            <span>0</span> likes
+                            <i class="heart like icon like-btn"
+                               th:classappend="${travel.checked} ? 'checked' : 'outline'"
+                               th:value="${travel.id}">
+                            </i>
+                            <span th:text="${travel.likeCount}"></span> likes
                         </span>
                         <i class="comment icon"></i>
-                        <span>0</span> comments
+                        <span th:text="${travel.commentCount}"></span> comments
                     </div>
                 </div>
             </div>
@@ -69,5 +72,8 @@
 
 <!-- FOOTER -->
 <div th:insert="common/footer.html" id="footer" class="ui grid container"></div>
+
+<script th:src="@{/js/mapSearch.js}"></script>
+
 </body>
 </html>

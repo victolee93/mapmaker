@@ -1,7 +1,7 @@
 
 const mymapObj = {
     map : null,
-    
+
     init : () => {
         // 지도 초기화
         mymapObj.map = mymapObj.mapInit();
@@ -93,7 +93,9 @@ const mymapObj = {
         document.querySelector('#img-preview').src = jsonInfo.filePath;
 
         // show
-        document.querySelector("#hidden").id = '';
+        document.querySelector("#travel-info").classList.remove('hidden');
+
+        document.querySelector('#map-container').style.height = "1600px";
     },
     
 };

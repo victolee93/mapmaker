@@ -1,38 +1,21 @@
 
-mapSearchObj = {
-    map : null,
-
-    init : () => {
-        // 지도 초기화
-        mapSearchObj.map = mapSearchObj.mapInit();
-
-        // 마킹 표시
-        mapSearchObj.displayMarkers(mapSearchObj.map);
+mapDetailObj = {
+    init: () => {
+        // display 초기화
+        mapDetailObj.setDisplay();
     },
 
     /*
-     *  지도를 초기화한다. ( 지도의 중심, 레벨 등 )
+     * 카드 개수에 따라 컨테이너의 height를 조정
      */
-    mapInit : () => {
-        let container = document.querySelector('#small-map'); //지도를 담을 영역의 DOM 레퍼런스
+    setDisplay : () => {
+        let originHeight = document.querySelector('#map-search-container').offsetHeight;
+        let cardRowCount = Math.ceil(document.querySelectorAll('.card').length / 3);
 
-        // 지도 생성
-        let options = {
-            center: new kakao.maps.LatLng(37.531425, 127.006561),
-            level: 8
-        };
-        return new kakao.maps.Map(container, options);
-    },
-
-    displayMarkers : (map) => {
-        for (let item of positions) {
-            let position = new kakao.maps.LatLng(item['longitude'], item['latitude']);
-            let marker = new kakao.maps.Marker({
-                position: position
-            });
-            marker.setMap(map);
-        }
+        // 새로운 높이 = 원래 높이 + 카드라인수 * 250px
+        let newHeight = (originHeight + (cardRowCount * 300)) + "px";
+        document.querySelector('#map-search-container').style.height = newHeight;
     },
 };
 
-mapSearchObj.init();
+mapDetailObj.init();

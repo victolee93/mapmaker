@@ -4,7 +4,7 @@
  **********************/
 #map-container {
     background-color: #f2f4f7;
-    height: 2000px;
+    height: 900px;
 }
 
 #small-map {
@@ -39,13 +39,26 @@
 /**********************
  *   map-content
  **********************/
-#hidden {
+#travel-info {
+    overflow-wrap: break-word;
+    width: 100%;
+    border-radius: 255px 15px 225px 15px/15px 225px 15px 255px;
+    padding: 2em;
+    margin-top: 5%;
+    box-shadow: 0px 0px 6px 4px darkgrey;
+}
+
+#travel-info.hidden {
     display: none;
 }
 
-.content-title{
+.content-title {
     font-weight: 600;
     font-size: 1.22em;
+}
+
+.vertical-divider {
+    border-left: 0.15em solid #ccc;
 }
 
 
@@ -79,8 +92,7 @@
 }
 
 #img-preview {
-    width: 14%;
-    margin: 1em 0.5em 0em 0em;
+    width: 100%;
 }
 
 .ui.form textarea.textarea-scroll {
@@ -89,7 +101,9 @@
 
 #making-content {
     height: 1250px;
-    border-left: 1px solid darkgray;
+    border-radius: 255px 15px 225px 15px/15px 225px 15px 255px;
+    padding: 2em;
+    box-shadow: 0px 0px 6px 4px darkgrey;
 }
 
 
@@ -165,8 +179,7 @@
     margin-bottom: 60px;
 }
 
-#comment-list {
-    min-height: 400px;
-    max-height: 400px;
-    overflow-y: auto;
+.ui.comments .comment {
+    padding: 2em 0 3em 0;
+    box-shadow: 0 0.6em 1em -1em rgba(0, 0, 0, .25);
 }
