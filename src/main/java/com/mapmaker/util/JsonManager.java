@@ -6,6 +6,9 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import java.io.IOException;
 import java.util.List;
 
+/*
+ * ObjectMapper 클래스를 사용하여, DTO <---> Json 간의 변환을 담당하는 util
+ */
 public class JsonManager {
     private static ObjectMapper objectMapper = new ObjectMapper();
 

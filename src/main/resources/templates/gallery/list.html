@@ -36,7 +36,7 @@
                     <div class="content">
                         <span class="right floated">
                             <i class="heart like icon like-btn"
-                               th:classappend="${gallery.checked} ? 'checked' : 'outline'"
+                               th:classappend="${gallery.likeChecked} ? 'checked' : 'outline'"
                                th:value="${gallery.id}">
                             </i>
                             <span th:text="${gallery.likeCount}"></span> likes

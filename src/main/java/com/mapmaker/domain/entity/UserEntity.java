@@ -1,5 +1,11 @@
 package com.mapmaker.domain.entity;
 
+import com.mapmaker.domain.entity.Board.BoardCommentEntity;
+import com.mapmaker.domain.entity.Board.BoardLikeEntity;
+import com.mapmaker.domain.entity.Gallery.GalleryCommentEntity;
+import com.mapmaker.domain.entity.Gallery.GalleryLikeEntity;
+import com.mapmaker.domain.entity.Travel.TravelEntity;
+import com.mapmaker.domain.entity.Travel.TravelLikeEntity;
 import lombok.*;
 
 import javax.persistence.*;

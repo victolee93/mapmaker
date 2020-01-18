@@ -1,6 +1,6 @@
 package com.mapmaker.controller;
 
-import com.mapmaker.dto.TravelDto;
+import com.mapmaker.dto.Travel.TravelDto;
 import com.mapmaker.service.TravelService;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Controller;
@@ -16,9 +16,8 @@ public class SearchController {
     private TravelService travelService;
 
     @GetMapping("/search/map")
-    public String dispList(@RequestParam(value="keyword") String keyword,
-                           Model model) {
-        List<TravelDto> travelList = travelService.searchTravelList(keyword);
+    public String dispList(@RequestParam(value="keyword") String keyword, Model model) {
+        List<TravelDto> travelList = travelService.searchTravels(keyword);
 
         model.addAttribute("travelList", travelList);
 

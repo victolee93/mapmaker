@@ -1,5 +1,6 @@
-package com.mapmaker.domain.entity;
+package com.mapmaker.domain.entity.Gallery;
 
+import com.mapmaker.domain.entity.TimeEntity;
 import lombok.*;
 
 import javax.persistence.*;
@@ -10,7 +11,7 @@ import java.util.List;
 @Getter
 @Entity
 @Table(name = "gallery")
-public class GalleryEntity extends TimeEntity{
+public class GalleryEntity extends TimeEntity {
 
     @Id
     @GeneratedValue(strategy= GenerationType.IDENTITY)

@@ -1,7 +1,7 @@
 package com.mapmaker.dto;
 
 import com.mapmaker.domain.entity.MarkerEntity;
-import com.mapmaker.domain.entity.TravelEntity;
+import com.mapmaker.domain.entity.Travel.TravelEntity;
 import lombok.*;
 
 @Getter
@@ -15,7 +15,7 @@ public class MarkerDto {
     private Double longitude;
     private TravelEntity travelEntity;
 
-    public MarkerEntity toEntity(){
+    public MarkerEntity toEntity() {
         return MarkerEntity.builder()
                 .id(id)
                 .latitude(latitude)

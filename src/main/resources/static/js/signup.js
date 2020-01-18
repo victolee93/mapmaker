@@ -8,7 +8,7 @@ const signupObj = {
                 return false;
             }
 
-            this.closest('form').submit();
+            event.target.closest('form').submit();
         })
     },
 

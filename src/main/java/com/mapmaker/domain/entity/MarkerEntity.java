@@ -1,5 +1,6 @@
 package com.mapmaker.domain.entity;
 
+import com.mapmaker.domain.entity.Travel.TravelEntity;
 import lombok.AccessLevel;
 import lombok.Builder;
 import lombok.Getter;

@@ -1,7 +1,8 @@
 package com.mapmaker.dto;
 
-import com.mapmaker.domain.entity.TravelEntity;
+import com.mapmaker.domain.entity.Travel.TravelEntity;
 import com.mapmaker.domain.entity.UserEntity;
+import com.mapmaker.dto.Travel.TravelDto;
 import lombok.*;
 
 import java.time.LocalDateTime;

@@ -6,13 +6,10 @@ import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.Errors;
-import org.springframework.validation.FieldError;
-import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import javax.validation.Valid;
-import java.util.List;
 import java.util.Map;
 
 @Controller
@@ -33,6 +30,7 @@ public class UserController {
     }
 
     // 회원가입 페이지
+    // 입력 데이터 유지를 위해 매개변수에 UserDto를 명시해줘야 함
     @GetMapping("/user/signup")
     public String dispSignup(UserDto userDto) {
         return "/user/signup";
@@ -42,19 +40,19 @@ public class UserController {
     @PostMapping("/user/signup")
     public String execSignup(@Valid UserDto userDto, Errors errors, Model model) {
         if (errors.hasErrors()) {
-            // 입력 데이터 유지
+            // 회원가입 실패시, 입력 데이터를 유지
             model.addAttribute("userDto", userDto);
 
+            // 유효성 통과 못한 필드와 메시지를 핸들링
             Map<String, String> validatorResult = userService.validateHandling(errors);
-            for (String key : validatorResult.keySet()){
-                // validation 통과 못한 필드와 메시지
+            for (String key : validatorResult.keySet()) {
                 model.addAttribute(key, validatorResult.get(key));
             }
 
             return "/user/signup";
         }
 
-        userService.joinUser(userDto);
+        userService.signUp(userDto);
         return "redirect:/user/login";
     }
 

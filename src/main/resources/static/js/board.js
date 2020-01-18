@@ -16,12 +16,15 @@ boardObj = {
      * 댓글 개수에 따라 컨테이너의 height를 조정
      */
     setDisplay : () => {
-        let originHeight = document.querySelector('#board-detail-container').offsetHeight;
+        let containerElement = document.querySelector('#board-detail-container');
+        if (containerElement === null) return null;
+
+        let originHeight = containerElement.offsetHeight;
         let commentCount = document.querySelectorAll('.comment').length;
 
         // 새로운 높이 = 원래 높이 + 댓글수 * 130px
         let newHeight = (originHeight + (commentCount * 130)) + "px";
-        document.querySelector('#board-detail-container').style.height = newHeight;
+        containerElement.style.height = newHeight;
     },
 
     /*

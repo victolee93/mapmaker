@@ -1,10 +1,10 @@
 package com.mapmaker.controller;
 
-import com.mapmaker.domain.entity.BoardEntity;
+import com.mapmaker.domain.entity.Board.BoardEntity;
 import com.mapmaker.domain.entity.UserEntity;
-import com.mapmaker.dto.BoardCommentDto;
-import com.mapmaker.dto.BoardDto;
-import com.mapmaker.dto.BoardLikeDto;
+import com.mapmaker.dto.Board.BoardCommentDto;
+import com.mapmaker.dto.Board.BoardDto;
+import com.mapmaker.dto.Board.BoardLikeDto;
 import com.mapmaker.service.BoardService;
 import com.mapmaker.service.CommentService;
 import com.mapmaker.service.LikeService;
@@ -25,9 +25,9 @@ public class BoardController {
     private LikeService likeService;
     private CommentService commentService;
 
-    // 게시판 리스트 페이지
+    // 게시판 메인 페이지
     @GetMapping("/board")
-    public String dispList(Model model) {
+    public String dispBoardList(Model model) {
         List<BoardDto> boardList = boardService.getBoardlist();
 
         model.addAttribute("boardList", boardList);
@@ -36,23 +36,24 @@ public class BoardController {
 
     // 게시글 등록
     @PostMapping("/board")
-    public String execWrite(BoardDto boardDto, Authentication authentication) {
+    public String execPostWrite(BoardDto boardDto, Authentication authentication) {
         UserEntity userEntity = userService.getUserByEmail(authentication.getName());
-        boardDto.setAuthor(userEntity.getNickname());
-        boardService.savePost(boardDto);
+        boardService.savePost(boardDto, userEntity);
 
         return "redirect:/board";
     }
 
-    // 게시판 상세 페이지
+    // 게시글 상세
     @GetMapping("/board/{no}")
-    public String dispDetail(@PathVariable("no") Long no, Model model, Authentication authentication) {
+    public String dispPostDetail(@PathVariable("no") Long no, Model model, Authentication authentication) {
         UserEntity userEntity = userService.getUserByEmail(authentication.getName());
         BoardDto boardDTO = boardService.getPost(no);
 
-        List<BoardCommentDto> boardComments = commentService.getGalleryCommentList(boardDTO.toEntity());
+        // 댓글 목록
+        List<BoardCommentDto> boardComments = commentService.getGalleryCommentList(boardDTO);
 
-        Boolean likeChecked = likeService.isUserCheckedBoardLike(userEntity, boardDTO.toEntity());
+        // 현재 유저가 좋아요를 체크했는지 여부
+        Boolean likeChecked = likeService.isUserCheckedBoardLike(userEntity, boardDTO);
 
         model.addAttribute("board", boardDTO);
         model.addAttribute("replies", boardComments);
@@ -61,27 +62,27 @@ public class BoardController {
         return "/board/detail";
     }
 
-    // 게시판 수정
+    // 게시글 수정
     @PutMapping("/board/{no}")
-    public String execUpdate(BoardDto boardDto, Authentication authentication) {
+    public String execPostUpdate(BoardDto boardDto, Authentication authentication) {
         UserEntity userEntity = userService.getUserByEmail(authentication.getName());
-        boardDto.setAuthor(userEntity.getNickname());
-        boardService.savePost(boardDto);
+        boardService.savePost(boardDto, userEntity);
 
         return "redirect:/board";
     }
 
-    // 게시판 삭제
+    // 게시글 삭제
     @DeleteMapping("/board/{no}")
-    public String execDelete(@PathVariable("no") Long no) {
+    public String execPostDelete(@PathVariable("no") Long no) {
         boardService.deletePost(no);
 
         return "redirect:/board";
     }
 
+    // 게시글 좋아요
     @RequestMapping(value="/board/{no}/like", method = RequestMethod.GET)
     @ResponseBody
-    public String execLike(@PathVariable("no") Long boardId, Authentication authentication) {
+    public String execPostLike(@PathVariable("no") Long boardId, Authentication authentication) {
         UserEntity userEntity = userService.getUserByEmail(authentication.getName());
         BoardEntity boardEntity = boardService.getPost(boardId).toEntity();
 
@@ -90,11 +91,16 @@ public class BoardController {
         boardLikeDto.setBoardEntity(boardEntity);
 
         likeService.saveBoardLike(boardLikeDto);
+
         return "null";
     }
 
+    // 게시글 댓글 등록
     @PostMapping("/board/{no}/comment")
-    public String execComment(@PathVariable("no") Long boardId, Authentication authentication, BoardCommentDto boardCommentDto) {
+    public String execPostCommentWrite(@PathVariable("no") Long boardId,
+                                       Authentication authentication,
+                                       BoardCommentDto boardCommentDto) {
+
         UserEntity userEntity = userService.getUserByEmail(authentication.getName());
         BoardEntity boardEntity = boardService.getPost(boardId).toEntity();
 

@@ -46,7 +46,7 @@
                     <div class="content">
                         <span class="right floated">
                             <i class="heart like icon like-btn"
-                               th:classappend="${travel.checked} ? 'checked' : 'outline'"
+                               th:classappend="${travel.likeChecked} ? 'checked' : 'outline'"
                                th:value="${travel.id}">
                             </i>
                             <span th:text="${travel.likeCount}"></span> likes
@@ -81,7 +81,7 @@
                     <div class="content">
                         <span class="right floated">
                             <i class="heart like icon like-btn"
-                               th:classappend="${travel.checked} ? 'checked' : 'outline'"
+                               th:classappend="${travel.likeChecked} ? 'checked' : 'outline'"
                                th:value="${travel.id}">
                             </i>
                             <span th:text="${travel.likeCount}"></span> likes
@@ -111,7 +111,7 @@
 
                     <div class="content">
                         <p>
-                            지치고 힘들땐 바다를 보면서... 🌊🌊
+                            지치고 힘들땐 바다를 보면서... 🌊🌊 <br>
                             올 겨울 제주로 떠나보시는건 어떠신가요~? 🛫
                         </p>
                     </div>

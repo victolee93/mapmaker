@@ -25,6 +25,7 @@ public class S3Service {
         SimpleDateFormat date = new SimpleDateFormat("yyyymmddHHmmss");
         String fileName = date.format(new Date()) + "_" +file.getOriginalFilename();
         s3Client.putObject(new PutObjectRequest(bucket, fileName, file.getInputStream(), null).withCannedAcl(CannedAccessControlList.PublicRead));
+
         return s3Client.getUrl(bucket, fileName).toString();
     }
 

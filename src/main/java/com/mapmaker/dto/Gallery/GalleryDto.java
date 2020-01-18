@@ -1,8 +1,7 @@
-package com.mapmaker.dto;
+package com.mapmaker.dto.Gallery;
 
-import com.mapmaker.domain.entity.GalleryEntity;
-import com.mapmaker.domain.entity.GalleryLikeEntity;
-import com.mapmaker.domain.entity.UserEntity;
+import com.mapmaker.domain.entity.Gallery.GalleryEntity;
+import com.mapmaker.dto.Gallery.GalleryCommentDto;
 import lombok.*;
 
 import java.time.LocalDateTime;
@@ -19,16 +18,13 @@ public class GalleryDto {
     private String filePath;
     private Integer likeCount;
     private Integer commentCount;
-    private Boolean checked;
+    private Boolean likeChecked;
     private LocalDateTime createdDate;
     private LocalDateTime modifiedDate;
 
-    private UserEntity userEntity;
-    private GalleryLikeEntity galleryLikeEntity;
+    private List<GalleryCommentDto> galleryCommentEntities;
 
-    private List<GalleryCommentDto> galleryCommentEntityList;
-
-    public GalleryEntity toEntity(){
+    public GalleryEntity toEntity() {
         return GalleryEntity.builder()
                 .id(id)
                 .author(author)
@@ -39,7 +35,7 @@ public class GalleryDto {
 
     @Builder
     public GalleryDto(Long id, String content, String author, String filePath,
-                      Integer likeCount, Integer commentCount, Boolean checked, List<GalleryCommentDto> galleryCommentEntityList,
+                      Integer likeCount, Integer commentCount, Boolean likeChecked, List<GalleryCommentDto> galleryCommentEntities,
                     LocalDateTime createdDate, LocalDateTime modifiedDate) {
         this.id = id;
         this.author = author;
@@ -47,8 +43,8 @@ public class GalleryDto {
         this.filePath = filePath;
         this.likeCount = likeCount;
         this.commentCount = commentCount;
-        this.checked = checked;
-        this.galleryCommentEntityList = galleryCommentEntityList;
+        this.likeChecked = likeChecked;
+        this.galleryCommentEntities = galleryCommentEntities;
         this.createdDate = createdDate;
         this.modifiedDate = modifiedDate;
     }

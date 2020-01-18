@@ -56,7 +56,7 @@
                     <div class="content">
                         <span class="right floated">
                             <i class="heart like icon like-btn"
-                               th:classappend="${travel.checked} ? 'checked' : 'outline'"
+                               th:classappend="${travel.likeChecked} ? 'checked' : 'outline'"
                                th:value="${travel.id}">
                             </i>
                             <span th:text="${travel.likeCount}"></span> likes

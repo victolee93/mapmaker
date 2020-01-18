@@ -1,11 +1,11 @@
 package com.mapmaker.service;
 
 import com.mapmaker.domain.entity.MarkerEntity;
-import com.mapmaker.domain.entity.TravelEntity;
+import com.mapmaker.domain.entity.Travel.TravelEntity;
 import com.mapmaker.domain.entity.UserEntity;
 import com.mapmaker.domain.repository.MarkerRepository;
-import com.mapmaker.domain.repository.TravelRepository;
-import com.mapmaker.dto.TravelDto;
+import com.mapmaker.domain.repository.Travel.TravelRepository;
+import com.mapmaker.dto.Travel.TravelDto;
 import com.mapmaker.util.JsonManager;
 import lombok.AllArgsConstructor;
 import org.springframework.data.domain.Page;
@@ -17,7 +17,6 @@ import org.springframework.transaction.annotation.Transactional;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
 
 @Service
@@ -27,28 +26,31 @@ public class TravelService {
     private MarkerRepository markerRepository;
     private LikeService likeService;
 
+    // 최근 여행 리스트
     @Transactional
-    public List<TravelDto> getRecentTravelList(UserEntity userEntity){
+    public List<TravelDto> getRecentList(UserEntity userEntity) {
         Page<TravelEntity> page = travelRepository.findAll(PageRequest.of(0, 9, Sort.by(Sort.Direction.ASC, "createdDate")));
         return getDtoListByAddingField(page.getContent(), userEntity);
     }
 
+    // 인기 여행 리스트
     @Transactional
-    public List<TravelDto> getPopularTravelList(UserEntity userEntity){
+    public List<TravelDto> getPopularList(UserEntity userEntity) {
         List<TravelEntity> travelEntities = travelRepository.findByTravelLikesOrderByDesc();
         return getDtoListByAddingField(travelEntities, userEntity);
     }
 
+    // 현재 유저의 여행 리스트
     @Transactional
-    public List<TravelDto> getTravelListByUser(UserEntity userEntity){
-        List<TravelEntity> travelEntityList = travelRepository.findAllByUserEntity(userEntity);
+    public List<TravelDto> getListByUser(UserEntity userEntity) {
+        List<TravelEntity> travelEntities = travelRepository.findAllByUserEntity(userEntity);
         List<TravelDto> travelDtoList = new ArrayList<>();
 
-        if (travelEntityList.isEmpty()) {
+        if (travelEntities.isEmpty()) {
             return travelDtoList;
         }
 
-        for(TravelEntity travelEntity : travelEntityList) {
+        for (TravelEntity travelEntity : travelEntities) {
             TravelDto travelDto = convertEntityToDto(travelEntity);
             travelDto.setUserEntity(userEntity);
             travelDtoList.add(travelDto);
@@ -57,16 +59,15 @@ public class TravelService {
         return travelDtoList;
     }
 
+    // 제목을 기준으로 여행 검색
     @Transactional
-    public List<TravelDto> searchTravelList(String keyword){
-        List<TravelEntity> travelEntityList = travelRepository.findByTitleContaining(keyword);
+    public List<TravelDto> searchTravels(String keyword) {
+        List<TravelEntity> travelEntities = travelRepository.findByTitleContaining(keyword);
         List<TravelDto> travelDtoList = new ArrayList<>();
 
-        if (travelEntityList.isEmpty()) {
-            return travelDtoList;
-        }
+        if (travelEntities.isEmpty()) return travelDtoList;
 
-        for (TravelEntity travelEntity : travelEntityList) {
+        for (TravelEntity travelEntity : travelEntities) {
             TravelDto travelDto = convertEntityToDto(travelEntity);
             travelDto.setUserName(travelEntity.getUserEntity().getNickname());
 
@@ -76,35 +77,33 @@ public class TravelService {
         return travelDtoList;
     }
 
+    // 여행 상세정보
     @Transactional
-    public String getTravelInfoByMarker(Long no){
-        String travelInfoJson = "";
-        Optional<MarkerEntity> markerEntityWrapper = markerRepository.findById(no);
+    public TravelDto getDetail(Long no) {
+        TravelEntity travelEntity = travelRepository.findById(no).get();
 
-        if (markerEntityWrapper.isEmpty() == true) {
-            return travelInfoJson;
-        }
-
-        TravelEntity travelEntity = markerEntityWrapper.get().getTravelEntity();
-        TravelDto travelDto = convertEntityToDto(travelEntity);
-
-        travelInfoJson = JsonManager.convertDtoToJson(travelDto);
-        return travelInfoJson;
+        return convertEntityToDto(travelEntity);
     }
 
+    // 여행 상세정보를 Json으로 반환
     @Transactional
-    public TravelDto getTravelInfo(Long no){
-        Optional<TravelEntity> travelEntityWrapper = travelRepository.findById(no);
+    public String getDetailJson(Long no) {
+        TravelDto travelDto = this.getDetail(no);
 
-        return convertEntityToDto(travelEntityWrapper.get());
-    }
-
-    @Transactional
-    public String getTravelInfoJson(Long no){
-        TravelDto travelDto = getTravelInfo(no);
         return JsonManager.convertDtoToJson(travelDto);
     }
 
+    // 마커 번호로 여행 상세정보 가져오기
+    @Transactional
+    public String getDetailJsonByMarker(Long no) {
+        MarkerEntity markerEntity = markerRepository.findById(no).get();
+        TravelEntity travelEntity = markerEntity.getTravelEntity();
+        TravelDto travelDto = convertEntityToDto(travelEntity);
+
+        return JsonManager.convertDtoToJson(travelDto);
+    }
+
+    // TravelEntity에 정의된 필드 외에 필요한 정보를 Dto에 추가하는 메서드
     private List<TravelDto> getDtoListByAddingField(List<TravelEntity> travelEntities, UserEntity userEntity) {
         List<TravelDto> travelDtoList = new ArrayList<>();
 
@@ -113,8 +112,8 @@ public class TravelService {
 
             travelDto.setUserName(travelEntity.getUserEntity().getNickname());
             travelDto.setLikeCount(travelEntity.getTravelLikes().size());
+            travelDto.setLikeChecked(likeService.isUserCheckedTravelLike(userEntity, travelEntity));
             travelDto.setCommentCount(travelEntity.getTravelComments().size());
-            travelDto.setChecked(likeService.isUserCheckedTravelLike(userEntity, travelEntity));
 
             travelDtoList.add(travelDto);
         }

@@ -25,24 +25,28 @@ import java.util.*;
 public class UserService implements UserDetailsService {
     private UserRepository userRepository;
 
+    // 이메일로 유저정보 가져오기
+    @Transactional
     public UserEntity getUserByEmail(String email) {
-        Optional<UserEntity> userEntityWrapper = userRepository.findByEmail(email);
-        return userEntityWrapper.get();
+        return userRepository.findByEmail(email);
     }
 
+    // 회원가입
     @Transactional
-    public Long joinUser(UserDto userDto) {
+    public void signUp(UserDto userDto) {
         // 비밀번호 암호화
         BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
         userDto.setPassword(passwordEncoder.encode(userDto.getPassword()));
 
-        return userRepository.save(userDto.toEntity()).getId();
+        userRepository.save(userDto.toEntity());
     }
 
+    /*
+     *  Spring Security에서 회원가입시 사용되는 메서드로, 권한을 부여해준다.
+     */
     @Override
     public UserDetails loadUserByUsername(String userEmail) throws UsernameNotFoundException {
-        Optional<UserEntity> userEntityWrapper = userRepository.findByEmail(userEmail);
-        UserEntity userEntity = userEntityWrapper.get();
+        UserEntity userEntity = userRepository.findByEmail(userEmail);
 
         List<GrantedAuthority> authorities = new ArrayList<>();
         authorities.add(new SimpleGrantedAuthority(Role.MEMBER.getValue()));
@@ -50,8 +54,10 @@ public class UserService implements UserDetailsService {
         return new User(userEntity.getEmail(), userEntity.getPassword(), authorities);
     }
 
+    // 회원가입 시, 유효성 체크
     public Map<String, String> validateHandling(Errors errors) {
         Map<String, String> validatorResult = new HashMap<>();
+
         for (FieldError error : errors.getFieldErrors()) {
             String validKeyName = String.format("valid_%s", error.getField());
             validatorResult.put(validKeyName, error.getDefaultMessage());

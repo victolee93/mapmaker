@@ -1,5 +1,7 @@
-package com.mapmaker.domain.entity;
+package com.mapmaker.domain.entity.Board;
 
+import com.mapmaker.domain.entity.TimeEntity;
+import com.mapmaker.domain.entity.UserEntity;
 import lombok.AccessLevel;
 import lombok.Builder;
 import lombok.Getter;
@@ -10,8 +12,8 @@ import javax.persistence.*;
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Getter
 @Entity
-@Table(name = "gallery_comment")
-public class GalleryCommentEntity extends TimeEntity {
+@Table(name = "board_comment")
+public class BoardCommentEntity extends TimeEntity {
     @Id
     @GeneratedValue(strategy= GenerationType.IDENTITY)
     private Long id;
@@ -23,18 +25,18 @@ public class GalleryCommentEntity extends TimeEntity {
      *  Relation Mapping
      */
     @ManyToOne
-    @JoinColumn(name = "gallery_id")
-    private GalleryEntity galleryEntity;
+    @JoinColumn(name = "board_id")
+    private BoardEntity boardEntity;
 
     @ManyToOne
     @JoinColumn(name = "member_id")
     private UserEntity userEntity;
 
     @Builder
-    public GalleryCommentEntity(Long id, String content, GalleryEntity galleryEntity, UserEntity userEntity) {
+    public BoardCommentEntity(Long id, String content, BoardEntity boardEntity, UserEntity userEntity) {
         this.id = id;
         this.content = content;
-        this.galleryEntity = galleryEntity;
+        this.boardEntity = boardEntity;
         this.userEntity = userEntity;
     }
 }

@@ -1,16 +1,15 @@
 package com.mapmaker.controller;
 
-import com.mapmaker.domain.entity.GalleryEntity;
+import com.mapmaker.domain.entity.Gallery.GalleryEntity;
 import com.mapmaker.domain.entity.UserEntity;
-import com.mapmaker.dto.GalleryCommentDto;
-import com.mapmaker.dto.GalleryDto;
-import com.mapmaker.dto.GalleryLikeDto;
+import com.mapmaker.dto.Gallery.GalleryCommentDto;
+import com.mapmaker.dto.Gallery.GalleryDto;
+import com.mapmaker.dto.Gallery.GalleryLikeDto;
 import com.mapmaker.service.CommentService;
 import com.mapmaker.service.GalleryService;
 import com.mapmaker.service.LikeService;
 import com.mapmaker.service.UserService;
 import com.mapmaker.service.aws.S3Service;
-import com.mapmaker.util.JsonManager;
 import lombok.AllArgsConstructor;
 import org.springframework.http.MediaType;
 import org.springframework.security.core.Authentication;
@@ -35,15 +34,16 @@ public class GalleryController {
     private LikeService likeService;
     private CommentService commentService;
 
+    // 갤러리 메인
     @GetMapping("/gallery")
     public String dispGalleryList(Model model, Authentication authentication) {
         UserEntity userEntity = userService.getUserByEmail(authentication.getName());
-
         List<GalleryDto> galleryList = galleryService.getRecentList();
 
-        for(GalleryDto galleryDto: galleryList) {
-            Boolean checked = likeService.isUserCheckedGalleryLike(userEntity, galleryDto.toEntity());
-            galleryDto.setChecked(checked);
+        for (GalleryDto galleryDto: galleryList) {
+            // 현재 유저가 좋아요를 체크했는지 여부
+            Boolean checked = likeService.isUserCheckedGalleryLike(userEntity, galleryDto);
+            galleryDto.setLikeChecked(checked);
         }
 
         model.addAttribute("galleryList", galleryList);
@@ -51,29 +51,33 @@ public class GalleryController {
         return "/gallery/list";
     }
 
+    // 갤러리 글 등록
     @PostMapping("/gallery")
-    public String execWrite(GalleryDto galleryDto, Authentication authentication, MultipartFile file) throws IOException {
+    public String execGalleryWrite(GalleryDto galleryDto, Authentication authentication, MultipartFile file) throws IOException {
         UserEntity userEntity = userService.getUserByEmail(authentication.getName());
-        galleryDto.setAuthor(userEntity.getNickname());
+        galleryDto.setAuthor(userEntity.getNickname()); // 작성자
 
         String imgPath = s3Service.upload(file);
-        galleryDto.setFilePath(imgPath);
+        galleryDto.setFilePath(imgPath);    // 파일 경로
+
         galleryService.savePost(galleryDto);
 
         return "redirect:/gallery";
     }
 
+    // 갤러리 상세
     @RequestMapping(value="/gallery/{no}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody
-    public String getGalleryDetail(@PathVariable("no") Long no) {
-        return galleryService.getGalleryInfoAndCommentsJson(no);
+    public String dispGalleryDetail(@PathVariable("no") Long no) {
+        return galleryService.getDetailAndCommentsJson(no);
     }
 
+    // 갤러리 좋아요
     @RequestMapping(value="/gallery/{no}/like", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody
-    public String execLike(@PathVariable("no") Long galleryId, Authentication authentication) {
+    public String execGalleryLike(@PathVariable("no") Long galleryId, Authentication authentication) {
         UserEntity userEntity = userService.getUserByEmail(authentication.getName());
-        GalleryEntity galleryEntity = galleryService.getGalleryInfo(galleryId);
+        GalleryEntity galleryEntity = galleryService.getDetail(galleryId);
 
         GalleryLikeDto galleryLikeDto = new GalleryLikeDto();
         galleryLikeDto.setUserEntity(userEntity);
@@ -83,22 +87,27 @@ public class GalleryController {
         return "null";
     }
 
-
+    // 갤러리 댓글 등록
     @RequestMapping(value="/gallery/{no}/comment", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody
-    public Map<String, String> execComment(@PathVariable("no") Long galleryId, Authentication authentication, GalleryCommentDto galleryCommentDto) {
+    public Map<String, String> execGalleryCommentWrite(@PathVariable("no") Long galleryId,
+                                           Authentication authentication,
+                                           GalleryCommentDto galleryCommentDto) {
+
         UserEntity userEntity = userService.getUserByEmail(authentication.getName());
-        GalleryEntity galleryEntity = galleryService.getGalleryInfo(galleryId);
+        GalleryEntity galleryEntity = galleryService.getDetail(galleryId);
 
         galleryCommentDto.setUserEntity(userEntity);
         galleryCommentDto.setGalleryEntity(galleryEntity);
 
         commentService.saveGalleryComment(galleryCommentDto);
 
+        // ajax 요청이므로 등록된 댓글 정보를 Json으로 반환
         Map<String, String> returnJson = new HashMap<>();
         returnJson.put("username", userEntity.getNickname());
         returnJson.put("content", galleryCommentDto.getContent());
         returnJson.put("date", LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss")));
+
         return returnJson;
     }
 }

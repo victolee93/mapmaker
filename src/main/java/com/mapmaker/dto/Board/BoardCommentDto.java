@@ -1,32 +1,34 @@
-package com.mapmaker.dto;
+package com.mapmaker.dto.Board;
 
 import com.mapmaker.domain.entity.*;
+import com.mapmaker.domain.entity.Board.BoardCommentEntity;
+import com.mapmaker.domain.entity.Board.BoardEntity;
 import lombok.*;
 
 @Getter
 @Setter
 @ToString
 @NoArgsConstructor
-public class TravelCommentDto {
+public class BoardCommentDto {
     private Long id;
     private String content;
     private String username;
     private String date;
 
     private UserEntity userEntity;
-    private TravelEntity travelEntity;
+    private BoardEntity boardEntity;
 
-    public TravelCommentEntity toEntity(){
-        return TravelCommentEntity.builder()
+    public BoardCommentEntity toEntity() {
+        return BoardCommentEntity.builder()
                 .id(id)
                 .content(content)
                 .userEntity(userEntity)
-                .travelEntity(travelEntity)
+                .boardEntity(boardEntity)
                 .build();
     }
 
     @Builder
-    public TravelCommentDto(Long id, String content, String username, String date) {
+    public BoardCommentDto(Long id, String content, String username, String date) {
         this.id = id;
         this.content = content;
         this.username = username;

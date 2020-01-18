@@ -57,7 +57,7 @@ galleryObj = {
 
                         // 댓글 리스트
                         let commentBoxElement = document.querySelector("#comment-box");
-                        res.galleryCommentEntityList.forEach( (reply) => {
+                        res.galleryCommentEntities.forEach( (reply) => {
                             let replyContentDiv = galleryObj.createReplyContent(reply);
                             commentBoxElement.appendChild(replyContentDiv);
                         });

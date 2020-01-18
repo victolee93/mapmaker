@@ -1,7 +1,7 @@
-package com.mapmaker.dto;
+package com.mapmaker.dto.Gallery;
 
-import com.mapmaker.domain.entity.GalleryCommentEntity;
-import com.mapmaker.domain.entity.GalleryEntity;
+import com.mapmaker.domain.entity.Gallery.GalleryCommentEntity;
+import com.mapmaker.domain.entity.Gallery.GalleryEntity;
 import com.mapmaker.domain.entity.UserEntity;
 import lombok.*;
 
@@ -18,7 +18,7 @@ public class GalleryCommentDto {
     private UserEntity userEntity;
     private GalleryEntity galleryEntity;
 
-    public GalleryCommentEntity toEntity(){
+    public GalleryCommentEntity toEntity() {
         return GalleryCommentEntity.builder()
                 .id(id)
                 .content(content)

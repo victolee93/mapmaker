@@ -1,6 +1,8 @@
-package com.mapmaker.dto;
+package com.mapmaker.dto.Travel;
 
 import com.mapmaker.domain.entity.*;
+import com.mapmaker.domain.entity.Travel.TravelEntity;
+import com.mapmaker.domain.entity.Travel.TravelLikeEntity;
 import lombok.*;
 
 @Getter
@@ -12,7 +14,7 @@ public class TravelLikeDto {
     private UserEntity userEntity;
     private TravelEntity travelEntity;
 
-    public TravelLikeEntity toEntity(){
+    public TravelLikeEntity toEntity() {
         return TravelLikeEntity.builder()
                 .id(id)
                 .userEntity(userEntity)

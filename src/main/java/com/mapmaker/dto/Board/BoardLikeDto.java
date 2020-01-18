@@ -1,6 +1,8 @@
-package com.mapmaker.dto;
+package com.mapmaker.dto.Board;
 
 import com.mapmaker.domain.entity.*;
+import com.mapmaker.domain.entity.Board.BoardEntity;
+import com.mapmaker.domain.entity.Board.BoardLikeEntity;
 import lombok.*;
 
 @Getter
@@ -12,7 +14,7 @@ public class BoardLikeDto {
     private UserEntity userEntity;
     private BoardEntity boardEntity;
 
-    public BoardLikeEntity toEntity(){
+    public BoardLikeEntity toEntity() {
         return BoardLikeEntity.builder()
                 .id(id)
                 .userEntity(userEntity)

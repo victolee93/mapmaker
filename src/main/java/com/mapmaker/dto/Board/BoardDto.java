@@ -1,6 +1,6 @@
-package com.mapmaker.dto;
+package com.mapmaker.dto.Board;
 
-import com.mapmaker.domain.entity.BoardEntity;
+import com.mapmaker.domain.entity.Board.BoardEntity;
 import lombok.*;
 
 import java.time.LocalDateTime;
@@ -19,7 +19,7 @@ public class BoardDto {
     private LocalDateTime createdDate;
     private LocalDateTime modifiedDate;
 
-    public BoardEntity toEntity(){
+    public BoardEntity toEntity() {
         return BoardEntity.builder()
                 .id(id)
                 .author(author)

@@ -1,6 +1,6 @@
-package com.mapmaker.dto;
+package com.mapmaker.dto.Travel;
 
-import com.mapmaker.domain.entity.TravelEntity;
+import com.mapmaker.domain.entity.Travel.TravelEntity;
 import com.mapmaker.domain.entity.UserEntity;
 import lombok.*;
 
@@ -30,14 +30,14 @@ public class TravelDto {
     private String userName;
 
     private Integer likeCount;
+    private Boolean likeChecked;
     private Integer commentCount;
-    private Boolean checked;
 
     private UserEntity userEntity;
     private LocalDateTime createdDate;
     private LocalDateTime modifiedDate;
 
-    public TravelEntity toEntity(){
+    public TravelEntity toEntity() {
         // 여행일정 : LocalDateTime으로 변환
         DateTimeFormatter dateformatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
         LocalDate startDate = LocalDate.parse(periodStartDate, dateformatter);
@@ -68,7 +68,7 @@ public class TravelDto {
     public TravelDto(Long id, String title, String periodStartDate, String periodEndDate,
                      String description, String foodInfo, String placeInfo, String lodgingInfo,
                      String transportInfo, Long cost, String totalReview, String memo, String openStatus,
-                     String userName, String filePath, Integer likeCount, Integer commentCount, Boolean checked,
+                     String userName, String filePath, Integer likeCount, Integer commentCount, Boolean likeChecked,
                      UserEntity userEntity, LocalDateTime createdDate, LocalDateTime modifiedDate) {
         this.id = id;
         this.title = title;
@@ -86,7 +86,7 @@ public class TravelDto {
         this.filePath = filePath;
         this.likeCount = likeCount;
         this.commentCount = commentCount;
-        this.checked = checked;
+        this.likeChecked = likeChecked;
         this.userName = userName;
         this.userEntity = userEntity;
         this.createdDate = createdDate;

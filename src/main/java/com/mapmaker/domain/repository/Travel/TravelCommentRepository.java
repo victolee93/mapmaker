@@ -1,7 +1,7 @@
-package com.mapmaker.domain.repository;
+package com.mapmaker.domain.repository.Travel;
 
-import com.mapmaker.domain.entity.TravelCommentEntity;
-import com.mapmaker.domain.entity.TravelEntity;
+import com.mapmaker.domain.entity.Travel.TravelCommentEntity;
+import com.mapmaker.domain.entity.Travel.TravelEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.List;

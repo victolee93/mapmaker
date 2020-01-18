@@ -1,7 +1,7 @@
-package com.mapmaker.domain.repository;
+package com.mapmaker.domain.repository.Gallery;
 
-import com.mapmaker.domain.entity.GalleryCommentEntity;
-import com.mapmaker.domain.entity.GalleryEntity;
+import com.mapmaker.domain.entity.Gallery.GalleryCommentEntity;
+import com.mapmaker.domain.entity.Gallery.GalleryEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.List;

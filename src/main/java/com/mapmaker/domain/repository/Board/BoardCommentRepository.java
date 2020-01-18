@@ -1,7 +1,7 @@
-package com.mapmaker.domain.repository;
+package com.mapmaker.domain.repository.Board;
 
-import com.mapmaker.domain.entity.BoardCommentEntity;
-import com.mapmaker.domain.entity.BoardEntity;
+import com.mapmaker.domain.entity.Board.BoardCommentEntity;
+import com.mapmaker.domain.entity.Board.BoardEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.List;

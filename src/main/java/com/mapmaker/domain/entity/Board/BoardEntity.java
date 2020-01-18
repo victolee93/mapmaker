@@ -1,5 +1,6 @@
-package com.mapmaker.domain.entity;
+package com.mapmaker.domain.entity.Board;
 
+import com.mapmaker.domain.entity.TimeEntity;
 import lombok.AccessLevel;
 import lombok.Builder;
 import lombok.Getter;
